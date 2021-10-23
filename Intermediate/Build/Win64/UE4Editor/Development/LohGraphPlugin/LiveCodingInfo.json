@@ -4,18 +4,18 @@
 		"Module.LohGraphPlugin.cpp.obj": [
 			"LGPGameCoreSystem.cpp.obj",
 			"LGPGraphComponentBase.cpp.obj",
+			"LGPGraphReader.cpp.obj",
+			"LGPGraphWriter.cpp.obj",
 			"LGPNode.cpp.obj",
-			"LohGraphPlugin.cpp.obj",
-			"MyLGPGraphReader.cpp.obj",
-			"MyLGPGraphWriter.cpp.obj"
+			"LohGraphPlugin.cpp.obj"
 		],
 		"Module.LohGraphPlugin.gen.cpp.obj": [
 			"LGPGameCoreSystem.gen.cpp.obj",
 			"LGPGraphComponentBase.gen.cpp.obj",
+			"LGPGraphReader.gen.cpp.obj",
+			"LGPGraphWriter.gen.cpp.obj",
 			"LGPNode.gen.cpp.obj",
-			"LohGraphPlugin.init.gen.cpp.obj",
-			"MyLGPGraphReader.gen.cpp.obj",
-			"MyLGPGraphWriter.gen.cpp.obj"
+			"LohGraphPlugin.init.gen.cpp.obj"
 		]
 	}
 }

@@ -1,38 +1,80 @@
 // Copyright by Loh Zhi Kang
 
-
 #include "LGPGameCoreSystem.h"
+#include "LGPGraphComponentBase.h"
+
 
 DEFINE_LOG_CATEGORY(LogGraphCore);
 
 // Thread System ////////////////////////////////////////////
 
-void ULGPGameCoreSystem::AddTasker(FAsyncTask<GraphCoreTasker>* AsyncTask)
+void ULGPGameCoreSystem::AddTasker(ULGPGraphComponentBase* GraphComponent)
 {
-	checkf(AsyncTask && AsyncTask->IsDone(), TEXT("AsyncTask Must Be Valid And Not On Work"));
-
-	switch (AsyncTask->GetTask().GetClassType())
+	checkf(GraphComponent, TEXT("GraphComponent Must Be Valid"));
+	checkf(GraphComponent->ComponentTasker->IsDone(), TEXT("AsyncTask Not On Work"));
+	
+	switch (GraphComponent->GetTypeID())
 	{
-	case 0: ProcessReaderTask++; break;
-	case 1: ProcessWriterTask++; break;
-	}
+	case EGraphComponentType::Reader : 
+		if (StopReaderTask)
+		{
+			ReaderQueueList.Add(GraphComponent);
+		}
+		else
+		{
+			ProcessReaderTask++;
 
-	AsyncTask->StartBackgroundTask(GraphThreadPool);
+			GraphComponent->ComponentTasker->StartBackgroundTask(GraphThreadPool);
+		}
+		break;
+	case EGraphComponentType::Writer :
+		if (StopReaderTask && ProcessReaderTask == 0)
+		{
+			ProcessWriterTask++;
+
+			GraphComponent->ComponentTasker->StartBackgroundTask(GraphThreadPool);
+		}
+		else
+		{
+			StopReaderTask = true;
+
+			WriterQueueList.Add(GraphComponent);
+		}
+		break;
+	}
 
 	return;
 }
 
-void ULGPGameCoreSystem::RemoveTasker(const GraphCoreTasker& Task)
+void ULGPGameCoreSystem::RemoveTasker(ULGPGraphComponentBase* GraphComponent)
 {
-	switch (Task.GetClassType())
-	{
-	case 0: ProcessReaderTask--; break;
-	case 1: ProcessWriterTask--; break;
-	}
+	checkf(GraphComponent, TEXT("GraphComponent Must Be Valid"));
 
-	if (ProcessWriterTask == 0)
+	switch (GraphComponent->GetTypeID())
+	{
+	case EGraphComponentType::Reader: ProcessReaderTask--; break;
+	case EGraphComponentType::Writer: ProcessWriterTask--; break;
+	}
+	
+	if (ProcessReaderTask == 0 && StopReaderTask)
+	{
+		for (ULGPGraphComponentBase* Writer : WriterQueueList)
+		{
+			AddTasker(Writer);
+		}
+
+		WriterQueueList.Empty();
+	}
+	else if (ProcessWriterTask == 0 && WriterQueueList.Num() == 0)
 	{
 		StopReaderTask = false;
+
+		for (ULGPGraphComponentBase* Reader : ReaderQueueList)
+		{
+			AddTasker(Reader);
+		}
+
+		ReaderQueueList.Empty();
 	}
 
 	return;
@@ -62,7 +104,11 @@ void ULGPGameCoreSystem::Deinitialize()
 	GraphThreadPool = nullptr;
 }
 
-void ULGPGameCoreSystem::Test()
+void ULGPGameCoreSystem::RegisterGraphComponent(ULGPGraphComponentBase* Reader)
 {
-	
+	RegisterComponents.Add(Reader);
+
+	Reader->CoreSystem = this;
+
+	return;
 }

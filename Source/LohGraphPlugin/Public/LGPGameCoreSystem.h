@@ -8,6 +8,10 @@
 
 DECLARE_LOG_CATEGORY_EXTERN(LogGraphCore, Log, All);
 
+class ULGPGraphComponentBase;
+class ULGPGraphReader;
+class ULGPGraphWriter;
+
 /** 
  * Core System
  * 
@@ -15,7 +19,8 @@ DECLARE_LOG_CATEGORY_EXTERN(LogGraphCore, Log, All);
  * - On Writer Create Add To List
  * - On Reader Create Add To List
  * For Thread Pool And Task Management
- * 
+ * - Stop Reader Thread If Detect Writer Thread Need Work
+ * - Auto Start Reader Thread After All Writer Thread Done
  */
 UCLASS()
 class LOHGRAPHPLUGIN_API ULGPGameCoreSystem : public UGameInstanceSubsystem
@@ -28,7 +33,7 @@ class LOHGRAPHPLUGIN_API ULGPGameCoreSystem : public UGameInstanceSubsystem
 
 private:
 
-	FCriticalSection GraphWriteLock;
+	//FCriticalSection GraphWriteLock;
 
 	FQueuedThreadPool* GraphThreadPool;
 
@@ -38,16 +43,19 @@ private:
 	////////////////////////////////////////////
 
 	// Stop Signer ////////////////////////
-	FThreadSafeBool StopReaderTask = false;
+	FThreadSafeBool StopReaderTask = false; // If This True Will Cause All Reader Task To Stop Early And Put New Add Reader Tasker To Queue
 	///////////////////////////////////////
+
+	UPROPERTY() TSet<ULGPGraphComponentBase*> WriterQueueList;
+	UPROPERTY() TSet<ULGPGraphComponentBase*> ReaderQueueList;
 
 public:
 
-	FORCEINLINE void AddTasker(FAsyncTask<GraphCoreTasker>* AsyncTask);
+	FORCEINLINE void AddTasker(ULGPGraphComponentBase* GraphComponent);
 
 private:
 
-	FORCEINLINE void RemoveTasker(const GraphCoreTasker& Task);
+	FORCEINLINE void RemoveTasker(ULGPGraphComponentBase* GraphComponent);
 
 //////////////////////////////////////////////////////////////
 
@@ -59,7 +67,11 @@ public:
 
 	virtual void Deinitialize() override;
 
-	void Test();
+	FORCEINLINE void RegisterGraphComponent(ULGPGraphComponentBase* Reader);
+
+private:
+
+	UPROPERTY() TSet<ULGPGraphComponentBase*> RegisterComponents;
 };
 
 class GraphCoreTasker : public FNonAbandonableTask
@@ -68,38 +80,35 @@ class GraphCoreTasker : public FNonAbandonableTask
 
 public:
 
-	GraphCoreTasker(FAsyncTask<GraphCoreTasker>* Self) : SelfPointer(Self), GraphCore(GEngine->GetWorld()->GetGameInstance()->GetSubsystem<ULGPGameCoreSystem>()) { }
+	GraphCoreTasker(ULGPGraphComponentBase* Component) : OwnerComponent(Component), GraphCore(GEngine->GetWorld()->GetGameInstance()->GetSubsystem<ULGPGameCoreSystem>()) { }
 
 	void DoWork()
 	{
-		checkf(SelfPointer, TEXT("SelfPointer Must be Valid"));
+		checkf(OwnerComponent, TEXT("OwnerComponent Must be Valid"));
 		checkf(GraphCore, TEXT("GraphCore Must be Valid"));
 
-		DoThreadWork(GraphCore);
+		DoThreadWork(GraphCore, GraphCore->StopReaderTask);
 
 		AsyncTask(ENamedThreads::GameThread, [&]()
 		{
-			OnThreadWorkDone(GraphCore);
+			OnThreadWorkDone(GraphCore, GraphCore->StopReaderTask);
 
-			GraphCore->RemoveTasker(*this);
+			GraphCore->RemoveTasker(OwnerComponent);
 		});
 	}
 
-	virtual void DoThreadWork(ULGPGameCoreSystem* Core) { return; }
+	virtual void DoThreadWork(ULGPGameCoreSystem* Core, FThreadSafeBool& ForceStop) { return; }
 
-	virtual void OnThreadWorkDone(ULGPGameCoreSystem* Core) { return; }
-
-	uint8 GetClassType() const { return ClassType; }
+	virtual void OnThreadWorkDone(ULGPGameCoreSystem* Core, const bool IsForceStop) { return; }
 
 	FORCEINLINE TStatId GetStatId() const { RETURN_QUICK_DECLARE_CYCLE_STAT(GraphCoreTasker, STATGROUP_ThreadPoolAsyncTasks); }
 
 protected :
 
-	uint8 ClassType = (uint8)0; // Remember To Override On Child Class
+	UPROPERTY()
+		ULGPGraphComponentBase* OwnerComponent = nullptr;
 
-	FAsyncTask<GraphCoreTasker>* SelfPointer = nullptr;
-
-private :
+private:
 
 	UPROPERTY()
 		ULGPGameCoreSystem* GraphCore = nullptr;

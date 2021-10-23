@@ -1,5 +1,5 @@
 // Copyright by Loh Zhi Kang
 
 
-#include "MyLGPGraphWriter.h"
+#include "LGPGraphReader.h"
 
