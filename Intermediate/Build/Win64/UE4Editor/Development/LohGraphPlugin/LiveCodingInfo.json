@@ -1,0 +1,21 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.LohGraphPlugin.cpp.obj": [
+			"LGPGameCoreSystem.cpp.obj",
+			"LGPGraphComponentBase.cpp.obj",
+			"LGPNode.cpp.obj",
+			"LohGraphPlugin.cpp.obj",
+			"MyLGPGraphReader.cpp.obj",
+			"MyLGPGraphWriter.cpp.obj"
+		],
+		"Module.LohGraphPlugin.gen.cpp.obj": [
+			"LGPGameCoreSystem.gen.cpp.obj",
+			"LGPGraphComponentBase.gen.cpp.obj",
+			"LGPNode.gen.cpp.obj",
+			"LohGraphPlugin.init.gen.cpp.obj",
+			"MyLGPGraphReader.gen.cpp.obj",
+			"MyLGPGraphWriter.gen.cpp.obj"
+		]
+	}
+}
