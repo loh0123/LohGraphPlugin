@@ -68,6 +68,11 @@ void ULGPGraphComponentBase::StopTasker()
 	return;
 }
 
+bool ULGPGraphComponentBase::GetWeightPrefab(const int32 ID, FLGPWeightPrefab& Prefab) const
+{
+	return CoreSystem->GetWeightPrefab(ID, Prefab);
+}
+
 
 // Called every frame
 void ULGPGraphComponentBase::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

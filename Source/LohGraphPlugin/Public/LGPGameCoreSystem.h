@@ -60,11 +60,34 @@ public:
 
 	virtual void Deinitialize() override;
 
-	FORCEINLINE void RegisterGraphComponent(ULGPGraphComponentBase* Reader);
+	// Component Registration /////////////////////////////////////////////////////////
+
+	FORCEINLINE void RegisterGraphComponent(ULGPGraphComponentBase* Component);
+
+	FORCEINLINE void UnregisterGraphComponent(ULGPGraphComponentBase* Component);
+
+	///////////////////////////////////////////////////////////////////////////////////
+
+
+
+	// Weight Prefab List /////////////////////////////////////////////////////////////
+
+	UFUNCTION(BlueprintCallable, Category = "LGPGameCoreSystem")
+		FORCEINLINE int32 SetWeightPrefabList(TArray<FLGPWeightPrefab>& NewList);
+
+	UFUNCTION(BlueprintCallable, Category = "LGPGameCoreSystem")
+		FORCEINLINE int32 ClearWeightPrefabList();
+
+	UFUNCTION(BlueprintPure, Category = "LGPGameCoreSystem")
+		FORCEINLINE bool GetWeightPrefab(const int32 ID, UPARAM(ref) FLGPWeightPrefab& Prefab) const;
+
+	///////////////////////////////////////////////////////////////////////////////////
 
 private:
 
 	UPROPERTY() TSet<ULGPGraphComponentBase*> RegisterComponents;
+
+	UPROPERTY() TArray<FLGPWeightPrefab> WeightPrefabList;
 };
 
 class GraphCoreTasker : public FNonAbandonableTask

@@ -8,14 +8,27 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FLGPWeightPrefab;
 #ifdef LOHGRAPHPLUGIN_LGPGameCoreSystem_generated_h
 #error "LGPGameCoreSystem.generated.h already included, missing '#pragma once' in LGPGameCoreSystem.h"
 #endif
 #define LOHGRAPHPLUGIN_LGPGameCoreSystem_generated_h
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_RPC_WRAPPERS
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_RPC_WRAPPERS_NO_PURE_DECLS
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execGetWeightPrefab); \
+	DECLARE_FUNCTION(execClearWeightPrefabList); \
+	DECLARE_FUNCTION(execSetWeightPrefabList);
+
+
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execGetWeightPrefab); \
+	DECLARE_FUNCTION(execClearWeightPrefabList); \
+	DECLARE_FUNCTION(execSetWeightPrefabList);
+
+
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPGameCoreSystem(); \
@@ -61,7 +74,8 @@ public: \
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__ProcessReaderTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, ProcessReaderTask); } \
 	FORCEINLINE static uint32 __PPO__ProcessWriterTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, ProcessWriterTask); } \
-	FORCEINLINE static uint32 __PPO__RegisterComponents() { return STRUCT_OFFSET(ULGPGameCoreSystem, RegisterComponents); }
+	FORCEINLINE static uint32 __PPO__RegisterComponents() { return STRUCT_OFFSET(ULGPGameCoreSystem, RegisterComponents); } \
+	FORCEINLINE static uint32 __PPO__WeightPrefabList() { return STRUCT_OFFSET(ULGPGameCoreSystem, WeightPrefabList); }
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_25_PROLOG

@@ -9,6 +9,34 @@
 class GraphCoreTasker;
 class ULGPGameCoreSystem;
 
+USTRUCT(BlueprintType)
+struct FLGPWeightPrefab
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+
+	FLGPWeightPrefab()
+	{
+		WeightList.SetNum(256);
+	}
+
+	UPROPERTY(EditAnywhere, EditFixedSize, Category = "LGSTypePrefab | Variable")
+		TArray<float> WeightList;
+
+	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
+		float NodeBufferMultiply = 1.0f;
+
+	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
+		float DistanceToTargetMultiply = 1.0f;
+
+	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
+		float DistanceToStartMultiply = 1.0f;
+
+	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
+		float StepMultiply = 1.0f;
+};
+
 UENUM(BlueprintType)
 enum class EGraphComponentType : uint8
 {
@@ -50,6 +78,13 @@ protected:
 	FORCEINLINE void StopTasker();
 
 	//////////////////////////////////////////////////////////////////
+
+
+	// Local Core Function /////////////////////////////////////////////////
+
+	FORCEINLINE bool GetWeightPrefab(const int32 ID, FLGPWeightPrefab& Prefab) const;
+
+	////////////////////////////////////////////////////////////////////////
 
 public:	
 	// Called every frame

@@ -99,11 +99,48 @@ void ULGPGameCoreSystem::Deinitialize()
 	GraphThreadPool = nullptr;
 }
 
-void ULGPGameCoreSystem::RegisterGraphComponent(ULGPGraphComponentBase* Reader)
+void ULGPGameCoreSystem::RegisterGraphComponent(ULGPGraphComponentBase* Component)
 {
-	RegisterComponents.Add(Reader);
+	RegisterComponents.Add(Component);
 
-	Reader->CoreSystem = this;
+	Component->CoreSystem = this;
 
 	return;
+}
+
+void ULGPGameCoreSystem::UnregisterGraphComponent(ULGPGraphComponentBase* Component)
+{
+	RegisterComponents.Remove(Component);
+
+	Component->CoreSystem = nullptr;
+
+	return;
+}
+
+int32 ULGPGameCoreSystem::SetWeightPrefabList(TArray<FLGPWeightPrefab>& NewList)
+{
+	WeightPrefabList = NewList;
+
+	return WeightPrefabList.Num();
+}
+
+int32 ULGPGameCoreSystem::ClearWeightPrefabList()
+{
+	const int32 OriginalSize = WeightPrefabList.Num();
+
+	WeightPrefabList.Empty();
+
+	return OriginalSize;
+}
+
+bool ULGPGameCoreSystem::GetWeightPrefab(const int32 ID, UPARAM(ref) FLGPWeightPrefab& Prefab) const
+{
+	if (WeightPrefabList.IsValidIndex(ID))
+	{
+		Prefab = WeightPrefabList[ID];
+
+		return true;
+	}
+
+	return false;
 }

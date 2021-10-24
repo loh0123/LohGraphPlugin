@@ -7,7 +7,10 @@
 #include "LGPNode.generated.h"
 
 /**
- * 
+ * Base Class Of Graph Node 
+ * For
+ * - Register / Unregister With Graph Writer At ( Begin Play )
+ * - Add / Remove Path Function
  */
 UCLASS()
 class LOHGRAPHPLUGIN_API ULGPNodeBase : public UPrimitiveComponent
