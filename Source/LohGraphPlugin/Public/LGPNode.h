@@ -17,14 +17,7 @@ class LOHGRAPHPLUGIN_API ULGPNodeBase : public UPrimitiveComponent
 };
 
 UCLASS()
-class LOHGRAPHPLUGIN_API ULGPNodeGroup : public ULGPNodeBase
-{
-	GENERATED_BODY()
-
-};
-
-UCLASS()
-class LOHGRAPHPLUGIN_API ULGPNodeCache : public ULGPNodeGroup
+class LOHGRAPHPLUGIN_API ULGPNodeCache : public ULGPNodeBase
 {
 	GENERATED_BODY()
 

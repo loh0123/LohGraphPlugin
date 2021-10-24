@@ -59,8 +59,8 @@ public: \
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__WriterQueueList() { return STRUCT_OFFSET(ULGPGameCoreSystem, WriterQueueList); } \
-	FORCEINLINE static uint32 __PPO__ReaderQueueList() { return STRUCT_OFFSET(ULGPGameCoreSystem, ReaderQueueList); } \
+	FORCEINLINE static uint32 __PPO__ProcessReaderTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, ProcessReaderTask); } \
+	FORCEINLINE static uint32 __PPO__ProcessWriterTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, ProcessWriterTask); } \
 	FORCEINLINE static uint32 __PPO__RegisterComponents() { return STRUCT_OFFSET(ULGPGameCoreSystem, RegisterComponents); }
 
 

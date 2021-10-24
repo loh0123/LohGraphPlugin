@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "LGPGraphComponentBase.h"
 #include "LGPGameCoreSystem.generated.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogGraphCore, Log, All);
 
-class ULGPGraphComponentBase;
 class ULGPGraphReader;
 class ULGPGraphWriter;
 
@@ -38,16 +38,9 @@ private:
 	FQueuedThreadPool* GraphThreadPool;
 
 	// Process Counter /////////////////////////
-	int32 ProcessReaderTask = 0;
-	int32 ProcessWriterTask = 0;
+	UPROPERTY() TSet<ULGPGraphComponentBase*> ProcessReaderTask;
+	UPROPERTY() TSet<ULGPGraphComponentBase*> ProcessWriterTask;
 	////////////////////////////////////////////
-
-	// Stop Signer ////////////////////////
-	FThreadSafeBool StopReaderTask = false; // If This True Will Cause All Reader Task To Stop Early And Put New Add Reader Tasker To Queue
-	///////////////////////////////////////
-
-	UPROPERTY() TSet<ULGPGraphComponentBase*> WriterQueueList;
-	UPROPERTY() TSet<ULGPGraphComponentBase*> ReaderQueueList;
 
 public:
 
@@ -87,11 +80,11 @@ public:
 		checkf(OwnerComponent, TEXT("OwnerComponent Must be Valid"));
 		checkf(GraphCore, TEXT("GraphCore Must be Valid"));
 
-		DoThreadWork(GraphCore, GraphCore->StopReaderTask);
+		DoThreadWork(GraphCore, OwnerComponent->StopTaskerWork);
 
 		AsyncTask(ENamedThreads::GameThread, [&]()
 		{
-			OnThreadWorkDone(GraphCore, GraphCore->StopReaderTask);
+			OnThreadWorkDone(GraphCore, OwnerComponent->StopTaskerWork);
 
 			GraphCore->RemoveTasker(OwnerComponent);
 		});

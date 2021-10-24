@@ -59,6 +59,15 @@ FAsyncTask<GraphCoreTasker>* ULGPGraphComponentBase::CreateTasker()
 	return new FAsyncTask<GraphCoreTasker>(this);
 }
 
+void ULGPGraphComponentBase::StopTasker()
+{
+	StopTaskerWork = true;
+
+	ComponentTasker->EnsureCompletion();
+
+	return;
+}
+
 
 // Called every frame
 void ULGPGraphComponentBase::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

@@ -33,16 +33,16 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_WriterQueueList_ElementProp;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ProcessReaderTask_ElementProp;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_WriterQueueList_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ProcessReaderTask_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FSetPropertyParams NewProp_WriterQueueList;
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ReaderQueueList_ElementProp;
+		static const UE4CodeGen_Private::FSetPropertyParams NewProp_ProcessReaderTask;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ProcessWriterTask_ElementProp;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ReaderQueueList_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ProcessWriterTask_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FSetPropertyParams NewProp_ReaderQueueList;
+		static const UE4CodeGen_Private::FSetPropertyParams NewProp_ProcessWriterTask;
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_RegisterComponents_ElementProp;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_RegisterComponents_MetaData[];
@@ -64,24 +64,24 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		{ "ToolTip", "Core System\n\nFor Recording Writer / Reader Creation\n- On Writer Create Add To List\n- On Reader Create Add To List\nFor Thread Pool And Task Management\n- Stop Reader Thread If Detect Writer Thread Need Work\n- Auto Start Reader Thread After All Writer Thread Done" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WriterQueueList_ElementProp = { "WriterQueueList", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask_ElementProp = { "ProcessReaderTask", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WriterQueueList_MetaData[] = {
-		{ "Comment", "// If This True Will Cause All Reader Task To Stop Early And Put New Add Reader Tasker To Queue\n///////////////////////////////////////\n" },
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask_MetaData[] = {
+		{ "Comment", "// Process Counter /////////////////////////\n" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/LGPGameCoreSystem.h" },
-		{ "ToolTip", "If This True Will Cause All Reader Task To Stop Early And Put New Add Reader Tasker To Queue" },
+		{ "ToolTip", "Process Counter /" },
 	};
 #endif
-	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WriterQueueList = { "WriterQueueList", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, WriterQueueList), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WriterQueueList_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WriterQueueList_MetaData)) };
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ReaderQueueList_ElementProp = { "ReaderQueueList", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask = { "ProcessReaderTask", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, ProcessReaderTask), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_ElementProp = { "ProcessWriterTask", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ReaderQueueList_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_MetaData[] = {
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/LGPGameCoreSystem.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ReaderQueueList = { "ReaderQueueList", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, ReaderQueueList), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ReaderQueueList_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ReaderQueueList_MetaData)) };
+	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask = { "ProcessWriterTask", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, ProcessWriterTask), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_MetaData)) };
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_ElementProp = { "RegisterComponents", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_MetaData[] = {
@@ -91,10 +91,10 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 #endif
 	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents = { "RegisterComponents", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, RegisterComponents), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPGameCoreSystem_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WriterQueueList_ElementProp,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WriterQueueList,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ReaderQueueList_ElementProp,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ReaderQueueList,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask_ElementProp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_ElementProp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents,
 	};
@@ -125,7 +125,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGameCoreSystem, 3069715571);
+	IMPLEMENT_CLASS(ULGPGameCoreSystem, 2819870747);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGameCoreSystem>()
 	{
 		return ULGPGameCoreSystem::StaticClass();

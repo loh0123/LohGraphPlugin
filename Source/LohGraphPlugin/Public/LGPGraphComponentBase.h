@@ -23,6 +23,7 @@ class LOHGRAPHPLUGIN_API ULGPGraphComponentBase : public UActorComponent
 	GENERATED_BODY()
 
 	friend class ULGPGameCoreSystem;
+	friend class GraphCoreTasker;
 
 public:	
 	FAsyncTask<GraphCoreTasker>* ComponentTasker = nullptr;
@@ -41,6 +42,14 @@ protected:
 
 	// Called when need to create tasker
 	virtual FAsyncTask<GraphCoreTasker>* CreateTasker();
+
+	// Thread Handle /////////////////////////////////////////////////
+
+	FThreadSafeBool StopTaskerWork = false;
+
+	FORCEINLINE void StopTasker();
+
+	//////////////////////////////////////////////////////////////////
 
 public:	
 	// Called every frame
