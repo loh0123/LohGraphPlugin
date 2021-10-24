@@ -9,6 +9,11 @@
 class GraphCoreTasker;
 class ULGPGameCoreSystem;
 
+/**
+* For
+* - Weight Data Use By Reader
+* - Data Store In Core
+*/
 USTRUCT(BlueprintType)
 struct FLGPWeightPrefab
 {
@@ -37,6 +42,10 @@ public:
 		float StepMultiply = 1.0f;
 };
 
+/**
+* For
+* - Graph Component Identify
+*/
 UENUM(BlueprintType)
 enum class EGraphComponentType : uint8
 {
@@ -45,6 +54,13 @@ enum class EGraphComponentType : uint8
 	Writer  UMETA(DisplayName = "Writer"),
 };
 
+/**
+* Base Class For Graph Component
+* For
+* - Component Thread Task Management
+* - Register With Core System
+* - Core Function Reroute
+*/
 UCLASS()
 class LOHGRAPHPLUGIN_API ULGPGraphComponentBase : public UActorComponent
 {
