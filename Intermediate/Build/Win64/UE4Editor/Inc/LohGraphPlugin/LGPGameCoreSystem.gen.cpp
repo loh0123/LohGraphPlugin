@@ -205,11 +205,11 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ProcessWriterTask_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FSetPropertyParams NewProp_ProcessWriterTask;
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_RegisterComponents_ElementProp;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_RegisteredComponents_ElementProp;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_RegisterComponents_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_RegisteredComponents_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FSetPropertyParams NewProp_RegisterComponents;
+		static const UE4CodeGen_Private::FSetPropertyParams NewProp_RegisteredComponents;
 		static const UE4CodeGen_Private::FStructPropertyParams NewProp_WeightPrefabList_Inner;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_WeightPrefabList_MetaData[];
@@ -254,14 +254,14 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 	};
 #endif
 	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask = { "ProcessWriterTask", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, ProcessWriterTask), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_MetaData)) };
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_ElementProp = { "RegisterComponents", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents_ElementProp = { "RegisteredComponents", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents_MetaData[] = {
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/LGPGameCoreSystem.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents = { "RegisterComponents", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, RegisterComponents), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_MetaData)) };
+	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents = { "RegisteredComponents", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, RegisteredComponents), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents_MetaData)) };
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WeightPrefabList_Inner = { "WeightPrefabList", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FLGPWeightPrefab, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WeightPrefabList_MetaData[] = {
@@ -274,8 +274,8 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents_ElementProp,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisterComponents,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents_ElementProp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WeightPrefabList_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WeightPrefabList,
 	};
@@ -306,7 +306,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGameCoreSystem, 2232461940);
+	IMPLEMENT_CLASS(ULGPGameCoreSystem, 3174200454);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGameCoreSystem>()
 	{
 		return ULGPGameCoreSystem::StaticClass();

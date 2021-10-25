@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+UCLASS(ClassGroup = (LGPGraphComponent), meta = (BlueprintSpawnableComponent))
 class LOHGRAPHPLUGIN_API ULGPGraphReader : public ULGPGraphComponentBase
 {
 	GENERATED_BODY()

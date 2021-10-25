@@ -35,7 +35,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphComponentBase() {}
 		return EGraphComponentType_StaticEnum();
 	}
 	static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EGraphComponentType(EGraphComponentType_StaticEnum, TEXT("/Script/LohGraphPlugin"), TEXT("EGraphComponentType"), false, nullptr, nullptr);
-	uint32 Get_Z_Construct_UEnum_LohGraphPlugin_EGraphComponentType_Hash() { return 562972972U; }
+	uint32 Get_Z_Construct_UEnum_LohGraphPlugin_EGraphComponentType_Hash() { return 590551320U; }
 	UEnum* Z_Construct_UEnum_LohGraphPlugin_EGraphComponentType()
 	{
 #if WITH_HOT_RELOAD
@@ -56,9 +56,11 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphComponentBase() {}
 				{ "Base.DisplayName", "Base" },
 				{ "Base.Name", "EGraphComponentType::Base" },
 				{ "BlueprintType", "true" },
+				{ "Comment", "/**\n* For\n* - Graph Component Identify\n*/" },
 				{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
 				{ "Reader.DisplayName", "Reader" },
 				{ "Reader.Name", "EGraphComponentType::Reader" },
+				{ "ToolTip", "For\n- Graph Component Identify" },
 				{ "Writer.DisplayName", "Writer" },
 				{ "Writer.Name", "EGraphComponentType::Writer" },
 			};
@@ -135,7 +137,9 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+		{ "Comment", "/**\n* For\n* - Weight Data Use By Reader\n* - Data Store In Core\n*/" },
 		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
+		{ "ToolTip", "For\n- Weight Data Use By Reader\n- Data Store In Core" },
 	};
 #endif
 	void* Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewStructOps()
@@ -214,7 +218,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FLGPWeightPrefab_Hash() { return 3196177693U; }
+	uint32 Get_Z_Construct_UScriptStruct_FLGPWeightPrefab_Hash() { return 2610236466U; }
 	void ULGPGraphComponentBase::StaticRegisterNativesULGPGraphComponentBase()
 	{
 	}
@@ -242,8 +246,10 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphComponentBase_Statics::Class_MetaDataParams[] = {
+		{ "Comment", "/**\n* Base Class For Graph Component\n* For\n* - Component Thread Task Management\n* - Register With Core System\n* - Core Function Reroute\n*/" },
 		{ "IncludePath", "LGPGraphComponentBase.h" },
 		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
+		{ "ToolTip", "Base Class For Graph Component\nFor\n- Component Thread Task Management\n- Register With Core System\n- Core Function Reroute" },
 	};
 #endif
 #if WITH_METADATA
@@ -282,7 +288,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphComponentBase, 2260000796);
+	IMPLEMENT_CLASS(ULGPGraphComponentBase, 2634131883);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphComponentBase>()
 	{
 		return ULGPGraphComponentBase::StaticClass();

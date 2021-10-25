@@ -17,6 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphWriter() {}
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphWriter();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphComponentBase();
 	UPackage* Z_Construct_UPackage__Script_LohGraphPlugin();
+	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNode_NoRegister();
 // End Cross Module References
 	void ULGPGraphWriter::StaticRegisterNativesULGPGraphWriter()
 	{
@@ -31,6 +32,12 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphWriter() {}
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_RegisteredNode_ElementProp;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_RegisteredNode_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FSetPropertyParams NewProp_RegisteredNode;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
 	};
@@ -41,12 +48,25 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphWriter() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
-		{ "ClassGroupNames", "Custom" },
+		{ "ClassGroupNames", "LGPGraphComponent" },
 		{ "Comment", "/**\n * \n */" },
 		{ "IncludePath", "LGPGraphWriter.h" },
 		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
 	};
 #endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_ElementProp = { "RegisteredNode", nullptr, (EPropertyFlags)0x00000000000a0009, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPNode_NoRegister, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_MetaData[] = {
+		{ "Category", "LGPGraphWriter" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode = { "RegisteredNode", nullptr, (EPropertyFlags)0x0020088000020009, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphWriter, RegisteredNode), METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPGraphWriter_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_ElementProp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode,
+	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ULGPGraphWriter_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ULGPGraphWriter>::IsAbstract,
 	};
@@ -56,11 +76,11 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphWriter() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
-		nullptr,
+		Z_Construct_UClass_ULGPGraphWriter_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
-		0,
+		UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::PropPointers),
 		0,
 		0x00B000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::Class_MetaDataParams))
@@ -74,7 +94,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphWriter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphWriter, 1680750445);
+	IMPLEMENT_CLASS(ULGPGraphWriter, 2545663301);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphWriter>()
 	{
 		return ULGPGraphWriter::StaticClass();

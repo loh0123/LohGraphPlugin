@@ -41,7 +41,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphReader() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphReader_Statics::Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
-		{ "ClassGroupNames", "Custom" },
+		{ "ClassGroupNames", "LGPGraphComponent" },
 		{ "Comment", "/**\n * \n */" },
 		{ "IncludePath", "LGPGraphReader.h" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
@@ -74,7 +74,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphReader() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphReader, 932134711);
+	IMPLEMENT_CLASS(ULGPGraphReader, 931309816);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphReader>()
 	{
 		return ULGPGraphReader::StaticClass();

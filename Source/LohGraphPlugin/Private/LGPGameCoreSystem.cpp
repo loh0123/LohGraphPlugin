@@ -101,7 +101,7 @@ void ULGPGameCoreSystem::Deinitialize()
 
 void ULGPGameCoreSystem::RegisterGraphComponent(ULGPGraphComponentBase* Component)
 {
-	RegisterComponents.Add(Component);
+	RegisteredComponents.Add(Component);
 
 	Component->CoreSystem = this;
 
@@ -110,7 +110,7 @@ void ULGPGameCoreSystem::RegisterGraphComponent(ULGPGraphComponentBase* Componen
 
 void ULGPGameCoreSystem::UnregisterGraphComponent(ULGPGraphComponentBase* Component)
 {
-	RegisterComponents.Remove(Component);
+	RegisteredComponents.Remove(Component);
 
 	Component->CoreSystem = nullptr;
 

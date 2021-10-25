@@ -85,7 +85,7 @@ public:
 
 private:
 
-	UPROPERTY() TSet<ULGPGraphComponentBase*> RegisterComponents;
+	UPROPERTY() TSet<ULGPGraphComponentBase*> RegisteredComponents;
 
 	UPROPERTY() TArray<FLGPWeightPrefab> WeightPrefabList;
 };
