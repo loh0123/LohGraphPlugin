@@ -2,7 +2,30 @@
 
 
 #include "LGPGraphWriter.h"
-#include "LGPNode.h"
+
+void ULGPGraphWriter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	TInlineComponentArray<ULGPNode*> NodeList(GetOwner());
+
+	GetOwner()->GetComponents<ULGPNode>(NodeList, true);
+
+	for (ULGPNode* Node : NodeList)
+	{
+		RegisterGraphNode(Node);
+	}
+}
+
+void ULGPGraphWriter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	for (ULGPNode* Node : RegisteredNode)
+	{
+		UnregisterGraphNode(Node);
+	}
+}
 
 void ULGPGraphWriter::RegisterGraphNode(ULGPNode* Node)
 {

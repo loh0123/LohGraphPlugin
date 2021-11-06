@@ -6,8 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "LGPGraphComponentBase.generated.h"
 
-class GraphCoreTasker;
 class ULGPGameCoreSystem;
+class GraphComponentTasker;
 
 /**
 * For
@@ -67,31 +67,33 @@ class LOHGRAPHPLUGIN_API ULGPGraphComponentBase : public UActorComponent
 	GENERATED_BODY()
 
 	friend class ULGPGameCoreSystem;
-	friend class GraphCoreTasker;
+	friend class GraphComponentTasker;
 
 public:	
-	FAsyncTask<GraphCoreTasker>* ComponentTasker = nullptr;
 
 	// Sets default values for this component's properties
 	ULGPGraphComponentBase();
 
 protected:
-	UPROPERTY() ULGPGameCoreSystem* CoreSystem = nullptr;
-
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-	// Called when the game end
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-
-	// Called when need to create tasker
-	virtual FAsyncTask<GraphCoreTasker>* CreateTasker();
-
 	// Thread Handle /////////////////////////////////////////////////
 
-	FThreadSafeBool StopTaskerWork = false;
+	FORCEINLINE void StopGraphComponentTasker();
+	
+	FORCEINLINE bool IsGraphComponentWorking();
+	
+	
+	
+	FORCEINLINE void MarkGraphComponentDirty() { bIsDirty = true; PreBuildVersion++; return; }
+	
+	FORCEINLINE bool IsGraphComponentDirty() const { return bIsDirty; }
 
-	FORCEINLINE void StopTasker();
+
+
+	// Warning This Run On Other Thread
+	virtual void DoThreadWork() { return; }
+
+	// Call After Thread Work Is Done
+	virtual void OnThreadWorkDone() { return; }
 
 	//////////////////////////////////////////////////////////////////
 
@@ -102,9 +104,28 @@ protected:
 
 	////////////////////////////////////////////////////////////////////////
 
+
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
+	// Called when the game end
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	EGraphComponentType GetTypeID() const;
+
+protected:
+
+	FAsyncTask<GraphComponentTasker>* ComponentTasker = nullptr;
+
+	FThreadSafeBool StopTaskerWork = false;
+
+	UPROPERTY() ULGPGameCoreSystem* CoreSystem = nullptr;
+
+	UPROPERTY(VisibleAnywhere) uint8 bIsDirty : 1;
+
+	UPROPERTY(VisibleAnywhere) uint32 PreBuildVersion = uint32(0);
 };

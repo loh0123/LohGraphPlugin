@@ -6,13 +6,13 @@ C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4E
 C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Inc\LohGraphPlugin\LGPGameCoreSystem.generated.h
 C:/Unreal/Project/PluginLab/Plugins/LohGraphPlugin/Source/LohGraphPlugin/Private/LGPGraphComponentBase.cpp
 C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Source\LohGraphPlugin\Public\LGPGraphWriter.h
+C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Source\LohGraphPlugin\Public\LGPNode.h
+C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Inc\LohGraphPlugin\LGPNode.generated.h
 C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Inc\LohGraphPlugin\LGPGraphWriter.generated.h
 C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Source\LohGraphPlugin\Public\LGPGraphReader.h
 C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Inc\LohGraphPlugin\LGPGraphReader.generated.h
 C:/Unreal/Project/PluginLab/Plugins/LohGraphPlugin/Source/LohGraphPlugin/Private/LGPGraphReader.cpp
 C:/Unreal/Project/PluginLab/Plugins/LohGraphPlugin/Source/LohGraphPlugin/Private/LGPGraphWriter.cpp
-C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Source\LohGraphPlugin\Public\LGPNode.h
-C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Inc\LohGraphPlugin\LGPNode.generated.h
 C:/Unreal/Project/PluginLab/Plugins/LohGraphPlugin/Source/LohGraphPlugin/Private/LGPNode.cpp
 C:/Unreal/Project/PluginLab/Plugins/LohGraphPlugin/Source/LohGraphPlugin/Private/LohGraphPlugin.cpp
 C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Source\LohGraphPlugin\Public\LohGraphPlugin.h

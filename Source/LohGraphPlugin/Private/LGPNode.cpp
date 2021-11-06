@@ -20,10 +20,23 @@ void ULGPNodeBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
 
+	ClearPath();
+
 	if (NodeGraphWriter)
 	{
 		NodeGraphWriter->UnregisterGraphNode(Cast<ULGPNode>(this));
 	}
+}
+
+void ULGPNodeBase::SetupNode(TSet<FLGPNodePathData>& Paths, const bool WeightType, const bool IsTrigger)
+{
+	checkf(!HasBegunPlay(), TEXT("Setup Node Only Can Run Before Begin Play"));
+
+	PathList = Paths;
+	NodeWeightType = WeightType;
+	bIsTrigger = IsTrigger;
+
+	return;
 }
 
 bool ULGPNodeBase::AddPath(ULGPNode* Node, const uint8 WeightType, const bool IsReturnable, const bool Trigger)
@@ -38,7 +51,7 @@ bool ULGPNodeBase::AddPath(ULGPNode* Node, const uint8 WeightType, const bool Is
 			Node->PathList.Find(Cast<ULGPNode>(this))->IsReturnable = true;
 
 			Data->PathWeightType = WeightType;
-			Data->IsTrigger = Trigger;
+			Data->bIsTrigger = Trigger;
 		}
 		else
 		{
@@ -92,11 +105,4 @@ bool ULGPNodeBase::ClearPath()
 	}
 
 	return LocalPathNode.Num() > 0;
-}
-
-float ULGPNodeBase::GetNodeWeight(ULGPGraphReader* Reader) const // TODO
-{
-    // TODO : Finish Reader First
-
-    return 0.0f;
 }

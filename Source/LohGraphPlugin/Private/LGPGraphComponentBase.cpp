@@ -18,6 +18,29 @@ ULGPGraphComponentBase::ULGPGraphComponentBase()
 }
 
 
+
+void ULGPGraphComponentBase::StopGraphComponentTasker()
+{
+	StopTaskerWork = true; 
+	
+	ComponentTasker->EnsureCompletion(false);
+	
+	return;
+}
+
+bool ULGPGraphComponentBase::IsGraphComponentWorking()
+{
+	return !ComponentTasker->IsWorkDone() || bIsDirty;
+}
+
+
+
+bool ULGPGraphComponentBase::GetWeightPrefab(const int32 ID, FLGPWeightPrefab& Prefab) const
+{
+	return CoreSystem->GetWeightPrefab(ID, Prefab);
+}
+
+
 // Called when the game starts
 void ULGPGraphComponentBase::BeginPlay()
 {
@@ -26,11 +49,7 @@ void ULGPGraphComponentBase::BeginPlay()
 	GEngine->GetWorld()->GetGameInstance()->GetSubsystem<ULGPGameCoreSystem>()->RegisterGraphComponent(this);
 
 	// Create Thread /////////////////////////////////
-	checkf(ComponentTasker == nullptr, TEXT("ComponentTasker Can't Be Create Before This"));
-
-	ComponentTasker = CreateTasker();
-
-	checkf(ComponentTasker != nullptr, TEXT("ComponentTasker Create Fail"));
+	ComponentTasker = new FAsyncTask<GraphComponentTasker>(this);
 	////////////////////////////////////////////////////
 	
 	return;
@@ -44,33 +63,14 @@ void ULGPGraphComponentBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (ComponentTasker)
 	{
 		ComponentTasker->EnsureCompletion();
-
+	
 		delete ComponentTasker;
-
+	
 		ComponentTasker = nullptr;
 	}
 	////////////////////////////////////////////////////
 
 	return;
-}
-
-FAsyncTask<GraphCoreTasker>* ULGPGraphComponentBase::CreateTasker()
-{
-	return new FAsyncTask<GraphCoreTasker>(this);
-}
-
-void ULGPGraphComponentBase::StopTasker()
-{
-	StopTaskerWork = true;
-
-	ComponentTasker->EnsureCompletion();
-
-	return;
-}
-
-bool ULGPGraphComponentBase::GetWeightPrefab(const int32 ID, FLGPWeightPrefab& Prefab) const
-{
-	return CoreSystem->GetWeightPrefab(ID, Prefab);
 }
 
 
@@ -79,8 +79,18 @@ void ULGPGraphComponentBase::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (bIsDirty)
+	{
+		bIsDirty = false;
+
+		CoreSystem->AddTasker(this);
+	}
+
+	return;
 	// ...
 }
+
+
 
 EGraphComponentType ULGPGraphComponentBase::GetTypeID() const
 {

@@ -236,6 +236,15 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CoreSystem_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CoreSystem;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bIsDirty_MetaData[];
+#endif
+		static void NewProp_bIsDirty_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bIsDirty;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PreBuildVersion_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FUInt32PropertyParams NewProp_PreBuildVersion;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -258,8 +267,28 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_CoreSystem = { "CoreSystem", nullptr, (EPropertyFlags)0x0020080000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphComponentBase, CoreSystem), Z_Construct_UClass_ULGPGameCoreSystem_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_CoreSystem_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_CoreSystem_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_bIsDirty_MetaData[] = {
+		{ "Category", "LGPGraphComponentBase" },
+		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
+	};
+#endif
+	void Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_bIsDirty_SetBit(void* Obj)
+	{
+		((ULGPGraphComponentBase*)Obj)->bIsDirty = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_bIsDirty = { "bIsDirty", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::Bool , RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(uint8), sizeof(ULGPGraphComponentBase), &Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_bIsDirty_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_bIsDirty_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_bIsDirty_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_PreBuildVersion_MetaData[] = {
+		{ "Category", "LGPGraphComponentBase" },
+		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FUInt32PropertyParams Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_PreBuildVersion = { "PreBuildVersion", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::UInt32, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphComponentBase, PreBuildVersion), METADATA_PARAMS(Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_PreBuildVersion_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_PreBuildVersion_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPGraphComponentBase_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_CoreSystem,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_bIsDirty,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphComponentBase_Statics::NewProp_PreBuildVersion,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ULGPGraphComponentBase_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ULGPGraphComponentBase>::IsAbstract,
@@ -288,7 +317,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphComponentBase, 2634131883);
+	IMPLEMENT_CLASS(ULGPGraphComponentBase, 1292346408);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphComponentBase>()
 	{
 		return ULGPGraphComponentBase::StaticClass();

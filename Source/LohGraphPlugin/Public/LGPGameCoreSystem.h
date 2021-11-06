@@ -29,7 +29,7 @@ class LOHGRAPHPLUGIN_API ULGPGameCoreSystem : public UGameInstanceSubsystem
 
 // Thread System ////////////////////////////////////////////
 
-	friend class GraphCoreTasker; // Give Tasker Access To Private Function
+	friend class GraphComponentTasker; // Give Tasker Access To Private Function
 
 private:
 
@@ -90,34 +90,32 @@ private:
 	UPROPERTY() TArray<FLGPWeightPrefab> WeightPrefabList;
 };
 
-class GraphCoreTasker : public FNonAbandonableTask
+class GraphComponentTasker : public FNonAbandonableTask
 {
-	friend class FAsyncTask<GraphCoreTasker>;
+	friend class FAsyncTask<GraphComponentTasker>;
 
 public:
 
-	GraphCoreTasker(ULGPGraphComponentBase* Component) : OwnerComponent(Component), GraphCore(GEngine->GetWorld()->GetGameInstance()->GetSubsystem<ULGPGameCoreSystem>()) { }
+	GraphComponentTasker(ULGPGraphComponentBase* Component) : OwnerComponent(Component), GraphCore(GEngine->GetWorld()->GetGameInstance()->GetSubsystem<ULGPGameCoreSystem>()) { }
 
 	void DoWork()
 	{
 		checkf(OwnerComponent, TEXT("OwnerComponent Must be Valid"));
 		checkf(GraphCore, TEXT("GraphCore Must be Valid"));
 
-		DoThreadWork(GraphCore, OwnerComponent->StopTaskerWork);
+		OwnerComponent->DoThreadWork();
 
 		AsyncTask(ENamedThreads::GameThread, [&]()
 		{
-			OnThreadWorkDone(GraphCore, OwnerComponent->StopTaskerWork);
+			OwnerComponent->OnThreadWorkDone();
 
 			GraphCore->RemoveTasker(OwnerComponent);
 		});
+
+		return;
 	}
 
-	virtual void DoThreadWork(ULGPGameCoreSystem* Core, FThreadSafeBool& ForceStop) { return; }
-
-	virtual void OnThreadWorkDone(ULGPGameCoreSystem* Core, const bool IsForceStop) { return; }
-
-	FORCEINLINE TStatId GetStatId() const { RETURN_QUICK_DECLARE_CYCLE_STAT(GraphCoreTasker, STATGROUP_ThreadPoolAsyncTasks); }
+	FORCEINLINE TStatId GetStatId() const { RETURN_QUICK_DECLARE_CYCLE_STAT(GraphComponentTasker, STATGROUP_ThreadPoolAsyncTasks); }
 
 protected :
 

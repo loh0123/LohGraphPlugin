@@ -1,6 +1,7 @@
 // Copyright by Loh Zhi Kang
 
 #include "LGPGameCoreSystem.h"
+#include "LGPGraphComponentBase.h"
 
 
 DEFINE_LOG_CATEGORY(LogGraphCore);

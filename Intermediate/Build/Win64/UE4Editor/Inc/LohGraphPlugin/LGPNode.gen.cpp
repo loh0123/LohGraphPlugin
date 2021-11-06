@@ -19,7 +19,6 @@ void EmptyLinkFunctionForGeneratedCodeLGPNode() {}
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNodeBase_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNodeBase();
 	ENGINE_API UClass* Z_Construct_UClass_UPrimitiveComponent();
-	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphReader_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphWriter_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNodeCache_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNodeCache();
@@ -72,10 +71,10 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		static void NewProp_IsReturnable_SetBit(void* Obj);
 		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_IsReturnable;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_IsTrigger_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bIsTrigger_MetaData[];
 #endif
-		static void NewProp_IsTrigger_SetBit(void* Obj);
-		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_IsTrigger;
+		static void NewProp_bIsTrigger_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bIsTrigger;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const UE4CodeGen_Private::FStructParams ReturnStructParams;
 	};
@@ -127,22 +126,22 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	}
 	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsReturnable = { "IsReturnable", nullptr, (EPropertyFlags)0x0010000000020001, UE4CodeGen_Private::EPropertyGenFlags::Bool , RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(uint8), sizeof(FLGPNodePathData), &Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsReturnable_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsReturnable_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsReturnable_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsTrigger_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_bIsTrigger_MetaData[] = {
 		{ "Category", "LGPNodePathData" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
 	};
 #endif
-	void Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsTrigger_SetBit(void* Obj)
+	void Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_bIsTrigger_SetBit(void* Obj)
 	{
-		((FLGPNodePathData*)Obj)->IsTrigger = 1;
+		((FLGPNodePathData*)Obj)->bIsTrigger = 1;
 	}
-	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsTrigger = { "IsTrigger", nullptr, (EPropertyFlags)0x0010000000020001, UE4CodeGen_Private::EPropertyGenFlags::Bool , RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(uint8), sizeof(FLGPNodePathData), &Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsTrigger_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsTrigger_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsTrigger_MetaData)) };
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_bIsTrigger = { "bIsTrigger", nullptr, (EPropertyFlags)0x0010000000020001, UE4CodeGen_Private::EPropertyGenFlags::Bool , RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(uint8), sizeof(FLGPNodePathData), &Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_bIsTrigger_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_bIsTrigger_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_bIsTrigger_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FLGPNodePathData_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_ConnectNode,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_PathWeightType,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsWalkable,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsReturnable,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_IsTrigger,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPNodePathData_Statics::NewProp_bIsTrigger,
 	};
 	const UE4CodeGen_Private::FStructParams Z_Construct_UScriptStruct_FLGPNodePathData_Statics::ReturnStructParams = {
 		(UObject* (*)())Z_Construct_UPackage__Script_LohGraphPlugin,
@@ -172,7 +171,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FLGPNodePathData_Hash() { return 334625385U; }
+	uint32 Get_Z_Construct_UScriptStruct_FLGPNodePathData_Hash() { return 603732609U; }
 	DEFINE_FUNCTION(ULGPNodeBase::execSetNodeWeightType)
 	{
 		P_GET_PROPERTY(FByteProperty,Z_Param_ID);
@@ -186,14 +185,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		*(uint8*)Z_Param__Result=P_THIS->GetNodeWeightType();
-		P_NATIVE_END;
-	}
-	DEFINE_FUNCTION(ULGPNodeBase::execGetNodeWeight)
-	{
-		P_GET_OBJECT(ULGPGraphReader,Z_Param_Reader);
-		P_FINISH;
-		P_NATIVE_BEGIN;
-		*(float*)Z_Param__Result=P_THIS->GetNodeWeight(Z_Param_Reader);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(ULGPNodeBase::execClearPath)
@@ -235,7 +226,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AddPath", &ULGPNodeBase::execAddPath },
 			{ "ClearPath", &ULGPNodeBase::execClearPath },
-			{ "GetNodeWeight", &ULGPNodeBase::execGetNodeWeight },
 			{ "GetNodeWeightType", &ULGPNodeBase::execGetNodeWeightType },
 			{ "GetPathArray", &ULGPNodeBase::execGetPathArray },
 			{ "RemovePath", &ULGPNodeBase::execRemovePath },
@@ -374,51 +364,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPNodeBase_ClearPath_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
-	struct Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics
-	{
-		struct LGPNodeBase_eventGetNodeWeight_Parms
-		{
-			ULGPGraphReader* Reader;
-			float ReturnValue;
-		};
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Reader_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_Reader;
-		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
-		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UE4CodeGen_Private::FFunctionParams FuncParams;
-	};
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::NewProp_Reader_MetaData[] = {
-		{ "EditInline", "true" },
-	};
-#endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::NewProp_Reader = { "Reader", nullptr, (EPropertyFlags)0x0010000000080080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPNodeBase_eventGetNodeWeight_Parms, Reader), Z_Construct_UClass_ULGPGraphReader_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::NewProp_Reader_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::NewProp_Reader_MetaData)) };
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPNodeBase_eventGetNodeWeight_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
-	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::NewProp_Reader,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::NewProp_ReturnValue,
-	};
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::Function_MetaDataParams[] = {
-		{ "Category", "LGPNodeBase | Weight Type" },
-		{ "ModuleRelativePath", "Public/LGPNode.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPNodeBase, nullptr, "GetNodeWeight", nullptr, nullptr, sizeof(LGPNodeBase_eventGetNodeWeight_Parms), Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -611,10 +556,10 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 #endif
 		static const UE4CodeGen_Private::FBytePropertyParams NewProp_NodeWeightType;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_IsTrigger_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bIsTrigger_MetaData[];
 #endif
-		static void NewProp_IsTrigger_SetBit(void* Obj);
-		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_IsTrigger;
+		static void NewProp_bIsTrigger_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bIsTrigger;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -626,7 +571,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	const FClassFunctionLinkInfo Z_Construct_UClass_ULGPNodeBase_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_ULGPNodeBase_AddPath, "AddPath" }, // 1886337862
 		{ &Z_Construct_UFunction_ULGPNodeBase_ClearPath, "ClearPath" }, // 2501074026
-		{ &Z_Construct_UFunction_ULGPNodeBase_GetNodeWeight, "GetNodeWeight" }, // 3738608671
 		{ &Z_Construct_UFunction_ULGPNodeBase_GetNodeWeightType, "GetNodeWeightType" }, // 727419856
 		{ &Z_Construct_UFunction_ULGPNodeBase_GetPathArray, "GetPathArray" }, // 588580164
 		{ &Z_Construct_UFunction_ULGPNodeBase_RemovePath, "RemovePath" }, // 3211535296
@@ -634,11 +578,11 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeBase_Statics::Class_MetaDataParams[] = {
-		{ "Comment", "/**\n * Base Class Of Graph Node \n * For\n * - Register / Unregister With Graph Writer At ( Begin Play )\n * - Add / Remove Path Function\n */" },
+		{ "Comment", "/**\n * Base Class Of Graph Node \n * For\n * - Register / Unregister With Graph Writer At ( Begin Play )\n * - Add / Remove Path Function\n * - All Base Spawn Variable\n */" },
 		{ "HideCategories", "Mobility VirtualTexture Trigger" },
 		{ "IncludePath", "LGPNode.h" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
-		{ "ToolTip", "Base Class Of Graph Node\nFor\n- Register / Unregister With Graph Writer At ( Begin Play )\n- Add / Remove Path Function" },
+		{ "ToolTip", "Base Class Of Graph Node\nFor\n- Register / Unregister With Graph Writer At ( Begin Play )\n- Add / Remove Path Function\n- All Base Spawn Variable" },
 	};
 #endif
 #if WITH_METADATA
@@ -666,23 +610,23 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 #endif
 	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType = { "NodeWeightType", nullptr, (EPropertyFlags)0x0021080000000015, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeBase, NodeWeightType), nullptr, METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_IsTrigger_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_MetaData[] = {
 		{ "Category", "LGPNodeBase" },
 		{ "ExposeOnSpawn", "true" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
 	};
 #endif
-	void Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_IsTrigger_SetBit(void* Obj)
+	void Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_SetBit(void* Obj)
 	{
-		((ULGPNodeBase*)Obj)->IsTrigger = 1;
+		((ULGPNodeBase*)Obj)->bIsTrigger = 1;
 	}
-	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_IsTrigger = { "IsTrigger", nullptr, (EPropertyFlags)0x0021080000000015, UE4CodeGen_Private::EPropertyGenFlags::Bool , RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(uint8), sizeof(ULGPNodeBase), &Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_IsTrigger_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_IsTrigger_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_IsTrigger_MetaData)) };
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger = { "bIsTrigger", nullptr, (EPropertyFlags)0x0021080000000015, UE4CodeGen_Private::EPropertyGenFlags::Bool , RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(uint8), sizeof(ULGPNodeBase), &Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPNodeBase_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeGraphWriter,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_IsTrigger,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ULGPNodeBase_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ULGPNodeBase>::IsAbstract,
@@ -711,7 +655,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNodeBase, 3788568219);
+	IMPLEMENT_CLASS(ULGPNodeBase, 400444751);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNodeBase>()
 	{
 		return ULGPNodeBase::StaticClass();
@@ -740,9 +684,11 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeCache_Statics::Class_MetaDataParams[] = {
+		{ "Comment", "/**\n * Cache Class Of Graph Node\n * For\n * - Storing All Writer Cook Data\n * - Handle All Writer Send Event\n */" },
 		{ "HideCategories", "Mobility VirtualTexture Trigger" },
 		{ "IncludePath", "LGPNode.h" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
+		{ "ToolTip", "Cache Class Of Graph Node\nFor\n- Storing All Writer Cook Data\n- Handle All Writer Send Event" },
 	};
 #endif
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ULGPNodeCache_Statics::StaticCppClassTypeInfo = {
@@ -772,7 +718,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNodeCache, 1179550626);
+	IMPLEMENT_CLASS(ULGPNodeCache, 1769573923);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNodeCache>()
 	{
 		return ULGPNodeCache::StaticClass();
@@ -801,9 +747,11 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNode_Statics::Class_MetaDataParams[] = {
+		{ "Comment", "/**\n * Top Class Of Graph Node\n * For\n * - Debug Information And Viewer\n */" },
 		{ "HideCategories", "Mobility VirtualTexture Trigger" },
 		{ "IncludePath", "LGPNode.h" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
+		{ "ToolTip", "Top Class Of Graph Node\nFor\n- Debug Information And Viewer" },
 	};
 #endif
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ULGPNode_Statics::StaticCppClassTypeInfo = {
@@ -833,7 +781,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNode, 1886068378);
+	IMPLEMENT_CLASS(ULGPNode, 2716259424);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNode>()
 	{
 		return ULGPNode::StaticClass();

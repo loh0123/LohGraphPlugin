@@ -34,7 +34,8 @@
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN
 "C:\Unreal\Project\PluginLab\Intermediate\Build\Win64\PluginLabEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Development\LohGraphPlugin\LohGraphPlugin.cpp.obj"
+"C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Development\LohGraphPlugin\Module.LohGraphPlugin.cpp.obj"
+"C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Development\LohGraphPlugin\Module.LohGraphPlugin.gen.cpp.obj"
 "C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Development\LohGraphPlugin\Default.rc2.res"
 "C:\Unreal\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Development\CoreUObject\UE4Editor-CoreUObject.lib"
 "C:\Unreal\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\UE4Editor-Engine.lib"

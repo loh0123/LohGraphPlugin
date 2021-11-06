@@ -21,20 +21,20 @@ public:
 
 	FLGPNodePathData(ULGPNode* Node) : ConnectNode(Node) {}
 
-	FLGPNodePathData(ULGPNode* Node, const uint8 WeightType, const bool Walkable, const bool Returnable, const bool Trigger) : ConnectNode(Node), PathWeightType(WeightType), IsWalkable(Walkable), IsReturnable(Returnable), IsTrigger(Trigger) {}
+	FLGPNodePathData(ULGPNode* Node, const uint8 WeightType, const bool Walkable, const bool Returnable, const bool Trigger) : ConnectNode(Node), PathWeightType(WeightType), IsWalkable(Walkable), IsReturnable(Returnable), bIsTrigger(Trigger) {}
 
 
 
 	UPROPERTY(VisibleAnywhere) ULGPNode* ConnectNode;
 
-	UPROPERTY(VisibleAnywhere) uint8 PathWeightType = (uint8)0;
+	UPROPERTY(VisibleAnywhere) uint8 PathWeightType = uint8(0);
 
 
 	UPROPERTY(VisibleAnywhere) uint8 IsWalkable : 1;
 
 	UPROPERTY(VisibleAnywhere) uint8 IsReturnable : 1;
 
-	UPROPERTY(VisibleAnywhere) uint8 IsTrigger : 1;
+	UPROPERTY(VisibleAnywhere) uint8 bIsTrigger : 1;
 
 
 
@@ -56,6 +56,7 @@ public:
  * For
  * - Register / Unregister With Graph Writer At ( Begin Play )
  * - Add / Remove Path Function
+ * - All Base Spawn Variable
  */
 UCLASS()
 class LOHGRAPHPLUGIN_API ULGPNodeBase : public UPrimitiveComponent
@@ -74,7 +75,10 @@ protected:
 
 public:
 
-		FORCEINLINE const TSet<FLGPNodePathData>& GetPathList() const { return PathList; }
+	// Setup Node On Construst
+	FORCEINLINE void SetupNode(TSet<FLGPNodePathData>& Paths, const bool WeightType, const bool IsTrigger);
+
+	FORCEINLINE const TSet<FLGPNodePathData>& GetPathList() const { return PathList; }
 
 	UFUNCTION(BlueprintPure,		Category = "LGPNodeBase | Graph Path")
 		FORCEINLINE TArray<FLGPNodePathData> GetPathArray() const { return PathList.Array(); }
@@ -91,9 +95,6 @@ public:
 
 
 	UFUNCTION(BlueprintPure,		Category = "LGPNodeBase | Weight Type")
-		FORCEINLINE float GetNodeWeight(ULGPGraphReader* Reader) const;
-
-	UFUNCTION(BlueprintPure,		Category = "LGPNodeBase | Weight Type")
 		FORCEINLINE uint8 GetNodeWeightType() const { return NodeWeightType; }
 
 	UFUNCTION(BlueprintCallable,	Category = "LGPNodeBase | Weight Type")
@@ -107,9 +108,16 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, meta = (ExposeOnSpawn = "true")) uint8 NodeWeightType = (uint8)0;
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, meta = (ExposeOnSpawn = "true")) uint8 IsTrigger : 1;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, meta = (ExposeOnSpawn = "true")) uint8 bIsTrigger : 1;
 };
 
+
+/**
+ * Cache Class Of Graph Node
+ * For
+ * - Storing All Writer Cook Data
+ * - Handle All Writer Send Event
+ */
 UCLASS()
 class LOHGRAPHPLUGIN_API ULGPNodeCache : public ULGPNodeBase
 {
@@ -117,6 +125,12 @@ class LOHGRAPHPLUGIN_API ULGPNodeCache : public ULGPNodeBase
 
 };
 
+
+/**
+ * Top Class Of Graph Node
+ * For
+ * - Debug Information And Viewer
+ */
 UCLASS()
 class LOHGRAPHPLUGIN_API ULGPNode : public ULGPNodeCache
 {

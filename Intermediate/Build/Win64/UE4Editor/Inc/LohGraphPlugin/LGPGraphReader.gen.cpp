@@ -74,7 +74,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphReader() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphReader, 931309816);
+	IMPLEMENT_CLASS(ULGPGraphReader, 1711166080);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphReader>()
 	{
 		return ULGPGraphReader::StaticClass();

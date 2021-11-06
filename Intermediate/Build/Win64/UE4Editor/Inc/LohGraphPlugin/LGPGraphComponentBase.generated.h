@@ -66,7 +66,8 @@ public: \
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphComponentBase_h_67_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__CoreSystem() { return STRUCT_OFFSET(ULGPGraphComponentBase, CoreSystem); }
+	FORCEINLINE static uint32 __PPO__CoreSystem() { return STRUCT_OFFSET(ULGPGraphComponentBase, CoreSystem); } \
+	FORCEINLINE static uint32 __PPO__PreBuildVersion() { return STRUCT_OFFSET(ULGPGraphComponentBase, PreBuildVersion); }
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphComponentBase_h_64_PROLOG
