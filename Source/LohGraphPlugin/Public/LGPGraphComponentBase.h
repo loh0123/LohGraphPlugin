@@ -83,7 +83,7 @@ protected:
 	
 	
 	
-	FORCEINLINE void MarkGraphComponentDirty(const bool Recompile = true) { bIsDirty = true; if (Recompile) CurrentBuildVersion++; return; }
+	FORCEINLINE void MarkGraphComponentDirty(const bool Recompile = true) { if (!IsPendingKill()) { bIsDirty = true; if (Recompile) CurrentBuildVersion++; } return; }
 	
 	FORCEINLINE bool IsGraphComponentDirty() const { return bIsDirty; }
 

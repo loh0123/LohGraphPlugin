@@ -59,9 +59,11 @@ public:
 
 	FLGPNodeGroupData() {}
 
-	FLGPNodeGroupData(TArray<ULGPNode*>& Members, TArray<FLGPNodePathData> Paths) : GroupMember(Members), GroupPath(Paths) {}
+	FLGPNodeGroupData(const TSet<ULGPNode*>& Members) : GroupMember(Members) {}
 
-	UPROPERTY(VisibleAnywhere) TArray<ULGPNode*> GroupMember;
+	FLGPNodeGroupData(const TArray<ULGPNode*>& Members, const TArray<FLGPNodePathData>& Paths) : GroupMember(Members), GroupPath(Paths) {}
+
+	UPROPERTY(VisibleAnywhere) TSet<ULGPNode*> GroupMember;
 
 	UPROPERTY(VisibleAnywhere) TArray<FLGPNodePathData> GroupPath;
 
@@ -136,6 +138,13 @@ protected:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override; // Unregister Writer
 
 
+	virtual FORCEINLINE bool AddPath(ULGPNode* Node, const uint8 WeightType, const bool IsReturnable, const bool Trigger) override;
+
+	virtual FORCEINLINE bool RemovePath(ULGPNode* Node) override;
+
+	virtual FORCEINLINE bool ClearPath() override;
+
+
 
 	//FORCEINLINE void AddPassWeight(ULGPGraphReader* Reader);
 
@@ -167,7 +176,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere) TMap<ULGPNode*, uint16> NodeSteps;
 
-	UPROPERTY(VisibleAnywhere) uint16 GroupID = 0;
+	UPROPERTY(VisibleAnywhere) int32 GroupID = INDEX_NONE;
 
 };
 
@@ -181,5 +190,10 @@ UCLASS()
 class LOHGRAPHPLUGIN_API ULGPNode : public ULGPNodeCache
 {
 	GENERATED_BODY()
+
+
+public:
+
+	ULGPNode();
 
 };

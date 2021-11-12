@@ -9,6 +9,27 @@
 
 class GraphWriterTasker;
 
+USTRUCT(BlueprintType)
+struct FLGSNodeGroupProcess
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+
+	FLGSNodeGroupProcess() {}
+
+	FLGSNodeGroupProcess(const int32 ID) : LowLinkID(ID), LowLinkValue(ID) {}
+
+	UPROPERTY()
+		int32 LowLinkID;
+
+	UPROPERTY()
+		int32 LowLinkValue;
+
+	UPROPERTY()
+		int32 SCCID = INDEX_NONE;
+};
+
 /**
  *  Graph Writer
  * 
@@ -39,6 +60,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////
 
+	FORCEINLINE void MarkGraphWriterDirty() { if (!bIsDirty) MarkGraphComponentDirty(); }
+
 protected:
 
 	UPROPERTY(VisibleAnywhere) TSet<ULGPNode*> RegisteredNode;
@@ -46,23 +69,34 @@ protected:
 // Thread Handle //////////////////////////////////////////////////////////////////
 
 	virtual bool OnThreadWorkStart() override {
-		if (BuildVersion != CurrentBuildVersion)
+		if (RegisteredNode.Num() > 0)
+		{
+			if (BuildVersion != CurrentBuildVersion)
+			{
+				PathProcessQueue.Empty();
+				NodeGroupList.Empty();
+				CurrentPathProcessNode = nullptr;
+
+				return true;
+			}
+			else if (PathProcessQueue.Num() > 0)
+			{
+				CurrentPathProcessNode = PathProcessQueue.Pop();
+
+				return true;
+			}
+		}
+		else
 		{
 			PathProcessQueue.Empty();
 			NodeGroupList.Empty();
-
-			return true;
-		}
-
-		if (PathProcessQueue.Num() > 0)
-		{
-			return true;
+			CurrentPathProcessNode = nullptr;
 		}
 
 		return false; 
 	}
 
-	virtual void DoThreadWork() override { return; } // TODO ! ! ! ! !!!!!!! !!! !!!
+	virtual void DoThreadWork() override;
 
 	virtual void OnThreadWorkDone() override { if(!StopTaskerWork) BuildVersion = CurrentBuildVersion; return; }
 
@@ -73,6 +107,8 @@ protected:
 	UPROPERTY(VisibleAnywhere) uint32 BuildVersion = 0; // Use To Check If Data Is Outdated
 
 	UPROPERTY(VisibleAnywhere) TArray<ULGPNode*> PathProcessQueue;
+
+	UPROPERTY(VisibleAnywhere) ULGPNode* CurrentPathProcessNode; // This Only Read On Other Thread , Write On Game Thread
 
 	UPROPERTY(VisibleAnywhere) TArray<FLGPNodeGroupData> NodeGroupList;
 

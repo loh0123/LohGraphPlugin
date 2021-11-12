@@ -96,7 +96,7 @@ class GraphComponentTasker : public FNonAbandonableTask
 
 public:
 
-	GraphComponentTasker(ULGPGraphComponentBase* Component) : OwnerComponent(Component), GraphCore(GEngine->GetWorld()->GetGameInstance()->GetSubsystem<ULGPGameCoreSystem>()) { }
+	GraphComponentTasker(ULGPGraphComponentBase* Component) : OwnerComponent(Component), GraphCore(Component->CoreSystem) { }
 
 	void DoWork()
 	{

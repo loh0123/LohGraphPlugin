@@ -103,8 +103,38 @@ void ULGPNodeCache::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	ClearPath();
 
-	if (NodeGraphWriter)
-	{
-		NodeGraphWriter->UnregisterGraphNode(Cast<ULGPNode>(this));
-	}
+	if (NodeGraphWriter) NodeGraphWriter->UnregisterGraphNode(Cast<ULGPNode>(this));
+
+	return;
+}
+
+bool ULGPNodeCache::AddPath(ULGPNode* Node, const uint8 WeightType, const bool IsReturnable, const bool Trigger)
+{
+	if (NodeGraphWriter) NodeGraphWriter->MarkGraphWriterDirty();
+
+	return Super::AddPath(Node, WeightType, IsReturnable, Trigger);
+}
+
+bool ULGPNodeCache::RemovePath(ULGPNode* Node)
+{
+	if (NodeGraphWriter) NodeGraphWriter->MarkGraphWriterDirty();
+
+	return Super::RemovePath(Node);
+}
+
+bool ULGPNodeCache::ClearPath()
+{
+	if (NodeGraphWriter) NodeGraphWriter->MarkGraphWriterDirty();
+
+	return Super::ClearPath();
+}
+
+
+ULGPNode::ULGPNode()
+{
+	PrimaryComponentTick.bCanEverTick = false;
+
+	SetActive(true);
+
+	return;
 }

@@ -21,13 +21,16 @@ ULGPGraphComponentBase::ULGPGraphComponentBase()
 
 void ULGPGraphComponentBase::StopGraphComponentTasker(const bool StartNextFrame)
 {
-	StopTaskerWork = true; 
-	
-	ComponentTasker->EnsureCompletion(false);
-
-	if (StartNextFrame)
+	if (!ComponentTasker->IsWorkDone())
 	{
-		bIsDirty = true;
+		StopTaskerWork = true;
+
+		ComponentTasker->EnsureCompletion(false);
+
+		if (StartNextFrame)
+		{
+			bIsDirty = true;
+		}
 	}
 	
 	return;
@@ -51,10 +54,10 @@ void ULGPGraphComponentBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GEngine->GetWorld()->GetGameInstance()->GetSubsystem<ULGPGameCoreSystem>()->RegisterGraphComponent(this);
+	GetWorld()->GetGameInstance()->GetSubsystem<ULGPGameCoreSystem>()->RegisterGraphComponent(this);
 
 	// Create Thread /////////////////////////////////
-	ComponentTasker = new FAsyncTask<GraphComponentTasker>(this);
+	ComponentTasker = (new FAsyncTask<GraphComponentTasker>(this));
 	////////////////////////////////////////////////////
 	
 	return;
@@ -63,6 +66,11 @@ void ULGPGraphComponentBase::BeginPlay()
 void ULGPGraphComponentBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
+
+	if (CoreSystem)
+	{
+		CoreSystem->UnregisterGraphComponent(this);
+	}
 
 	// Clean Up Thread /////////////////////////////////
 	if (ComponentTasker)
@@ -86,7 +94,7 @@ void ULGPGraphComponentBase::TickComponent(float DeltaTime, ELevelTick TickType,
 
 	if (bIsDirty)
 	{
-		StopGraphComponentTasker(false);
+		checkf(ComponentTasker->IsIdle(), TEXT("Tasker Work Not Done Can't Start Another Job"));
 
 		StopTaskerWork = false;
 
