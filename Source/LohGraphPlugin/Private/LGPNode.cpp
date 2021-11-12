@@ -4,30 +4,6 @@
 #include "LGPNode.h"
 #include "LGPGraphWriter.h"
 
-void ULGPNodeBase::BeginPlay()
-{
-	Super::BeginPlay();
-
-	ULGPGraphWriter* FindedWriter = Cast<ULGPGraphWriter>(GetOwner()->GetComponentByClass(ULGPGraphWriter::StaticClass()));
-
-	if (FindedWriter)
-	{
-		FindedWriter->RegisterGraphNode(Cast<ULGPNode>(this));
-	}
-}
-
-void ULGPNodeBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
-{
-	Super::EndPlay(EndPlayReason);
-
-	ClearPath();
-
-	if (NodeGraphWriter)
-	{
-		NodeGraphWriter->UnregisterGraphNode(Cast<ULGPNode>(this));
-	}
-}
-
 void ULGPNodeBase::SetupNode(TSet<FLGPNodePathData>& Paths, const bool WeightType, const bool IsTrigger)
 {
 	checkf(!HasBegunPlay(), TEXT("Setup Node Only Can Run Before Begin Play"));
@@ -105,4 +81,30 @@ bool ULGPNodeBase::ClearPath()
 	}
 
 	return LocalPathNode.Num() > 0;
+}
+
+
+
+void ULGPNodeCache::BeginPlay()
+{
+	Super::BeginPlay();
+
+	ULGPGraphWriter* FindedWriter = Cast<ULGPGraphWriter>(GetOwner()->GetComponentByClass(ULGPGraphWriter::StaticClass()));
+
+	if (FindedWriter)
+	{
+		FindedWriter->RegisterGraphNode(Cast<ULGPNode>(this));
+	}
+}
+
+void ULGPNodeCache::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	ClearPath();
+
+	if (NodeGraphWriter)
+	{
+		NodeGraphWriter->UnregisterGraphNode(Cast<ULGPNode>(this));
+	}
 }

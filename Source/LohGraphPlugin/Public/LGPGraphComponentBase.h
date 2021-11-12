@@ -77,17 +77,19 @@ public:
 protected:
 	// Thread Handle /////////////////////////////////////////////////
 
-	FORCEINLINE void StopGraphComponentTasker();
+	FORCEINLINE void StopGraphComponentTasker(const bool StartNextFrame = true);
 	
 	FORCEINLINE bool IsGraphComponentWorking();
 	
 	
 	
-	FORCEINLINE void MarkGraphComponentDirty() { bIsDirty = true; PreBuildVersion++; return; }
+	FORCEINLINE void MarkGraphComponentDirty(const bool Recompile = true) { bIsDirty = true; if (Recompile) CurrentBuildVersion++; return; }
 	
 	FORCEINLINE bool IsGraphComponentDirty() const { return bIsDirty; }
 
 
+	// Prepare Thread To Start (True if can start Thread)
+	virtual bool OnThreadWorkStart() { return true; }
 
 	// Warning This Run On Other Thread
 	virtual void DoThreadWork() { return; }
@@ -115,6 +117,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	// Get Current Component Type
 	EGraphComponentType GetTypeID() const;
 
 protected:
@@ -127,5 +130,5 @@ protected:
 
 	UPROPERTY(VisibleAnywhere) uint8 bIsDirty : 1;
 
-	UPROPERTY(VisibleAnywhere) uint32 PreBuildVersion = uint32(0);
+	UPROPERTY(VisibleAnywhere) uint32 CurrentBuildVersion = 0;
 };

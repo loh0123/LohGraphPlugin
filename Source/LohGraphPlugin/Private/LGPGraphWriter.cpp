@@ -44,3 +44,13 @@ void ULGPGraphWriter::UnregisterGraphNode(ULGPNode* Node)
 
 	return;
 }
+
+FLGPNodeGroupData* ULGPGraphWriter::GetGroupDataPointer(ULGPNode* Node)
+{
+	if (!IsGraphComponentWorking() && BuildVersion == CurrentBuildVersion && NodeGroupList.IsValidIndex(Node->GroupID))
+	{
+		return &NodeGroupList[Node->GroupID];
+	}
+
+	return nullptr;
+}

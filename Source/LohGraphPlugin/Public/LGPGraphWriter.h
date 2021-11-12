@@ -10,7 +10,11 @@
 class GraphWriterTasker;
 
 /**
+ *  Graph Writer
  * 
+ *  - Register / Unregister Graph Node
+ *  - Store / Create Group List
+ *  - Calculate Path Map For Nodes
  */
 UCLASS(ClassGroup = (LGPGraphComponent), meta = (BlueprintSpawnableComponent))
 class LOHGRAPHPLUGIN_API ULGPGraphWriter : public ULGPGraphComponentBase
@@ -37,8 +41,41 @@ public:
 
 protected:
 
-	UPROPERTY(VisibleAnywhere) TArray<ULGPNode*> PathProcessList;
-
 	UPROPERTY(VisibleAnywhere) TSet<ULGPNode*> RegisteredNode;
+
+// Thread Handle //////////////////////////////////////////////////////////////////
+
+	virtual bool OnThreadWorkStart() override {
+		if (BuildVersion != CurrentBuildVersion)
+		{
+			PathProcessQueue.Empty();
+			NodeGroupList.Empty();
+
+			return true;
+		}
+
+		if (PathProcessQueue.Num() > 0)
+		{
+			return true;
+		}
+
+		return false; 
+	}
+
+	virtual void DoThreadWork() override { return; } // TODO ! ! ! ! !!!!!!! !!! !!!
+
+	virtual void OnThreadWorkDone() override { if(!StopTaskerWork) BuildVersion = CurrentBuildVersion; return; }
+
+
+	FORCEINLINE FLGPNodeGroupData* GetGroupDataPointer(ULGPNode* Node); // Null If Thread Running Or Index Not Found
+
+
+	UPROPERTY(VisibleAnywhere) uint32 BuildVersion = 0; // Use To Check If Data Is Outdated
+
+	UPROPERTY(VisibleAnywhere) TArray<ULGPNode*> PathProcessQueue;
+
+	UPROPERTY(VisibleAnywhere) TArray<FLGPNodeGroupData> NodeGroupList;
+
+///////////////////////////////////////////////////////////////////////////////////
 	
 };

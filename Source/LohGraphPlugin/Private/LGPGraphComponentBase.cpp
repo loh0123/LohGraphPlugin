@@ -19,11 +19,16 @@ ULGPGraphComponentBase::ULGPGraphComponentBase()
 
 
 
-void ULGPGraphComponentBase::StopGraphComponentTasker()
+void ULGPGraphComponentBase::StopGraphComponentTasker(const bool StartNextFrame)
 {
 	StopTaskerWork = true; 
 	
 	ComponentTasker->EnsureCompletion(false);
+
+	if (StartNextFrame)
+	{
+		bIsDirty = true;
+	}
 	
 	return;
 }
@@ -81,9 +86,13 @@ void ULGPGraphComponentBase::TickComponent(float DeltaTime, ELevelTick TickType,
 
 	if (bIsDirty)
 	{
+		StopGraphComponentTasker(false);
+
+		StopTaskerWork = false;
+
 		bIsDirty = false;
 
-		CoreSystem->AddTasker(this);
+		if (OnThreadWorkStart()) CoreSystem->AddTasker(this);
 	}
 
 	return;

@@ -50,6 +50,23 @@ public:
 	}
 };
 
+USTRUCT(BlueprintType)
+struct FLGPNodeGroupData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+
+	FLGPNodeGroupData() {}
+
+	FLGPNodeGroupData(TArray<ULGPNode*>& Members, TArray<FLGPNodePathData> Paths) : GroupMember(Members), GroupPath(Paths) {}
+
+	UPROPERTY(VisibleAnywhere) TArray<ULGPNode*> GroupMember;
+
+	UPROPERTY(VisibleAnywhere) TArray<FLGPNodePathData> GroupPath;
+
+	// FORCEINLINE float GetGroupWeight(ULGPGraphReader* Reader) const;
+};
 
 /**
  * Base Class Of Graph Node 
@@ -64,14 +81,6 @@ class LOHGRAPHPLUGIN_API ULGPNodeBase : public UPrimitiveComponent
 	GENERATED_BODY()
 
 	friend class ULGPGraphWriter;
-
-protected:
-
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-	// Called when the game end
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 public:
 
@@ -93,22 +102,15 @@ public:
 		virtual FORCEINLINE bool ClearPath	();
 
 
+public:
 
-	UFUNCTION(BlueprintPure,		Category = "LGPNodeBase | Weight Type")
-		FORCEINLINE uint8 GetNodeWeightType() const { return NodeWeightType; }
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn = "true"), Category = "LGPNodeBase | Variable") uint8 NodeWeightType = (uint8)0;
 
-	UFUNCTION(BlueprintCallable,	Category = "LGPNodeBase | Weight Type")
-		virtual FORCEINLINE uint8 SetNodeWeightType(const uint8 ID) { return NodeWeightType = ID; }
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn = "true"), Category = "LGPNodeBase | Variable") uint8 bIsTrigger : 1;
 
 protected:
 
-	UPROPERTY(VisibleAnywhere) ULGPGraphWriter* NodeGraphWriter = nullptr;
-
 	UPROPERTY(VisibleAnywhere) TSet<FLGPNodePathData> PathList;
-
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, meta = (ExposeOnSpawn = "true")) uint8 NodeWeightType = (uint8)0;
-
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, meta = (ExposeOnSpawn = "true")) uint8 bIsTrigger : 1;
 };
 
 
@@ -122,6 +124,50 @@ UCLASS()
 class LOHGRAPHPLUGIN_API ULGPNodeCache : public ULGPNodeBase
 {
 	GENERATED_BODY()
+
+		friend class ULGPGraphWriter;
+
+protected:
+
+	// Called when the game starts
+	virtual void BeginPlay() override;  // Register Writer
+
+	// Called when the game end
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override; // Unregister Writer
+
+
+
+	//FORCEINLINE void AddPassWeight(ULGPGraphReader* Reader);
+
+
+
+	FORCEINLINE ULGPGraphWriter* GetOwingWriter() const { return NodeGraphWriter; }
+
+	FORCEINLINE float GetPassWeight() const { return PassWeight; }
+
+	FORCEINLINE bool GetNodeStep(ULGPNode* Node, uint16& Value) const {
+
+		const uint16* ValuePointer = NodeSteps.Find(Node);
+
+		if (ValuePointer)
+		{
+			Value = *ValuePointer;
+
+			return true;
+		}
+
+		return false;
+	}
+
+protected:
+
+	UPROPERTY(blueprintReadOnly, VisibleAnywhere) ULGPGraphWriter* NodeGraphWriter = nullptr;
+
+	UPROPERTY(blueprintReadOnly, VisibleAnywhere) float PassWeight;
+
+	UPROPERTY(VisibleAnywhere) TMap<ULGPNode*, uint16> NodeSteps;
+
+	UPROPERTY(VisibleAnywhere) uint16 GroupID = 0;
 
 };
 
