@@ -82,7 +82,7 @@ class LOHGRAPHPLUGIN_API ULGPNodeBase : public UPrimitiveComponent
 {
 	GENERATED_BODY()
 
-	friend class ULGPGraphWriter;
+	//friend class ULGPGraphWriter;
 
 public:
 
@@ -93,6 +93,7 @@ public:
 
 	UFUNCTION(BlueprintPure,		Category = "LGPNodeBase | Graph Path")
 		FORCEINLINE TArray<FLGPNodePathData> GetPathArray() const { return PathList.Array(); }
+
 
 	UFUNCTION(BlueprintCallable,	Category = "LGPNodeBase | Graph Path")
 		virtual FORCEINLINE bool AddPath	(ULGPNode* Node, const uint8 WeightType, const bool IsReturnable, const bool Trigger);
@@ -106,13 +107,14 @@ public:
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn = "true"), Category = "LGPNodeBase | Variable") uint8 NodeWeightType = (uint8)0;
-
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn = "true"), Category = "LGPNodeBase | Variable") uint8 bIsTrigger : 1;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn = "true"), Category = "LGPNodeBase | Variable") uint8 NodeWeightType = uint8(0);
 
 protected:
 
 	UPROPERTY(VisibleAnywhere) TSet<FLGPNodePathData> PathList;
+
 };
 
 
@@ -170,9 +172,9 @@ protected:
 
 protected:
 
-	UPROPERTY(blueprintReadOnly, VisibleAnywhere) ULGPGraphWriter* NodeGraphWriter = nullptr;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere) ULGPGraphWriter* NodeGraphWriter = nullptr;
 
-	UPROPERTY(blueprintReadOnly, VisibleAnywhere) float PassWeight;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere) float PassWeight;
 
 	UPROPERTY(VisibleAnywhere) TMap<ULGPNode*, uint16> NodeSteps;
 
@@ -186,7 +188,7 @@ protected:
  * For
  * - Debug Information And Viewer
  */
-UCLASS()
+UCLASS(ClassGroup = (LGPGraphComponent), meta = (BlueprintSpawnableComponent))
 class LOHGRAPHPLUGIN_API ULGPNode : public ULGPNodeCache
 {
 	GENERATED_BODY()
@@ -196,4 +198,57 @@ public:
 
 	ULGPNode();
 
+// Debug Handle 
+///////////////////////////////////////////////////////////////////////
+
+protected:
+
+	//~ Begin UPrimitiveComponent Interface.
+	virtual FPrimitiveSceneProxy* CreateSceneProxy() override;
+	//~ End UPrimitiveComponent Interface.
+
+	//~ Begin USceneComponent Interface
+	virtual FBoxSphereBounds CalcBounds(const FTransform& LocalToWorld) const override;
+	//~ End USceneComponent Interface
+
+///////////////////////////////////////////////////////////////////////
+
+// Collision Handle
+///////////////////////////////////////////////////////////////////////
+private:
+	/**		//// Override Collision Data ////		 */
+	virtual UBodySetup* GetBodySetup() override;
+
+
+	/** Collision data */
+	UPROPERTY(Instanced)
+		class UBodySetup* NodeCollision;
+
+	UPROPERTY()
+		FBoxSphereBounds CollisionBound;
+
+	/**		////////		Collision Function				////////		*/
+public:
+
+	UFUNCTION(BlueprintCallable, Category = "LGSNodeBase | Collision")
+		void SetCollisionVertex(const TArray<FVector>& Vertexs, const TArray<int32>& Indexs);
+
+	UFUNCTION(BlueprintCallable, Category = "LGSNodeBase | Collision")
+		void SetCollisionBox(const TArray<FTransform>& Boxs);
+
+	UFUNCTION(BlueprintCallable, Category = "LGSNodeBase | Collision")
+		void SetCollisionSphere(const TArray<FVector4>& Spheres);
+
+	UFUNCTION(BlueprintCallable, Category = "LGSNodeBase | Collision")
+		void ClearCollisionVertex();
+
+private:
+
+	FORCEINLINE void CreateCollisionData();
+
+	FORCEINLINE void UpdateCollisionData();
+
+	///////////////////////////////////////////////////////////////////////
+
+	friend class FGraphNodeProxy;
 };

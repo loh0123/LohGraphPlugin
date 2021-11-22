@@ -1,7 +1,5 @@
 // Copyright by Loh Zhi Kang
 
-// Test Github
-
 #include "LGPGraphWriter.h"
 
 void ULGPGraphWriter::BeginPlay()
@@ -84,27 +82,30 @@ void ULGPGraphWriter::DoThreadWork()
 
 		auto SetLowLink = [&] (FLGSNodeGroupProcess& A, FLGSNodeGroupProcess& B)
 		{
-			A.LowLinkValue = B.LowLinkValue;
-
-			if (B.SCCID != INDEX_NONE)
+			if (A.LowLinkValue >= B.LowLinkValue)
 			{
-				if (A.SCCID != INDEX_NONE)
-				{
-					if (LocalGroupList[A.SCCID].GroupMember.Num() > LocalGroupList[B.SCCID].GroupMember.Num())
-					{
-						LocalGroupList[A.SCCID].GroupMember.Append(LocalGroupList[B.SCCID].GroupMember);
-						LocalGroupList[B.SCCID].GroupMember.Empty();
+				A.LowLinkValue = B.LowLinkValue;
 
-						return;
-					}
-					else
+				if (B.SCCID != INDEX_NONE)
+				{
+					if (A.SCCID != INDEX_NONE)
 					{
-						LocalGroupList[B.SCCID].GroupMember.Append(LocalGroupList[A.SCCID].GroupMember);
-						LocalGroupList[A.SCCID].GroupMember.Empty();
+						if (LocalGroupList[A.SCCID].GroupMember.Num() > LocalGroupList[B.SCCID].GroupMember.Num())
+						{
+							LocalGroupList[A.SCCID].GroupMember.Append(LocalGroupList[B.SCCID].GroupMember);
+							LocalGroupList[B.SCCID].GroupMember.Empty();
+
+							return;
+						}
+						else
+						{
+							LocalGroupList[B.SCCID].GroupMember.Append(LocalGroupList[A.SCCID].GroupMember);
+							LocalGroupList[A.SCCID].GroupMember.Empty();
+						}
 					}
+
+					A.SCCID = B.SCCID;
 				}
-				
-				A.SCCID = B.SCCID;
 			}
 
 			return;
@@ -151,7 +152,7 @@ void ULGPGraphWriter::DoThreadWork()
 				// Check last process end in reverse and min self low link value
 				if (LastReverseNode)
 				{
-					if (NodeData.LowLinkValue > LastNodeData->LowLinkValue)	SetLowLink(NodeData, *LastNodeData);
+					SetLowLink(NodeData, *LastNodeData);
 				}
 
 				// Process all connected path in this node
@@ -163,7 +164,10 @@ void ULGPGraphWriter::DoThreadWork()
 
 						if (ProcNodeData)
 						{
-							if (StackNode.Contains(Path.ConnectNode)) SetLowLink(NodeData, *ProcNodeData);
+							if (StackNode.Contains(Path.ConnectNode))
+							{
+								SetLowLink(NodeData, *ProcNodeData);
+							}
 						}
 						else
 						{

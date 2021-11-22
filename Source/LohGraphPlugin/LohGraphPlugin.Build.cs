@@ -26,6 +26,11 @@ public class LohGraphPlugin : ModuleRules
 			new string[]
 			{
 				"Core",
+				"CoreUObject",
+				"Engine",
+				"RenderCore",
+				"RHI",
+				"PhysicsCore"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -34,10 +39,6 @@ public class LohGraphPlugin : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"CoreUObject",
-				"Engine",
-				"Slate",
-				"SlateCore",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

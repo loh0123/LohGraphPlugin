@@ -1,7 +1,5 @@
 // Copyright by Loh Zhi Kang
 
-// Test Github
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -54,7 +52,7 @@ protected:
 
 public:
 
-	// Component Registration /////////////////////////////////////////////////////////
+	// Node Registration /////////////////////////////////////////////////////////
 
 	FORCEINLINE void RegisterGraphNode(ULGPNode* Node);
 

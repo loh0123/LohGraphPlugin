@@ -79,7 +79,7 @@ public:
 		FORCEINLINE int32 ClearWeightPrefabList();
 
 	UFUNCTION(BlueprintPure, Category = "LGPGameCoreSystem")
-		FORCEINLINE bool GetWeightPrefab(const int32 ID, UPARAM(ref) FLGPWeightPrefab& Prefab) const;
+		FORCEINLINE bool GetWeightPrefab(const uint8 ID, UPARAM(ref) FLGPWeightPrefab& Prefab) const;
 
 	///////////////////////////////////////////////////////////////////////////////////
 

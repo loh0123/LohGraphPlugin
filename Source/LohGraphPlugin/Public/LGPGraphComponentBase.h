@@ -102,7 +102,7 @@ protected:
 
 	// Local Core Function /////////////////////////////////////////////////
 
-	FORCEINLINE bool GetWeightPrefab(const int32 ID, FLGPWeightPrefab& Prefab) const;
+	FORCEINLINE bool GetWeightPrefab(const uint8 ID, FLGPWeightPrefab& Prefab) const;
 
 	////////////////////////////////////////////////////////////////////////
 

@@ -24,6 +24,11 @@ void EmptyLinkFunctionForGeneratedCodeLGPNode() {}
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNodeCache();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphWriter_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNode();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FTransform();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector4();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
+	ENGINE_API UClass* Z_Construct_UClass_UBodySetup_NoRegister();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FBoxSphereBounds();
 // End Cross Module References
 class UScriptStruct* FLGPNodeGroupData::StaticStruct()
 {
@@ -552,14 +557,14 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NodeWeightType_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FBytePropertyParams NewProp_NodeWeightType;
-#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bIsTrigger_MetaData[];
 #endif
 		static void NewProp_bIsTrigger_SetBit(void* Obj);
 		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bIsTrigger;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NodeWeightType_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FBytePropertyParams NewProp_NodeWeightType;
 		static const UE4CodeGen_Private::FStructPropertyParams NewProp_PathList_ElementProp;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PathList_MetaData[];
@@ -589,14 +594,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	};
 #endif
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType_MetaData[] = {
-		{ "Category", "LGPNodeBase | Variable" },
-		{ "ExposeOnSpawn", "true" },
-		{ "ModuleRelativePath", "Public/LGPNode.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType = { "NodeWeightType", nullptr, (EPropertyFlags)0x0011000000000005, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeBase, NodeWeightType), nullptr, METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType_MetaData)) };
-#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_MetaData[] = {
 		{ "Category", "LGPNodeBase | Variable" },
 		{ "ExposeOnSpawn", "true" },
@@ -608,6 +605,14 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		((ULGPNodeBase*)Obj)->bIsTrigger = 1;
 	}
 	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger = { "bIsTrigger", nullptr, (EPropertyFlags)0x0011000000000005, UE4CodeGen_Private::EPropertyGenFlags::Bool , RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(uint8), sizeof(ULGPNodeBase), &Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType_MetaData[] = {
+		{ "Category", "LGPNodeBase | Variable" },
+		{ "ExposeOnSpawn", "true" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType = { "NodeWeightType", nullptr, (EPropertyFlags)0x0011000000000005, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeBase, NodeWeightType), nullptr, METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType_MetaData)) };
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_ElementProp = { "PathList", nullptr, (EPropertyFlags)0x0000008000020001, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FLGPNodePathData, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_MetaData[] = {
@@ -617,8 +622,8 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 #endif
 	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList = { "PathList", nullptr, (EPropertyFlags)0x0020088000020001, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeBase, PathList), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPNodeBase_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList,
 	};
@@ -649,7 +654,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNodeBase, 567155324);
+	IMPLEMENT_CLASS(ULGPNodeBase, 1181987570);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNodeBase>()
 	{
 		return ULGPNodeBase::StaticClass();
@@ -770,15 +775,225 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNodeCache, 3020395474);
+	IMPLEMENT_CLASS(ULGPNodeCache, 609364001);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNodeCache>()
 	{
 		return ULGPNodeCache::StaticClass();
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_ULGPNodeCache(Z_Construct_UClass_ULGPNodeCache, &ULGPNodeCache::StaticClass, TEXT("/Script/LohGraphPlugin"), TEXT("ULGPNodeCache"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ULGPNodeCache);
+	DEFINE_FUNCTION(ULGPNode::execClearCollisionVertex)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ClearCollisionVertex();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ULGPNode::execSetCollisionSphere)
+	{
+		P_GET_TARRAY_REF(FVector4,Z_Param_Out_Spheres);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetCollisionSphere(Z_Param_Out_Spheres);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ULGPNode::execSetCollisionBox)
+	{
+		P_GET_TARRAY_REF(FTransform,Z_Param_Out_Boxs);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetCollisionBox(Z_Param_Out_Boxs);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ULGPNode::execSetCollisionVertex)
+	{
+		P_GET_TARRAY_REF(FVector,Z_Param_Out_Vertexs);
+		P_GET_TARRAY_REF(int32,Z_Param_Out_Indexs);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetCollisionVertex(Z_Param_Out_Vertexs,Z_Param_Out_Indexs);
+		P_NATIVE_END;
+	}
 	void ULGPNode::StaticRegisterNativesULGPNode()
 	{
+		UClass* Class = ULGPNode::StaticClass();
+		static const FNameNativePtrPair Funcs[] = {
+			{ "ClearCollisionVertex", &ULGPNode::execClearCollisionVertex },
+			{ "SetCollisionBox", &ULGPNode::execSetCollisionBox },
+			{ "SetCollisionSphere", &ULGPNode::execSetCollisionSphere },
+			{ "SetCollisionVertex", &ULGPNode::execSetCollisionVertex },
+		};
+		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_ULGPNode_ClearCollisionVertex_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_ClearCollisionVertex_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LGSNodeBase | Collision" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPNode_ClearCollisionVertex_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPNode, nullptr, "ClearCollisionVertex", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_ClearCollisionVertex_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_ClearCollisionVertex_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ULGPNode_ClearCollisionVertex()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPNode_ClearCollisionVertex_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics
+	{
+		struct LGPNode_eventSetCollisionBox_Parms
+		{
+			TArray<FTransform> Boxs;
+		};
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_Boxs_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Boxs_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_Boxs;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::NewProp_Boxs_Inner = { "Boxs", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FTransform, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::NewProp_Boxs_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::NewProp_Boxs = { "Boxs", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPNode_eventSetCollisionBox_Parms, Boxs), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::NewProp_Boxs_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::NewProp_Boxs_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::NewProp_Boxs_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::NewProp_Boxs,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LGSNodeBase | Collision" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPNode, nullptr, "SetCollisionBox", nullptr, nullptr, sizeof(LGPNode_eventSetCollisionBox_Parms), Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ULGPNode_SetCollisionBox()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPNode_SetCollisionBox_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics
+	{
+		struct LGPNode_eventSetCollisionSphere_Parms
+		{
+			TArray<FVector4> Spheres;
+		};
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_Spheres_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Spheres_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_Spheres;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::NewProp_Spheres_Inner = { "Spheres", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FVector4, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::NewProp_Spheres_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::NewProp_Spheres = { "Spheres", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPNode_eventSetCollisionSphere_Parms, Spheres), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::NewProp_Spheres_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::NewProp_Spheres_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::NewProp_Spheres_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::NewProp_Spheres,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LGSNodeBase | Collision" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPNode, nullptr, "SetCollisionSphere", nullptr, nullptr, sizeof(LGPNode_eventSetCollisionSphere_Parms), Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ULGPNode_SetCollisionSphere()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPNode_SetCollisionSphere_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics
+	{
+		struct LGPNode_eventSetCollisionVertex_Parms
+		{
+			TArray<FVector> Vertexs;
+			TArray<int32> Indexs;
+		};
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_Vertexs_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Vertexs_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_Vertexs;
+		static const UE4CodeGen_Private::FIntPropertyParams NewProp_Indexs_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Indexs_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_Indexs;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Vertexs_Inner = { "Vertexs", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Vertexs_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Vertexs = { "Vertexs", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPNode_eventSetCollisionVertex_Parms, Vertexs), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Vertexs_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Vertexs_MetaData)) };
+	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Indexs_Inner = { "Indexs", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Indexs_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Indexs = { "Indexs", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPNode_eventSetCollisionVertex_Parms, Indexs), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Indexs_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Indexs_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Vertexs_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Vertexs,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Indexs_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::NewProp_Indexs,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LGSNodeBase | Collision" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPNode, nullptr, "SetCollisionVertex", nullptr, nullptr, sizeof(LGPNode_eventSetCollisionVertex_Parms), Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ULGPNode_SetCollisionVertex()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPNode_SetCollisionVertex_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	UClass* Z_Construct_UClass_ULGPNode_NoRegister()
 	{
@@ -787,9 +1002,19 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	struct Z_Construct_UClass_ULGPNode_Statics
 	{
 		static UObject* (*const DependentSingletons[])();
+		static const FClassFunctionLinkInfo FuncInfo[];
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NodeCollision_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NodeCollision;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CollisionBound_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_CollisionBound;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
 	};
@@ -797,8 +1022,16 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		(UObject* (*)())Z_Construct_UClass_ULGPNodeCache,
 		(UObject* (*)())Z_Construct_UPackage__Script_LohGraphPlugin,
 	};
+	const FClassFunctionLinkInfo Z_Construct_UClass_ULGPNode_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_ULGPNode_ClearCollisionVertex, "ClearCollisionVertex" }, // 1176029170
+		{ &Z_Construct_UFunction_ULGPNode_SetCollisionBox, "SetCollisionBox" }, // 780093976
+		{ &Z_Construct_UFunction_ULGPNode_SetCollisionSphere, "SetCollisionSphere" }, // 1433478689
+		{ &Z_Construct_UFunction_ULGPNode_SetCollisionVertex, "SetCollisionVertex" }, // 371994093
+	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNode_Statics::Class_MetaDataParams[] = {
+		{ "BlueprintSpawnableComponent", "" },
+		{ "ClassGroupNames", "LGPGraphComponent" },
 		{ "Comment", "/**\n * Top Class Of Graph Node\n * For\n * - Debug Information And Viewer\n */" },
 		{ "HideCategories", "Mobility VirtualTexture Trigger" },
 		{ "IncludePath", "LGPNode.h" },
@@ -806,6 +1039,25 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		{ "ToolTip", "Top Class Of Graph Node\nFor\n- Debug Information And Viewer" },
 	};
 #endif
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNode_Statics::NewProp_NodeCollision_MetaData[] = {
+		{ "Comment", "/** Collision data */" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+		{ "ToolTip", "Collision data" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPNode_Statics::NewProp_NodeCollision = { "NodeCollision", nullptr, (EPropertyFlags)0x0042000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNode, NodeCollision), Z_Construct_UClass_UBodySetup_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ULGPNode_Statics::NewProp_NodeCollision_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNode_Statics::NewProp_NodeCollision_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNode_Statics::NewProp_CollisionBound_MetaData[] = {
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULGPNode_Statics::NewProp_CollisionBound = { "CollisionBound", nullptr, (EPropertyFlags)0x0040000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNode, CollisionBound), Z_Construct_UScriptStruct_FBoxSphereBounds, METADATA_PARAMS(Z_Construct_UClass_ULGPNode_Statics::NewProp_CollisionBound_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNode_Statics::NewProp_CollisionBound_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPNode_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNode_Statics::NewProp_NodeCollision,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNode_Statics::NewProp_CollisionBound,
+	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ULGPNode_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ULGPNode>::IsAbstract,
 	};
@@ -814,12 +1066,12 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		"Engine",
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
-		nullptr,
-		nullptr,
+		FuncInfo,
+		Z_Construct_UClass_ULGPNode_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
-		0,
-		0,
+		UE_ARRAY_COUNT(FuncInfo),
+		UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNode_Statics::PropPointers),
 		0,
 		0x00B000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_ULGPNode_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNode_Statics::Class_MetaDataParams))
@@ -833,7 +1085,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNode, 2234216084);
+	IMPLEMENT_CLASS(ULGPNode, 2544010790);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNode>()
 	{
 		return ULGPNode::StaticClass();

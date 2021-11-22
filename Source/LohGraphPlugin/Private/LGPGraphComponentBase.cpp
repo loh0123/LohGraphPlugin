@@ -43,7 +43,7 @@ bool ULGPGraphComponentBase::IsGraphComponentWorking()
 
 
 
-bool ULGPGraphComponentBase::GetWeightPrefab(const int32 ID, FLGPWeightPrefab& Prefab) const
+bool ULGPGraphComponentBase::GetWeightPrefab(const uint8 ID, FLGPWeightPrefab& Prefab) const
 {
 	return CoreSystem->GetWeightPrefab(ID, Prefab);
 }
