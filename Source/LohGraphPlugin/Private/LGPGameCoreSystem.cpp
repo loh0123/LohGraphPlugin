@@ -11,7 +11,7 @@ DEFINE_LOG_CATEGORY(LogGraphCore);
 void ULGPGameCoreSystem::AddTasker(ULGPGraphComponentBase* GraphComponent)
 {
 	checkf(GraphComponent, TEXT("GraphComponent Must Be Valid"));
-	checkf(GraphComponent->ComponentTasker->IsDone(), TEXT("AsyncTask Not On Work"));
+	checkf(GraphComponent->ComponentTasker->IsDone(), TEXT("AsyncTask On Work"));
 	
 	switch (GraphComponent->GetTypeID())
 	{
@@ -26,18 +26,23 @@ void ULGPGameCoreSystem::AddTasker(ULGPGraphComponentBase* GraphComponent)
 		{
 			ProcessReaderTask.Add(GraphComponent);
 		}
+
 		break;
 	case EGraphComponentType::Writer :
 		if (ProcessReaderTask.Num() != 0)
 		{
-			for (ULGPGraphComponentBase* Reader : ProcessReaderTask)
+			TArray<ULGPGraphComponentBase*> CacheReader = ProcessReaderTask.Array();
+
+			for (ULGPGraphComponentBase* Reader : CacheReader)
 			{
 				Reader->StopTaskerWork = true; // Tell All Thread To End Early
 			}
 
-			for (ULGPGraphComponentBase* Reader : ProcessReaderTask)
+			for (ULGPGraphComponentBase* Reader : CacheReader)
 			{
 				Reader->ComponentTasker->EnsureCompletion(); // Check Thread Already End Or Wait Until End
+
+				Reader->MarkGraphComponentDirty(false); // Mark Reader To Be Rerun
 			}
 		}
 
@@ -59,6 +64,7 @@ void ULGPGameCoreSystem::RemoveTasker(ULGPGraphComponentBase* GraphComponent)
 	{
 	case EGraphComponentType::Reader: ProcessReaderTask.Remove(GraphComponent); break;
 	case EGraphComponentType::Writer: 
+
 		ProcessWriterTask.Remove(GraphComponent);
 
 		if (ProcessWriterTask.Num() == 0) // If All Writer Task Was Completed

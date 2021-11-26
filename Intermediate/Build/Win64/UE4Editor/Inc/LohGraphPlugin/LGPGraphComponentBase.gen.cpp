@@ -120,9 +120,9 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_NodeBufferMultiply;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_DistanceToTargetMultiply_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_DistanceToEndMultiply_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_DistanceToTargetMultiply;
+		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_DistanceToEndMultiply;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_DistanceToStartMultiply_MetaData[];
 #endif
@@ -162,12 +162,12 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply = { "NodeBufferMultiply", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, NodeBufferMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToTargetMultiply_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply_MetaData[] = {
 		{ "Category", "LGSTypePrefab | Variable" },
 		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToTargetMultiply = { "DistanceToTargetMultiply", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, DistanceToTargetMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToTargetMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToTargetMultiply_MetaData)) };
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply = { "DistanceToEndMultiply", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, DistanceToEndMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply_MetaData[] = {
 		{ "Category", "LGSTypePrefab | Variable" },
@@ -186,7 +186,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToTargetMultiply,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_StepMultiply,
 	};
@@ -218,7 +218,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FLGPWeightPrefab_Hash() { return 2610236466U; }
+	uint32 Get_Z_Construct_UScriptStruct_FLGPWeightPrefab_Hash() { return 138598122U; }
 	void ULGPGraphComponentBase::StaticRegisterNativesULGPGraphComponentBase()
 	{
 	}

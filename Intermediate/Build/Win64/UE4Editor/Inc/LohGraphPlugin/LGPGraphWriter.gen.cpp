@@ -192,9 +192,9 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion_MetaData[] = {
 		{ "Category", "LGPGraphWriter" },
-		{ "Comment", "// Null If Thread Running Or Index Not Found\n" },
+		{ "Comment", "// Cause Error If Thread Is Running\n" },
 		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
-		{ "ToolTip", "Null If Thread Running Or Index Not Found" },
+		{ "ToolTip", "Cause Error If Thread Is Running" },
 	};
 #endif
 	const UE4CodeGen_Private::FUInt32PropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion = { "BuildVersion", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::UInt32, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphWriter, BuildVersion), METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion_MetaData)) };
@@ -264,7 +264,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphWriter, 2315039877);
+	IMPLEMENT_CLASS(ULGPGraphWriter, 2622716444);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphWriter>()
 	{
 		return ULGPGraphWriter::StaticClass();

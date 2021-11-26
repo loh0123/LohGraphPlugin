@@ -2,7 +2,6 @@
 
 
 #include "LGPGraphReader.h"
-#include "LGPNode.h"
 #include "Kismet\KismetSystemLibrary.h"
 
 float ULGPGraphReader::GetNodeWeight(ULGPNode* Node) const
@@ -29,7 +28,7 @@ ULGPNode* ULGPGraphReader::GetOverlappingNode(const bool ReturnFirst) const
 	{
 		ULGPNode* NewComp = Cast<ULGPNode>(Comp);
 
-		if (NewComp)
+		if (NewComp && NewComp->IsNodeValid())
 		{
 			if (ReturnFirst)
 			{
@@ -70,7 +69,7 @@ ULGPNode* ULGPGraphReader::GetOverlappingNodeByLocation(const FVector Point, con
 		{
 			ULGPNode* NewComp = Cast<ULGPNode>(Comp);
 
-			if (NewComp)
+			if (NewComp && NewComp->IsNodeValid())
 			{
 				if (ReturnFirst)
 				{
@@ -79,7 +78,7 @@ ULGPNode* ULGPGraphReader::GetOverlappingNodeByLocation(const FVector Point, con
 
 				if (!OutComp ||
 					(FVector::Dist(Point, NewComp->GetComponentLocation()) <
-						FVector::Dist(Point, OutComp->GetComponentLocation())))
+					 FVector::Dist(Point, OutComp->GetComponentLocation())))
 				{
 					OutComp = NewComp;
 				}
@@ -92,4 +91,100 @@ ULGPNode* ULGPGraphReader::GetOverlappingNodeByLocation(const FVector Point, con
 	}
 
 	return OutComp;
+}
+
+bool ULGPGraphNavigator::GoToNode(ULGPNode* Node)
+{
+	ULGPNode* StartN = GetOverlappingNode();
+
+	if (StartN && StartN->IsNodeValid() && Node && Node->IsNodeValid())
+	{
+		StopGraphComponentTasker();
+
+		PathData.Empty();
+
+		StartNode = StartN;
+		EndNode = Node;
+
+		IsFollowingPath = false;
+		FollowIndex = -1;
+
+		return true;
+	}
+
+	return false;
+}
+
+bool ULGPGraphNavigator::GoToLocation(const FVector Location)
+{
+	return GoToNode(GetOverlappingNodeByLocation(Location));
+}
+
+bool ULGPGraphNavigator::OnThreadWorkStart()
+{
+	return StartNode && StartNode->IsNodeValid() && EndNode && EndNode->IsNodeValid();
+}
+
+void ULGPGraphNavigator::DoThreadWork()
+{
+	if (StartNode == EndNode) // Check Is Already On Target
+	{
+		return;
+	}
+
+	PathData.Empty();
+
+	FLGPWeightPrefab WeightData = FLGPWeightPrefab();
+
+	GetWeightData(WeightData);
+
+	TArray<FLGPAStarHelper> OpenGroups = { FLGPAStarHelper(nullptr, StartNode->GetGroupData().IdentifyNode, EndNode, WeightData) };
+	
+	TSet<FLGPAStarHelper> CloseGroups;
+	
+	OpenGroups.Heapify();
+	
+	while (OpenGroups.Num() > 0 && !StopTaskerWork)
+	{
+		FLGPAStarHelper CurrentGroupData;
+	
+		OpenGroups.HeapPop(CurrentGroupData);
+		
+		CloseGroups.Add(CurrentGroupData);
+	
+		if (CurrentGroupData.IdentifyNode == EndNode->GetGroupData().IdentifyNode)
+		{
+			FLGPAStarHelper* CurrentGroupPointer = &CurrentGroupData;
+
+			while (CurrentGroupPointer != nullptr && !StopTaskerWork)
+			{
+				PathData.Add(*(CurrentGroupData.FromNode->GetGroupData().GroupPath.Find(CurrentGroupData.IdentifyNode)));
+
+				CurrentGroupPointer = CloseGroups.Find(CurrentGroupData.FromNode);
+			}
+		}
+		else
+		{
+			for (const FLGPGroupPathData& PathItem : CurrentGroupData.GetGroupPath()) // Loop All Group Path
+			{
+				if (CloseGroups.Contains(PathItem.EndNode->GetGroupData().IdentifyNode))
+				{
+					continue;
+				}
+
+				int32 OpenIndex = OpenGroups.IndexOfByKey(PathItem.EndNode->GetGroupData().IdentifyNode);
+
+				if (OpenIndex != INDEX_NONE)
+				{
+					OpenGroups[OpenIndex].UpdateStartWeight(CurrentGroupData, WeightData);
+				}
+				else
+				{
+					OpenGroups.Add(FLGPAStarHelper(CurrentGroupData.IdentifyNode, PathItem.EndNode->GetGroupData().IdentifyNode, EndNode, WeightData));
+				}
+			}
+		}
+	}
+
+	return;
 }

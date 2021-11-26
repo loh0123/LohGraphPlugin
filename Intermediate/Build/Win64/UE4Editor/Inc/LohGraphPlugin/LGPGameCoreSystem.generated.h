@@ -14,22 +14,22 @@ struct FLGPWeightPrefab;
 #endif
 #define LOHGRAPHPLUGIN_LGPGameCoreSystem_generated_h
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_RPC_WRAPPERS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_SPARSE_DATA
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execGetWeightPrefab); \
 	DECLARE_FUNCTION(execClearWeightPrefabList); \
 	DECLARE_FUNCTION(execSetWeightPrefabList);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_RPC_WRAPPERS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execGetWeightPrefab); \
 	DECLARE_FUNCTION(execClearWeightPrefabList); \
 	DECLARE_FUNCTION(execSetWeightPrefabList);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_INCLASS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPGameCoreSystem(); \
 	friend struct Z_Construct_UClass_ULGPGameCoreSystem_Statics; \
@@ -38,7 +38,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPGameCoreSystem)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_INCLASS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_INCLASS \
 private: \
 	static void StaticRegisterNativesULGPGameCoreSystem(); \
 	friend struct Z_Construct_UClass_ULGPGameCoreSystem_Statics; \
@@ -47,7 +47,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPGameCoreSystem)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_STANDARD_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPGameCoreSystem(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPGameCoreSystem) \
@@ -60,7 +60,7 @@ private: \
 public:
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_ENHANCED_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ULGPGameCoreSystem(ULGPGameCoreSystem&&); \
@@ -71,34 +71,36 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ULGPGameCoreSystem)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_PRIVATE_PROPERTY_OFFSET \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__ProcessReaderTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, ProcessReaderTask); } \
 	FORCEINLINE static uint32 __PPO__ProcessWriterTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, ProcessWriterTask); } \
+	FORCEINLINE static uint32 __PPO__EndEventReaderTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, EndEventReaderTask); } \
+	FORCEINLINE static uint32 __PPO__EndEventWriterTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, EndEventWriterTask); } \
 	FORCEINLINE static uint32 __PPO__RegisteredComponents() { return STRUCT_OFFSET(ULGPGameCoreSystem, RegisteredComponents); } \
 	FORCEINLINE static uint32 __PPO__WeightPrefabList() { return STRUCT_OFFSET(ULGPGameCoreSystem, WeightPrefabList); }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_25_PROLOG
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_GENERATED_BODY_LEGACY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_27_PROLOG
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_RPC_WRAPPERS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_INCLASS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_STANDARD_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_RPC_WRAPPERS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_INCLASS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_RPC_WRAPPERS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_INCLASS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_28_ENHANCED_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_RPC_WRAPPERS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_INCLASS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

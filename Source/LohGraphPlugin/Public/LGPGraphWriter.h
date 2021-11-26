@@ -42,6 +42,8 @@ class LOHGRAPHPLUGIN_API ULGPGraphWriter : public ULGPGraphComponentBase
 {
 	GENERATED_BODY()
 
+	friend class ULGPNodeCache;
+
 protected:
 
 	// Called when the game starts
@@ -60,6 +62,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////
 
+	//FORCEINLINE void RemoveGroupPath(ULGPNode* Identify);
+
 	FORCEINLINE void MarkGraphWriterDirty() { if (!bIsDirty) MarkGraphComponentDirty(); }
 
 protected:
@@ -68,40 +72,16 @@ protected:
 
 // Thread Handle //////////////////////////////////////////////////////////////////
 
-	virtual bool OnThreadWorkStart() override {
-		if (RegisteredNode.Num() > 0)
-		{
-			if (BuildVersion != CurrentBuildVersion)
-			{
-				PathProcessQueue.Empty();
-				NodeGroupList.Empty();
-				CurrentPathProcessNode = nullptr;
+	virtual FORCEINLINE bool OnThreadWorkStart() override;
 
-				return true;
-			}
-			else if (PathProcessQueue.Num() > 0)
-			{
-				CurrentPathProcessNode = PathProcessQueue.Pop();
+	virtual FORCEINLINE void DoThreadWork() override;
 
-				return true;
-			}
-		}
-		else
-		{
-			PathProcessQueue.Empty();
-			NodeGroupList.Empty();
-			CurrentPathProcessNode = nullptr;
-		}
-
-		return false; 
-	}
-
-	virtual void DoThreadWork() override;
-
-	virtual void OnThreadWorkDone() override { if(!StopTaskerWork) BuildVersion = CurrentBuildVersion; return; }
+	virtual FORCEINLINE void OnThreadWorkDone() override;
 
 
 	FORCEINLINE FLGPNodeGroupData* GetGroupDataPointer(ULGPNode* Node); // Null If Thread Running Or Index Not Found
+
+	FORCEINLINE FLGPNodeGroupData& GetGroupData(ULGPNode* Node); // Cause Error If Thread Is Running
 
 
 	UPROPERTY(VisibleAnywhere) uint32 BuildVersion = 0; // Use To Check If Data Is Outdated

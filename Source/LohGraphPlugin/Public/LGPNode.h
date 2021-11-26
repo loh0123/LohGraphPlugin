@@ -19,13 +19,16 @@ public:
 
 	FLGPNodePathData() {}
 
-	FLGPNodePathData(ULGPNode* Node) : ConnectNode(Node) {}
+	FLGPNodePathData(ULGPNode* E) : EndNode(E) {}
 
-	FLGPNodePathData(ULGPNode* Node, const uint8 WeightType, const bool Walkable, const bool Returnable, const bool Trigger) : ConnectNode(Node), PathWeightType(WeightType), IsWalkable(Walkable), IsReturnable(Returnable), bIsTrigger(Trigger) {}
+	FLGPNodePathData(ULGPNode* S, ULGPNode* E) : StartNode(S), EndNode(E) {}
+
+	FLGPNodePathData(ULGPNode* S, ULGPNode* E, const uint8 WeightType, const bool Walkable, const bool Returnable, const bool Trigger) : StartNode(S), EndNode(E), PathWeightType(WeightType), IsWalkable(Walkable), IsReturnable(Returnable), bIsTrigger(Trigger) {}
 
 
+	UPROPERTY(VisibleAnywhere) ULGPNode* StartNode;
 
-	UPROPERTY(VisibleAnywhere) ULGPNode* ConnectNode;
+	UPROPERTY(VisibleAnywhere) ULGPNode* EndNode;
 
 	UPROPERTY(VisibleAnywhere) uint8 PathWeightType = uint8(0);
 
@@ -38,15 +41,47 @@ public:
 
 
 
-	FORCEINLINE bool operator==(ULGPNode* Target) const { return ConnectNode == Target; }
+	FORCEINLINE bool operator==(ULGPNode* Target) const { return EndNode == Target; }
 
-	FORCEINLINE bool operator==(const FLGPNodePathData& Target) const { return ConnectNode == Target.ConnectNode; }
+	FORCEINLINE bool operator==(const FLGPNodePathData& Target) const { return EndNode == Target.EndNode; }
 
 
 
 	friend FORCEINLINE uint32 GetTypeHash(const FLGPNodePathData& Other)
 	{
-		return GetTypeHash(Other.ConnectNode);
+		return GetTypeHash(Other.EndNode);
+	}
+};
+
+USTRUCT(BlueprintType)
+struct FLGPGroupPathData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+
+	FLGPGroupPathData() {}
+
+	FLGPGroupPathData(ULGPNode* E) : EndNode(E) {}
+
+	FLGPGroupPathData(ULGPNode* S, ULGPNode* E) : StartNode(S), EndNode(E) {}
+
+
+	UPROPERTY(VisibleAnywhere) ULGPNode* StartNode;
+
+	UPROPERTY(VisibleAnywhere) ULGPNode* EndNode;
+
+	UPROPERTY(VisibleAnywhere) TArray<FLGPNodePathData> ProxyPath;
+
+
+	FORCEINLINE bool operator==(ULGPNode* Target) const { return EndNode == Target; }
+
+	FORCEINLINE bool operator==(const FLGPGroupPathData& Target) const { return EndNode == Target.EndNode; }
+
+
+	friend FORCEINLINE uint32 GetTypeHash(const FLGPGroupPathData& Other)
+	{
+		return GetTypeHash(Other.EndNode);
 	}
 };
 
@@ -59,15 +94,33 @@ public:
 
 	FLGPNodeGroupData() {}
 
-	FLGPNodeGroupData(const TSet<ULGPNode*>& Members) : GroupMember(Members) {}
+	FLGPNodeGroupData(const TSet<ULGPNode*>& Members) : IdentifyNode(Members.Array()[0]), GroupMember(Members) {}
 
-	FLGPNodeGroupData(const TArray<ULGPNode*>& Members, const TArray<FLGPNodePathData>& Paths) : GroupMember(Members), GroupPath(Paths) {}
+	//FLGPNodeGroupData(const TArray<ULGPNode*>& Members, const TArray<FLGPNodePathData>& Paths) : IdentifyNode(Members[0]), GroupMember(Members), GroupPathRaw(Paths) {}
+
+	UPROPERTY(VisibleAnywhere) ULGPNode* IdentifyNode;
 
 	UPROPERTY(VisibleAnywhere) TSet<ULGPNode*> GroupMember;
 
-	UPROPERTY(VisibleAnywhere) TArray<FLGPNodePathData> GroupPath;
+	UPROPERTY(VisibleAnywhere) TSet<FLGPGroupPathData> GroupPath;
+
+
+
+
+	FORCEINLINE void ValidIdentifyNode() { IdentifyNode = GroupMember.Array()[0]; return; }
+
+	FORCEINLINE void ClearData() { IdentifyNode = nullptr; GroupMember.Empty(); GroupPath.Empty(); return; }
 
 	// FORCEINLINE float GetGroupWeight(ULGPGraphReader* Reader) const;
+
+
+
+	FORCEINLINE bool operator==(FLGPNodeGroupData& Other) const { return IdentifyNode == Other.IdentifyNode; }
+
+	friend FORCEINLINE uint32 GetTypeHash(const FLGPNodeGroupData& Other)
+	{
+		return GetTypeHash(Other.IdentifyNode);
+	}
 };
 
 /**
@@ -85,6 +138,8 @@ class LOHGRAPHPLUGIN_API ULGPNodeBase : public UPrimitiveComponent
 	//friend class ULGPGraphWriter;
 
 public:
+
+	FORCEINLINE bool IsNodeValid() const { return IsActive() && !IsPendingKill(); }
 
 	// Setup Node On Construst
 	FORCEINLINE void SetupNode(TSet<FLGPNodePathData>& Paths, const bool WeightType, const bool IsTrigger);
@@ -140,6 +195,9 @@ protected:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override; // Unregister Writer
 
 
+public:
+
+
 	virtual FORCEINLINE bool AddPath(ULGPNode* Node, const uint8 WeightType, const bool IsReturnable, const bool Trigger) override;
 
 	virtual FORCEINLINE bool RemovePath(ULGPNode* Node) override;
@@ -150,7 +208,9 @@ protected:
 
 	//FORCEINLINE void AddPassWeight(ULGPGraphReader* Reader);
 
+	FORCEINLINE FLGPNodeGroupData* GetGroupDataPointer(); // Warning Cant Change During Operation Or Will Cause Error
 
+	FORCEINLINE FLGPNodeGroupData& GetGroupData(); // Warning Cant Change During Operation Or Will Cause Error
 
 	FORCEINLINE ULGPGraphWriter* GetOwingWriter() const { return NodeGraphWriter; }
 

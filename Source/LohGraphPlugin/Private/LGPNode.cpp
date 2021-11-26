@@ -5,6 +5,7 @@
 #include "LGPGraphWriter.h"
 #include "LGPGraphReader.h"
 
+
 void ULGPNodeBase::SetupNode(TSet<FLGPNodePathData>& Paths, const bool WeightType, const bool IsTrigger)
 {
 	checkf(!HasBegunPlay(), TEXT("Setup Node Only Can Run Before Begin Play"));
@@ -32,8 +33,8 @@ bool ULGPNodeBase::AddPath(ULGPNode* Node, const uint8 WeightType, const bool Is
 		}
 		else
 		{
-			PathList.Add(FLGPNodePathData(Node, WeightType, true, IsReturnable, Trigger));
-			Node->PathList.Add(FLGPNodePathData(Cast<ULGPNode>(this), WeightType, IsReturnable, true, Trigger));
+			PathList.Add(FLGPNodePathData(Cast<ULGPNode>(this), Node, WeightType, true, IsReturnable, Trigger));
+			Node->PathList.Add(FLGPNodePathData(Node, Cast<ULGPNode>(this), WeightType, IsReturnable, true, Trigger));
 		}
 
 		return true;
@@ -78,7 +79,7 @@ bool ULGPNodeBase::ClearPath()
 
 	for (FLGPNodePathData& Path : LocalPathNode)
 	{
-		RemovePath(Path.ConnectNode);
+		RemovePath(Path.EndNode);
 	}
 
 	return LocalPathNode.Num() > 0;
@@ -128,6 +129,16 @@ bool ULGPNodeCache::ClearPath()
 	if (NodeGraphWriter) NodeGraphWriter->MarkGraphWriterDirty();
 
 	return Super::ClearPath();
+}
+
+FLGPNodeGroupData* ULGPNodeCache::GetGroupDataPointer()
+{
+	return NodeGraphWriter->GetGroupDataPointer(Cast<ULGPNode>(this));
+}
+
+FLGPNodeGroupData& ULGPNodeCache::GetGroupData()
+{
+	return NodeGraphWriter->GetGroupData(Cast<ULGPNode>(this));
 }
 
 

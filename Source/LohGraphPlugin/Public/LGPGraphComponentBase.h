@@ -33,7 +33,7 @@ public:
 		float NodeBufferMultiply = 1.0f;
 
 	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
-		float DistanceToTargetMultiply = 1.0f;
+		float DistanceToEndMultiply = 2.0f;
 
 	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
 		float DistanceToStartMultiply = 1.0f;
@@ -79,23 +79,26 @@ protected:
 
 	FORCEINLINE void StopGraphComponentTasker(const bool StartNextFrame = true);
 	
-	FORCEINLINE bool IsGraphComponentWorking();
+	FORCEINLINE bool IsGraphComponentWorking() const;
 	
 	
 	
-	FORCEINLINE void MarkGraphComponentDirty(const bool Recompile = true) { if (!IsPendingKill()) { bIsDirty = true; if (Recompile) CurrentBuildVersion++; } return; }
+	FORCEINLINE void MarkGraphComponentDirty(const bool Recompile = true);
 	
 	FORCEINLINE bool IsGraphComponentDirty() const { return bIsDirty; }
 
 
 	// Prepare Thread To Start (True if can start Thread)
-	virtual bool OnThreadWorkStart() { return true; }
+	virtual FORCEINLINE bool OnThreadWorkStart() { return true; }
 
 	// Warning This Run On Other Thread
-	virtual void DoThreadWork() { return; }
+	virtual FORCEINLINE void DoThreadWork() { return; }
 
 	// Call After Thread Work Is Done
-	virtual void OnThreadWorkDone() { return; }
+	virtual FORCEINLINE void OnThreadWorkDone() { return; }
+
+	// Call After All Thread Of Same Type End Work
+	virtual FORCEINLINE void OnThreadEndEvent() { return; }
 
 	//////////////////////////////////////////////////////////////////
 

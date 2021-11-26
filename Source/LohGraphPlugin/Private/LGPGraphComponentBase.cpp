@@ -29,16 +29,28 @@ void ULGPGraphComponentBase::StopGraphComponentTasker(const bool StartNextFrame)
 
 		if (StartNextFrame)
 		{
-			bIsDirty = true;
+			MarkGraphComponentDirty(false);
 		}
 	}
 	
 	return;
 }
 
-bool ULGPGraphComponentBase::IsGraphComponentWorking()
+bool ULGPGraphComponentBase::IsGraphComponentWorking() const
 {
 	return !ComponentTasker->IsWorkDone() || bIsDirty;
+}
+
+void ULGPGraphComponentBase::MarkGraphComponentDirty(const bool Recompile)
+{
+	if (!IsPendingKill() && CoreSystem)
+	{ 
+		bIsDirty = true; 
+
+		if (Recompile) CurrentBuildVersion++; 
+	} 
+	
+	return;
 }
 
 

@@ -26,6 +26,8 @@ void ULGPGraphWriter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	{
 		UnregisterGraphNode(Node);
 	}
+
+	return;
 }
 
 void ULGPGraphWriter::RegisterGraphNode(ULGPNode* Node)
@@ -50,6 +52,53 @@ void ULGPGraphWriter::UnregisterGraphNode(ULGPNode* Node)
 	return;
 }
 
+bool ULGPGraphWriter::OnThreadWorkStart()
+{
+	auto ClearData = [&]()
+	{
+		for (FLGPNodeGroupData& GroupItem : NodeGroupList)
+		{
+			for (FLGPGroupPathData& PathItem : GroupItem.GroupPath)
+			{
+				FLGPNodeGroupData* GroupPointer = PathItem.EndNode->GetGroupDataPointer();
+
+				if (GroupPointer)
+				{
+					GroupPointer->GroupPath.Remove(PathItem.StartNode);
+				}
+			}
+		}
+
+		PathProcessQueue.Empty();
+		NodeGroupList.Empty();
+		CurrentPathProcessNode = nullptr;
+
+		return;
+	};
+
+	if (RegisteredNode.Num() > 0)
+	{
+		if (BuildVersion != CurrentBuildVersion)
+		{
+			ClearData();
+
+			return true;
+		}
+		else if (PathProcessQueue.Num() > 0)
+		{
+			CurrentPathProcessNode = PathProcessQueue.Pop();
+
+			return true;
+		}
+	}
+	else
+	{
+		ClearData();
+	}
+
+	return false;
+}
+
 void ULGPGraphWriter::DoThreadWork()
 {
 	if (CurrentPathProcessNode)
@@ -59,7 +108,6 @@ void ULGPGraphWriter::DoThreadWork()
 	else if (NodeGroupList.Num() == 0)
 	{
 		// Process Group Data
-
 		TArray<ULGPNode*> UnMarkNode = RegisteredNode.Array();
 		TArray<ULGPNode*> StackNode;
 		TMap<ULGPNode*, FLGSNodeGroupProcess> MarkNode;
@@ -158,20 +206,20 @@ void ULGPGraphWriter::DoThreadWork()
 				// Process all connected path in this node
 				for (const FLGPNodePathData& Path : CurrentNode->GetPathList())
 				{
-					if (Path.ConnectNode->NodeGraphWriter == this && Path.IsWalkable && Path.ConnectNode->IsActive())
+					if (Path.EndNode->NodeGraphWriter == this && Path.IsWalkable && Path.EndNode->IsActive())
 					{
-						FLGSNodeGroupProcess* ProcNodeData = MarkNode.Find(Path.ConnectNode);
+						FLGSNodeGroupProcess* ProcNodeData = MarkNode.Find(Path.EndNode);
 
 						if (ProcNodeData)
 						{
-							if (StackNode.Contains(Path.ConnectNode))
+							if (StackNode.Contains(Path.EndNode))
 							{
 								SetLowLink(NodeData, *ProcNodeData);
 							}
 						}
 						else
 						{
-							AddStackNode(Path.ConnectNode);
+							AddStackNode(Path.EndNode);
 
 							Reverse = false;
 
@@ -189,10 +237,12 @@ void ULGPGraphWriter::DoThreadWork()
 
 					if (NodeData.LowLinkID == NodeData.LowLinkValue) // Store Data If Complete
 					{
+						LocalGroupList[NodeData.SCCID].ValidIdentifyNode();
+
 						// Add To Data List
 						NodeGroupList.Add(LocalGroupList[NodeData.SCCID]);
 
-						LocalGroupList[NodeData.SCCID].GroupMember.Empty();
+						LocalGroupList[NodeData.SCCID].ClearData();
 					}
 
 					// Set This Node To Last Node
@@ -208,31 +258,61 @@ void ULGPGraphWriter::DoThreadWork()
 			}
 		}
 
-		int32 Index = 0;
-
-		for (FLGPNodeGroupData& GroupData : NodeGroupList)
+		for (int32 Index = 0; Index < NodeGroupList.Num(); Index++)
 		{
-			for (ULGPNode*& Node : GroupData.GroupMember)
+			for (ULGPNode* Node : NodeGroupList[Index].GroupMember)
 			{
 				Node->GroupID = Index;
-
-				for (const FLGPNodePathData& Path : Node->GetPathList())
-				{
-					if (Path.IsWalkable && Path.ConnectNode->IsActive() && !GroupData.GroupMember.Contains(Path.ConnectNode))
-					{
-						GroupData.GroupPath.Add(Path);
-					}
-				}
-
-				if (StopTaskerWork) break;
 			}
-
-			Index++;
-
-			if (StopTaskerWork) break;
 		}
 	}
 
+	return;
+}
+
+void ULGPGraphWriter::OnThreadWorkDone()
+{
+	if (!StopTaskerWork)
+	{
+		BuildVersion = CurrentBuildVersion;
+
+		for (FLGPNodeGroupData& GroupItem : NodeGroupList) // Loop Current Group
+		{
+			for (ULGPNode* Node : GroupItem.GroupMember) // Loop Current Process Node From Group
+			{
+				for (const FLGPNodePathData& Path : Node->GetPathList()) // Loop All Path In Node
+				{
+					const FLGPNodePathData& OtherPath = *Path.EndNode->GetPathList().Find(Node); // Get Other Path Data
+					FLGPNodeGroupData* OtherGroup = Path.EndNode->GetGroupDataPointer(); // Get Other Group Data
+
+					if (Path.IsWalkable && Path.EndNode->IsNodeValid() && !GroupItem.GroupMember.Contains(Path.EndNode) && OtherGroup)
+					{
+						FLGPGroupPathData* PathPointer = GroupItem.GroupPath.Find(OtherGroup->IdentifyNode); // Already Has Path To This Group
+
+						if (PathPointer)
+						{
+							FLGPGroupPathData* OtherPathPointer = OtherGroup->GroupPath.Find(GroupItem.IdentifyNode); // Get Other Path In There Group
+
+							OtherPathPointer->ProxyPath.Add(OtherPath);
+							PathPointer->ProxyPath.Add(Path);
+						}
+						else
+						{
+							FLGPGroupPathData NewGroup = FLGPGroupPathData(GroupItem.IdentifyNode, OtherGroup->IdentifyNode);
+							FLGPGroupPathData OtherNewGroup = FLGPGroupPathData(OtherGroup->IdentifyNode, GroupItem.IdentifyNode);
+
+							NewGroup.ProxyPath.Add(Path);
+							OtherNewGroup.ProxyPath.Add(OtherPath);
+
+							GroupItem.GroupPath.Add(NewGroup);
+							OtherGroup->GroupPath.Add(OtherNewGroup);
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	return;
 }
 
@@ -244,4 +324,15 @@ FLGPNodeGroupData* ULGPGraphWriter::GetGroupDataPointer(ULGPNode* Node)
 	}
 
 	return nullptr;
+}
+
+FLGPNodeGroupData& ULGPGraphWriter::GetGroupData(ULGPNode* Node)
+{
+	checkf(Node, TEXT("Node Can't Be Null"));
+
+	checkf(NodeGroupList.IsValidIndex(Node->GroupID), TEXT("Can't Found Group"));
+
+	checkf(!IsGraphComponentWorking(), TEXT("Thread Is Running Can't Get Data"));
+
+	return NodeGroupList[Node->GroupID];
 }
