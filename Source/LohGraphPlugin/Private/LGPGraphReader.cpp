@@ -109,6 +109,8 @@ bool ULGPGraphNavigator::GoToNode(ULGPNode* Node)
 		IsFollowingPath = false;
 		FollowIndex = -1;
 
+		MarkGraphComponentDirty();
+
 		return true;
 	}
 
@@ -132,14 +134,10 @@ void ULGPGraphNavigator::DoThreadWork()
 		return;
 	}
 
-	PathData.Empty();
-
 	FLGPWeightPrefab WeightData = FLGPWeightPrefab();
-
 	GetWeightData(WeightData);
 
-	TArray<FLGPAStarHelper> OpenGroups = { FLGPAStarHelper(nullptr, StartNode->GetGroupData().IdentifyNode, EndNode, WeightData) };
-	
+	TArray<FLGPAStarHelper> OpenGroups = { FLGPAStarHelper(StartNode->GetGroupDataPointer(), EndNode, WeightData)};
 	TSet<FLGPAStarHelper> CloseGroups;
 	
 	OpenGroups.Heapify();
@@ -150,41 +148,56 @@ void ULGPGraphNavigator::DoThreadWork()
 	
 		OpenGroups.HeapPop(CurrentGroupData);
 		
-		CloseGroups.Add(CurrentGroupData);
+		FSetElementId GroupKey = CloseGroups.Add(CurrentGroupData);
 	
-		if (CurrentGroupData.IdentifyNode == EndNode->GetGroupData().IdentifyNode)
+		if (CurrentGroupData.GroupPointer == EndNode->GetGroupDataPointer())
 		{
-			FLGPAStarHelper* CurrentGroupPointer = &CurrentGroupData;
-
-			while (CurrentGroupPointer != nullptr && !StopTaskerWork)
+			while (CurrentGroupData.ParentKey.IsValidId())
 			{
-				PathData.Add(*(CurrentGroupData.FromNode->GetGroupData().GroupPath.Find(CurrentGroupData.IdentifyNode)));
+				PathData.Add(CloseGroups[CurrentGroupData.ParentKey].GroupPointer->GroupPath[CurrentGroupData.PathKey]);
 
-				CurrentGroupPointer = CloseGroups.Find(CurrentGroupData.FromNode);
-			}
+				CurrentGroupData = CloseGroups[CurrentGroupData.ParentKey];
+			} 
 		}
 		else
 		{
-			for (const FLGPGroupPathData& PathItem : CurrentGroupData.GetGroupPath()) // Loop All Group Path
+			for (auto PathItem = CurrentGroupData.GetGroupPath().CreateConstIterator(); PathItem; ++PathItem)
 			{
-				if (CloseGroups.Contains(PathItem.EndNode->GetGroupData().IdentifyNode))
+				if (PathItem->IsWalkable && !CloseGroups.Contains(PathItem->EndNode->GetGroupDataPointer()))
 				{
-					continue;
-				}
+					int32 OpenIndex = OpenGroups.IndexOfByKey(PathItem->EndNode->GetGroupDataPointer());
 
-				int32 OpenIndex = OpenGroups.IndexOfByKey(PathItem.EndNode->GetGroupData().IdentifyNode);
+					if (OpenIndex != INDEX_NONE)
+					{
+						float NewWeight = CurrentGroupData.StartWeight + (FVector::Dist(CurrentGroupData.GroupPointer->IdentifyNode->GetComponentLocation(), OpenGroups[OpenIndex].GroupPointer->IdentifyNode->GetComponentLocation()) * WeightData.DistanceToEndMultiply);
 
-				if (OpenIndex != INDEX_NONE)
-				{
-					OpenGroups[OpenIndex].UpdateStartWeight(CurrentGroupData, WeightData);
-				}
-				else
-				{
-					OpenGroups.Add(FLGPAStarHelper(CurrentGroupData.IdentifyNode, PathItem.EndNode->GetGroupData().IdentifyNode, EndNode, WeightData));
+						if (NewWeight < OpenGroups[OpenIndex].StartWeight)
+						{
+							OpenGroups[OpenIndex].StartWeight = NewWeight;
+							OpenGroups[OpenIndex].ParentKey = GroupKey;
+						}
+					}
+					else
+					{
+						OpenGroups.Add(FLGPAStarHelper(GroupKey, PathItem.GetId(), PathItem->EndNode->GetGroupDataPointer(), EndNode, WeightData));
+					}
 				}
 			}
 		}
 	}
 
 	return;
+}
+
+void ULGPGraphNavigator::OnThreadWorkDone()
+{
+	for (FLGPGroupPathData& PathItem : PathData)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, PathItem.StartNode->GetReadableName());
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, PathItem.EndNode->GetReadableName());
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%d"), PathItem.GetProxyPath().Num()));
+	}
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Reader Threae Exit Safe"));
 }

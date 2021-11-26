@@ -9,6 +9,8 @@
 class ULGPGraphReader;
 class ULGPGraphWriter;
 
+class FGraphNodeProxy;
+
 
 USTRUCT(BlueprintType)
 struct FLGPNodePathData
@@ -71,7 +73,29 @@ public:
 
 	UPROPERTY(VisibleAnywhere) ULGPNode* EndNode;
 
+	UPROPERTY(VisibleAnywhere) uint8 IsWalkable : 1;
+
+	UPROPERTY(VisibleAnywhere) uint8 IsReturnable : 1;
+
+protected:
+
 	UPROPERTY(VisibleAnywhere) TArray<FLGPNodePathData> ProxyPath;
+
+
+
+public:
+
+	FORCEINLINE const TArray<FLGPNodePathData>& GetProxyPath() { return ProxyPath; }
+
+	FORCEINLINE void AddProxyPath(const FLGPNodePathData& Data)
+	{
+		ProxyPath.Add(Data);
+
+		IsWalkable = Data.IsWalkable ? true : IsWalkable;
+		IsReturnable = Data.IsReturnable ? true : IsReturnable;
+
+		return;
+	}
 
 
 	FORCEINLINE bool operator==(ULGPNode* Target) const { return EndNode == Target; }
@@ -130,7 +154,7 @@ public:
  * - Add / Remove Path Function
  * - All Base Spawn Variable
  */
-UCLASS()
+UCLASS(HideDropdown)
 class LOHGRAPHPLUGIN_API ULGPNodeBase : public UPrimitiveComponent
 {
 	GENERATED_BODY()
@@ -168,7 +192,7 @@ public:
 
 protected:
 
-	UPROPERTY(VisibleAnywhere) TSet<FLGPNodePathData> PathList;
+	UPROPERTY(VisibleDefaultsOnly) TSet<FLGPNodePathData> PathList;
 
 };
 
@@ -179,7 +203,7 @@ protected:
  * - Storing All Writer Cook Data
  * - Handle All Writer Send Event
  */
-UCLASS()
+UCLASS(HideDropdown)
 class LOHGRAPHPLUGIN_API ULGPNodeCache : public ULGPNodeBase
 {
 	GENERATED_BODY()
@@ -232,15 +256,16 @@ public:
 
 protected:
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere) ULGPGraphWriter* NodeGraphWriter = nullptr;
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly) ULGPGraphWriter* NodeGraphWriter = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere) float PassWeight;
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly) float PassWeight;
 
-	UPROPERTY(VisibleAnywhere) TMap<ULGPNode*, uint16> NodeSteps;
+	UPROPERTY(VisibleDefaultsOnly) TMap<ULGPNode*, uint16> NodeSteps;
 
-	UPROPERTY(VisibleAnywhere) int32 GroupID = INDEX_NONE;
+	UPROPERTY(VisibleDefaultsOnly) int32 GroupID = INDEX_NONE;
 
 };
+
 
 
 /**
@@ -248,7 +273,7 @@ protected:
  * For
  * - Debug Information And Viewer
  */
-UCLASS(ClassGroup = (LGPGraphComponent), meta = (BlueprintSpawnableComponent))
+UCLASS(ClassGroup = (LGPGraphComponent), meta = (BlueprintSpawnableComponent), HideDropdown)
 class LOHGRAPHPLUGIN_API ULGPNode : public ULGPNodeCache
 {
 	GENERATED_BODY()
@@ -278,7 +303,6 @@ protected:
 private:
 	/**		//// Override Collision Data ////		 */
 	virtual UBodySetup* GetBodySetup() override;
-
 
 	/** Collision data */
 	UPROPERTY(Instanced)
@@ -311,4 +335,67 @@ private:
 	///////////////////////////////////////////////////////////////////////
 
 	friend class FGraphNodeProxy;
+};
+
+
+class FGraphNodeProxy final : public FPrimitiveSceneProxy
+{
+public:
+	SIZE_T GetTypeHash() const override
+	{
+		static size_t UniquePointer;
+		return reinterpret_cast<size_t>(&UniquePointer);
+	}
+
+	FGraphNodeProxy(const ULGPNode* InComponent)
+		: FPrimitiveSceneProxy(InComponent)
+		, CollisionInfo(InComponent->NodeCollision)
+		, WorldPosition(InComponent->GetComponentTransform())
+		, IsVisible(true)
+	{
+		bWillEverBeLit = false;
+	}
+
+	virtual void GetDynamicMeshElements(const TArray<const FSceneView*>& Views, const FSceneViewFamily& ViewFamily, uint32 VisibilityMap, FMeshElementCollector& Collector) const override
+	{
+		if (IsVisible && CollisionInfo)
+		{
+			FColoredMaterialRenderProxy* WireframeMaterialInstance = new FColoredMaterialRenderProxy(
+				GEngine->WireframeMaterial ? GEngine->WireframeMaterial->GetRenderProxy() : NULL,
+				FLinearColor(0, 0.5f, 1.f)
+			);
+
+			Collector.RegisterOneFrameMaterialProxy(WireframeMaterialInstance);
+
+			for (int32 ViewIndex = 0; ViewIndex < Views.Num(); ViewIndex++)
+			{
+				if (VisibilityMap & (1 << ViewIndex))
+				{
+					CollisionInfo->AggGeom.GetAggGeom(WorldPosition, FColor::Yellow, WireframeMaterialInstance, false, false, false, ViewIndex, Collector);
+				}
+			}
+		}
+	}
+
+	virtual FPrimitiveViewRelevance GetViewRelevance(const FSceneView* View) const override
+	{
+		FPrimitiveViewRelevance Result;
+		Result.bDrawRelevance = IsShown(View);
+		Result.bDynamicRelevance = true;
+		Result.bShadowRelevance = false;
+		Result.bEditorPrimitiveRelevance = UseEditorCompositing(View);
+
+		Result.bRenderInMainPass = ShouldRenderInMainPass();
+		Result.bVelocityRelevance = false;
+		return Result;
+	}
+
+	virtual uint32 GetMemoryFootprint(void) const override { return(sizeof(*this) + GetAllocatedSize()); }
+
+	uint32 GetAllocatedSize(void) const { return(FPrimitiveSceneProxy::GetAllocatedSize()); }
+
+private:
+	UBodySetup* CollisionInfo;
+	const FTransform& WorldPosition;
+	const bool IsVisible;
 };

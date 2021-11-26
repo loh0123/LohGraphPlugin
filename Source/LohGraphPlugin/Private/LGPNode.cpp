@@ -161,68 +161,6 @@ ULGPNode::ULGPNode()
 // Debug Handle 
 ///////////////////////////////////////////////////////////////////////
 
-class FGraphNodeProxy final : public FPrimitiveSceneProxy
-{
-public:
-	SIZE_T GetTypeHash() const override
-	{
-		static size_t UniquePointer;
-		return reinterpret_cast<size_t>(&UniquePointer);
-	}
-
-	FGraphNodeProxy(const ULGPNode* InComponent)
-		: FPrimitiveSceneProxy(InComponent)
-		, CollisionInfo(InComponent->NodeCollision)
-		, WorldPosition(InComponent->GetComponentTransform())
-		, IsVisible(true)
-	{
-		bWillEverBeLit = false;
-	}
-
-	virtual void GetDynamicMeshElements(const TArray<const FSceneView*>& Views, const FSceneViewFamily& ViewFamily, uint32 VisibilityMap, FMeshElementCollector& Collector) const override
-	{
-		if (IsVisible && CollisionInfo)
-		{
-			FColoredMaterialRenderProxy* WireframeMaterialInstance = new FColoredMaterialRenderProxy(
-				GEngine->WireframeMaterial ? GEngine->WireframeMaterial->GetRenderProxy() : NULL,
-				FLinearColor(0, 0.5f, 1.f)
-			);
-			
-			Collector.RegisterOneFrameMaterialProxy(WireframeMaterialInstance);
-
-			for (int32 ViewIndex = 0; ViewIndex < Views.Num(); ViewIndex++)
-			{
-				if (VisibilityMap & (1 << ViewIndex))
-				{
-					CollisionInfo->AggGeom.GetAggGeom(WorldPosition, FColor::Yellow, WireframeMaterialInstance, false, false, false, ViewIndex, Collector);
-				}
-			}
-		}
-	}
-
-	virtual FPrimitiveViewRelevance GetViewRelevance(const FSceneView* View) const override
-	{
-		FPrimitiveViewRelevance Result;
-		Result.bDrawRelevance = IsShown(View);
-		Result.bDynamicRelevance = true;
-		Result.bShadowRelevance = false;
-		Result.bEditorPrimitiveRelevance = UseEditorCompositing(View);
-
-		Result.bRenderInMainPass = ShouldRenderInMainPass();
-		Result.bVelocityRelevance = false;
-		return Result;
-	}
-
-	virtual uint32 GetMemoryFootprint(void) const override { return(sizeof(*this) + GetAllocatedSize()); }
-
-	uint32 GetAllocatedSize(void) const { return(FPrimitiveSceneProxy::GetAllocatedSize()); }
-
-private:
-	UBodySetup* CollisionInfo;
-	const FTransform& WorldPosition;
-	const bool IsVisible;
-};
-
 FPrimitiveSceneProxy* ULGPNode::CreateSceneProxy()
 {
 	return new FGraphNodeProxy(this);

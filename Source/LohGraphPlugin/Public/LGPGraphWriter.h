@@ -68,7 +68,7 @@ public:
 
 protected:
 
-	UPROPERTY(VisibleAnywhere) TSet<ULGPNode*> RegisteredNode;
+	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TSet<ULGPNode*> RegisteredNode;
 
 // Thread Handle //////////////////////////////////////////////////////////////////
 
@@ -84,13 +84,13 @@ protected:
 	FORCEINLINE FLGPNodeGroupData& GetGroupData(ULGPNode* Node); // Cause Error If Thread Is Running
 
 
-	UPROPERTY(VisibleAnywhere) uint32 BuildVersion = 0; // Use To Check If Data Is Outdated
+	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") uint32 BuildVersion = 0; // Use To Check If Data Is Outdated
 
-	UPROPERTY(VisibleAnywhere) TArray<ULGPNode*> PathProcessQueue;
+	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TArray<ULGPNode*> PathProcessQueue;
 
-	UPROPERTY(VisibleAnywhere) ULGPNode* CurrentPathProcessNode; // This Only Read On Other Thread , Write On Game Thread
+	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") ULGPNode* CurrentPathProcessNode; // This Only Read On Other Thread , Write On Game Thread
 
-	UPROPERTY(VisibleAnywhere) TArray<FLGPNodeGroupData> NodeGroupList;
+	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TArray<FLGPNodeGroupData> NodeGroupList;
 
 ///////////////////////////////////////////////////////////////////////////////////
 	

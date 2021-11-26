@@ -64,7 +64,7 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 
 				if (GroupPointer)
 				{
-					GroupPointer->GroupPath.Remove(PathItem.StartNode);
+					GroupPointer->GroupPath.Remove(GroupItem.IdentifyNode);
 				}
 			}
 		}
@@ -293,16 +293,16 @@ void ULGPGraphWriter::OnThreadWorkDone()
 						{
 							FLGPGroupPathData* OtherPathPointer = OtherGroup->GroupPath.Find(GroupItem.IdentifyNode); // Get Other Path In There Group
 
-							OtherPathPointer->ProxyPath.Add(OtherPath);
-							PathPointer->ProxyPath.Add(Path);
+							OtherPathPointer->AddProxyPath(OtherPath);
+							PathPointer->AddProxyPath(Path);
 						}
 						else
 						{
 							FLGPGroupPathData NewGroup = FLGPGroupPathData(GroupItem.IdentifyNode, OtherGroup->IdentifyNode);
 							FLGPGroupPathData OtherNewGroup = FLGPGroupPathData(OtherGroup->IdentifyNode, GroupItem.IdentifyNode);
 
-							NewGroup.ProxyPath.Add(Path);
-							OtherNewGroup.ProxyPath.Add(OtherPath);
+							NewGroup.AddProxyPath(Path);
+							OtherNewGroup.AddProxyPath(OtherPath);
 
 							GroupItem.GroupPath.Add(NewGroup);
 							OtherGroup->GroupPath.Add(OtherNewGroup);

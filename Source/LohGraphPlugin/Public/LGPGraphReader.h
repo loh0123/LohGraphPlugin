@@ -16,56 +16,49 @@ struct FLGPAStarHelper
 public:
 	FLGPAStarHelper() {}
 
-	FLGPAStarHelper(ULGPNode* Node) : IdentifyNode(Node) {}
+	FLGPAStarHelper(FLGPNodeGroupData* GPointer) : GroupPointer(GPointer) {}
 
-	FLGPAStarHelper(ULGPNode* From, ULGPNode* Node, ULGPNode* EndNode, const FLGPWeightPrefab& WeightData) :
-		FromNode(From),
-		IdentifyNode(Node),
-		EndWeight(FVector::Dist(Node->GetComponentLocation(), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
+	FLGPAStarHelper(FLGPNodeGroupData* GPointer, ULGPNode* EndNode, const FLGPWeightPrefab& WeightData) :
+		GroupPointer(GPointer),
+		EndWeight(FVector::Dist(GPointer->IdentifyNode->GetComponentLocation(), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
+	{}
+
+	FLGPAStarHelper(const FSetElementId& PrKey, const FSetElementId& PKey, FLGPNodeGroupData* GPointer, ULGPNode* EndNode, const FLGPWeightPrefab& WeightData) :
+		ParentKey(PrKey),
+		PathKey(PKey),
+		GroupPointer(GPointer),
+		EndWeight(FVector::Dist(GPointer->IdentifyNode->GetComponentLocation(), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
 	{}
 
 
-	UPROPERTY() ULGPNode* FromNode = nullptr;
+	FSetElementId ParentKey;
 
-	UPROPERTY() ULGPNode* IdentifyNode = nullptr;
+	FSetElementId PathKey;
+
+	FLGPNodeGroupData* GroupPointer = nullptr;
 
 	UPROPERTY() float EndWeight = 0.0f;
 
 	UPROPERTY() float StartWeight = 0.0f;
 
 
-	FORCEINLINE bool UpdateStartWeight(const FLGPAStarHelper& Data, const FLGPWeightPrefab& WeightData)
-	{ 
-		float NewWeight = Data.StartWeight + (FVector::Dist(Data.IdentifyNode->GetComponentLocation(), IdentifyNode->GetComponentLocation()) * WeightData.DistanceToEndMultiply);
-
-		if (NewWeight < StartWeight)
-		{
-			StartWeight = NewWeight;
-			FromNode = Data.IdentifyNode;
-
-			return true;
-		}
-
-		return false;
-	}
-
 
 	FORCEINLINE float GetTotalWeight() const { return EndWeight + StartWeight; }
 	
-	FORCEINLINE TSet<FLGPGroupPathData>& GetGroupPath() { return IdentifyNode->GetGroupData().GroupPath; }
+	FORCEINLINE TSet<FLGPGroupPathData>& GetGroupPath() { return GroupPointer->GroupPath; }
 
-	FORCEINLINE bool IsStartNode() const { return FromNode == nullptr; }
+	FORCEINLINE bool IsStartNode() const { return !ParentKey.IsValidId(); }
 
 
 	FORCEINLINE bool operator<(const FLGPAStarHelper& Other) const { return Other.GetTotalWeight() == GetTotalWeight(); }
 
-	FORCEINLINE bool operator==(const FLGPAStarHelper& Other) const { return Other.IdentifyNode == IdentifyNode; }
+	FORCEINLINE bool operator==(const FLGPAStarHelper& Other) const { return *Other.GroupPointer == *GroupPointer; }
 
 
 
 	friend FORCEINLINE uint32 GetTypeHash(const FLGPAStarHelper& Other)
 	{
-		return GetTypeHash(Other.IdentifyNode);
+		return GetTypeHash(Other.GroupPointer->IdentifyNode);
 	}
 };
 
@@ -81,19 +74,19 @@ class LOHGRAPHPLUGIN_API ULGPGraphReader : public ULGPGraphComponentBase
 
 public:
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "LGPGraphReader | Setting")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "LGPGraph | Setting")
 		int32 ReaderType = 0;
 
-	UFUNCTION(BlueprintPure, Category = "LGPGraphReader | Variable")
+	UFUNCTION(BlueprintPure, Category = "LGPGraph | Setting")
 		FORCEINLINE bool GetWeightData(FLGPWeightPrefab& Data) const { return GetWeightPrefab(ReaderType, Data); }
 
-	UFUNCTION(BlueprintPure, Category = "LGPGraphReader | Variable")
+	UFUNCTION(BlueprintPure, Category = "LGPGraph | Setting")
 		FORCEINLINE float GetNodeWeight(ULGPNode* Node) const;
 
-	UFUNCTION(BlueprintPure, Category = "LGPGraphReader | Finder")
+	UFUNCTION(BlueprintPure, Category = "LGPGraph | Setting")
 		ULGPNode* GetOverlappingNode(const bool ReturnFirst = false) const;
 
-	UFUNCTION(BlueprintPure, Category = "LGPGraphReader | Finder")
+	UFUNCTION(BlueprintPure, Category = "LGPGraph | Setting")
 		ULGPNode* GetOverlappingNodeByLocation(const FVector Point, const bool ReturnFirst = false) const;
 };
 
@@ -116,16 +109,16 @@ public:
 
 protected:
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraphReader | Variable")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraph | Varaible")
 		ULGPNode* StartNode = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraphReader | Variable")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraph | Varaible")
 		ULGPNode* EndNode = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraphReader | Variable")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraph | Varaible")
 		int32 FollowIndex = -1;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraphReader | Variable")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraph | Varaible")
 		bool IsFollowingPath = false;
 
 	// Thread Handle //////////////////////////////////////////////////////////////////
@@ -136,11 +129,11 @@ protected:
 
 	virtual FORCEINLINE void DoThreadWork() override;
 
-	//virtual FORCEINLINE void OnThreadWorkDone() override;
+	virtual FORCEINLINE void OnThreadWorkDone() override;
 
 
 
-	UPROPERTY(VisibleAnywhere) TArray<FLGPGroupPathData> PathData;
+	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TArray<FLGPGroupPathData> PathData;
 
 	///////////////////////////////////////////////////////////////////////////////////
 

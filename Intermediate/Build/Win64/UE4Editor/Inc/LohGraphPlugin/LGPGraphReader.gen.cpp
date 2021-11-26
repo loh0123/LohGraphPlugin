@@ -15,10 +15,10 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphReader() {}
 // Cross Module References
 	LOHGRAPHPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FLGPAStarHelper();
 	UPackage* Z_Construct_UPackage__Script_LohGraphPlugin();
-	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNode_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphReader_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphReader();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphComponentBase();
+	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNode_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	LOHGRAPHPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FLGPWeightPrefab();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphNavigator_NoRegister();
@@ -54,14 +54,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 #endif
 		static void* NewStructOps();
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_FromNode_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_FromNode;
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_IdentifyNode_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_IdentifyNode;
-#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_EndWeight_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_EndWeight;
@@ -82,20 +74,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FLGPAStarHelper>();
 	}
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_FromNode_MetaData[] = {
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_FromNode = { "FromNode", nullptr, (EPropertyFlags)0x0010000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPAStarHelper, FromNode), Z_Construct_UClass_ULGPNode_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_FromNode_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_FromNode_MetaData)) };
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_IdentifyNode_MetaData[] = {
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_IdentifyNode = { "IdentifyNode", nullptr, (EPropertyFlags)0x0010000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPAStarHelper, IdentifyNode), Z_Construct_UClass_ULGPNode_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_IdentifyNode_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_IdentifyNode_MetaData)) };
-#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_EndWeight_MetaData[] = {
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
@@ -108,8 +86,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_StartWeight = { "StartWeight", nullptr, (EPropertyFlags)0x0010000000000000, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPAStarHelper, StartWeight), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_StartWeight_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_StartWeight_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_FromNode,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_IdentifyNode,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_EndWeight,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::NewProp_StartWeight,
 	};
@@ -123,7 +99,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::PropPointers,
 		UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::PropPointers),
 		RF_Public|RF_Transient|RF_MarkAsNative,
-		EStructFlags(0x00000005),
+		EStructFlags(0x00000001),
 		METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPAStarHelper_Statics::Struct_MetaDataParams))
 	};
 	UScriptStruct* Z_Construct_UScriptStruct_FLGPAStarHelper()
@@ -141,7 +117,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FLGPAStarHelper_Hash() { return 2698625374U; }
+	uint32 Get_Z_Construct_UScriptStruct_FLGPAStarHelper_Hash() { return 839581279U; }
 	DEFINE_FUNCTION(ULGPGraphReader::execGetOverlappingNodeByLocation)
 	{
 		P_GET_STRUCT(FVector,Z_Param_Point);
@@ -217,7 +193,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphReader_GetNodeWeight_Statics::Function_MetaDataParams[] = {
-		{ "Category", "LGPGraphReader | Variable" },
+		{ "Category", "LGPGraph | Setting" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
 #endif
@@ -275,7 +251,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphReader_GetOverlappingNode_Statics::Function_MetaDataParams[] = {
-		{ "Category", "LGPGraphReader | Finder" },
+		{ "Category", "LGPGraph | Setting" },
 		{ "CPP_Default_ReturnFirst", "false" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
@@ -346,7 +322,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphReader_GetOverlappingNodeByLocation_Statics::Function_MetaDataParams[] = {
-		{ "Category", "LGPGraphReader | Finder" },
+		{ "Category", "LGPGraph | Setting" },
 		{ "CPP_Default_ReturnFirst", "false" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
@@ -389,7 +365,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphReader_GetWeightData_Statics::Function_MetaDataParams[] = {
-		{ "Category", "LGPGraphReader | Variable" },
+		{ "Category", "LGPGraph | Setting" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
 #endif
@@ -427,10 +403,10 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		(UObject* (*)())Z_Construct_UPackage__Script_LohGraphPlugin,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_ULGPGraphReader_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_ULGPGraphReader_GetNodeWeight, "GetNodeWeight" }, // 2449144880
-		{ &Z_Construct_UFunction_ULGPGraphReader_GetOverlappingNode, "GetOverlappingNode" }, // 1810208640
-		{ &Z_Construct_UFunction_ULGPGraphReader_GetOverlappingNodeByLocation, "GetOverlappingNodeByLocation" }, // 3759529760
-		{ &Z_Construct_UFunction_ULGPGraphReader_GetWeightData, "GetWeightData" }, // 1891249583
+		{ &Z_Construct_UFunction_ULGPGraphReader_GetNodeWeight, "GetNodeWeight" }, // 2784652050
+		{ &Z_Construct_UFunction_ULGPGraphReader_GetOverlappingNode, "GetOverlappingNode" }, // 690048953
+		{ &Z_Construct_UFunction_ULGPGraphReader_GetOverlappingNodeByLocation, "GetOverlappingNodeByLocation" }, // 1821321849
+		{ &Z_Construct_UFunction_ULGPGraphReader_GetWeightData, "GetWeightData" }, // 1255410138
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphReader_Statics::Class_MetaDataParams[] = {
@@ -444,7 +420,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 #endif
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphReader_Statics::NewProp_ReaderType_MetaData[] = {
-		{ "Category", "LGPGraphReader | Setting" },
+		{ "Category", "LGPGraph | Setting" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
 #endif
@@ -479,7 +455,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphReader, 220571255);
+	IMPLEMENT_CLASS(ULGPGraphReader, 4128458907);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphReader>()
 	{
 		return ULGPGraphReader::StaticClass();
@@ -676,7 +652,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 #endif
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_StartNode_MetaData[] = {
-		{ "Category", "LGPGraphReader | Variable" },
+		{ "Category", "LGPGraph | Varaible" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
@@ -684,7 +660,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_StartNode = { "StartNode", nullptr, (EPropertyFlags)0x00200800000a001d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphNavigator, StartNode), Z_Construct_UClass_ULGPNode_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_StartNode_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_StartNode_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_EndNode_MetaData[] = {
-		{ "Category", "LGPGraphReader | Variable" },
+		{ "Category", "LGPGraph | Varaible" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
@@ -692,14 +668,14 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_EndNode = { "EndNode", nullptr, (EPropertyFlags)0x00200800000a001d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphNavigator, EndNode), Z_Construct_UClass_ULGPNode_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_EndNode_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_EndNode_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FollowIndex_MetaData[] = {
-		{ "Category", "LGPGraphReader | Variable" },
+		{ "Category", "LGPGraph | Varaible" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
 #endif
 	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FollowIndex = { "FollowIndex", nullptr, (EPropertyFlags)0x0020080000020015, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphNavigator, FollowIndex), METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FollowIndex_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FollowIndex_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsFollowingPath_MetaData[] = {
-		{ "Category", "LGPGraphReader | Variable" },
+		{ "Category", "LGPGraph | Varaible" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
 #endif
@@ -711,10 +687,8 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData_Inner = { "PathData", nullptr, (EPropertyFlags)0x0000008000020000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FLGPGroupPathData, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData_MetaData[] = {
-		{ "Category", "LGPGraphNavigator" },
-		{ "Comment", "//virtual FORCEINLINE void OnThreadWorkDone() override;\n" },
+		{ "Category", "LGPGraph | Varaible" },
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
-		{ "ToolTip", "virtual FORCEINLINE void OnThreadWorkDone() override;" },
 	};
 #endif
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData = { "PathData", nullptr, (EPropertyFlags)0x0020088000020001, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphNavigator, PathData), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData_MetaData)) };
@@ -769,7 +743,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphNavigator, 1993346102);
+	IMPLEMENT_CLASS(ULGPGraphNavigator, 4136179684);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphNavigator>()
 	{
 		return ULGPGraphNavigator::StaticClass();
