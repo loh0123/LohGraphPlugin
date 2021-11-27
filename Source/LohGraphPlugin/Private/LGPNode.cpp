@@ -112,21 +112,21 @@ void ULGPNodeCache::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 bool ULGPNodeCache::AddPath(ULGPNode* Node, const uint8 WeightType, const bool IsReturnable, const bool Trigger)
 {
-	if (NodeGraphWriter) NodeGraphWriter->MarkGraphWriterDirty();
+	if (NodeGraphWriter) NodeGraphWriter->MarkGraphComponentDirty();
 
 	return Super::AddPath(Node, WeightType, IsReturnable, Trigger);
 }
 
 bool ULGPNodeCache::RemovePath(ULGPNode* Node)
 {
-	if (NodeGraphWriter) NodeGraphWriter->MarkGraphWriterDirty();
+	if (NodeGraphWriter) NodeGraphWriter->MarkGraphComponentDirty();
 
 	return Super::RemovePath(Node);
 }
 
 bool ULGPNodeCache::ClearPath()
 {
-	if (NodeGraphWriter) NodeGraphWriter->MarkGraphWriterDirty();
+	if (NodeGraphWriter) NodeGraphWriter->MarkGraphComponentDirty();
 
 	return Super::ClearPath();
 }
@@ -168,7 +168,7 @@ FPrimitiveSceneProxy* ULGPNode::CreateSceneProxy()
 
 FBoxSphereBounds ULGPNode::CalcBounds(const FTransform& LocalToWorld) const
 {
-	return CollisionBound.TransformBy(LocalToWorld);
+	return NodeCollision->AggGeom.CalcAABB(LocalToWorld);
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -293,7 +293,6 @@ void ULGPNode::CreateCollisionData()
 		NodeCollision->bGenerateMirroredCollision = false;
 		NodeCollision->bDoubleSidedGeometry = true;
 		NodeCollision->CollisionTraceFlag = CTF_UseDefault;
-
 	}
 }
 
@@ -305,8 +304,6 @@ void ULGPNode::UpdateCollisionData()
 	NodeCollision->InvalidatePhysicsData();
 	NodeCollision->CreatePhysicsMeshes();
 	RecreatePhysicsState(); 
-
-	CollisionBound = FBoxSphereBounds(NodeCollision->AggGeom.CalcAABB(FTransform()));
 
 	return;
 }

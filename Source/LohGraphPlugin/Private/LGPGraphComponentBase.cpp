@@ -43,7 +43,7 @@ bool ULGPGraphComponentBase::IsGraphComponentWorking() const
 
 void ULGPGraphComponentBase::MarkGraphComponentDirty(const bool Recompile)
 {
-	if (!IsPendingKill() && CoreSystem)
+	if (!bIsDirty && !IsPendingKill() && CoreSystem)
 	{ 
 		bIsDirty = true; 
 

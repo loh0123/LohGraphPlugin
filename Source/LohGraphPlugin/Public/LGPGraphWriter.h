@@ -62,10 +62,6 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////
 
-	//FORCEINLINE void RemoveGroupPath(ULGPNode* Identify);
-
-	FORCEINLINE void MarkGraphWriterDirty() { if (!bIsDirty) MarkGraphComponentDirty(); }
-
 protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TSet<ULGPNode*> RegisteredNode;

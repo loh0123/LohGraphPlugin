@@ -20,14 +20,14 @@ public:
 
 	FLGPAStarHelper(FLGPNodeGroupData* GPointer, ULGPNode* EndNode, const FLGPWeightPrefab& WeightData) :
 		GroupPointer(GPointer),
-		EndWeight(FVector::Dist(GPointer->IdentifyNode->GetComponentLocation(), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
+		EndWeight(FVector::Dist(GPointer->GetIdentifyNode()->GetComponentLocation(), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
 	{}
 
 	FLGPAStarHelper(const FSetElementId& PrKey, const FSetElementId& PKey, FLGPNodeGroupData* GPointer, ULGPNode* EndNode, const FLGPWeightPrefab& WeightData) :
 		ParentKey(PrKey),
 		PathKey(PKey),
 		GroupPointer(GPointer),
-		EndWeight(FVector::Dist(GPointer->IdentifyNode->GetComponentLocation(), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
+		EndWeight(FVector::Dist(GPointer->GetIdentifyNode()->GetComponentLocation(), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
 	{}
 
 
@@ -58,7 +58,7 @@ public:
 
 	friend FORCEINLINE uint32 GetTypeHash(const FLGPAStarHelper& Other)
 	{
-		return GetTypeHash(Other.GroupPointer->IdentifyNode);
+		return GetTypeHash(Other.GroupPointer->GetIdentifyNode());
 	}
 };
 

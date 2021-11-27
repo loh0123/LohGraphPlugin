@@ -64,9 +64,9 @@ public:
 
 	FLGPGroupPathData() {}
 
-	FLGPGroupPathData(ULGPNode* E) : EndNode(E) {}
+	FLGPGroupPathData(ULGPNode* E) : EndNode(E), IsWalkable(false), IsReturnable(false) {}
 
-	FLGPGroupPathData(ULGPNode* S, ULGPNode* E) : StartNode(S), EndNode(E) {}
+	FLGPGroupPathData(ULGPNode* S, ULGPNode* E) : StartNode(S), EndNode(E), IsWalkable(false), IsReturnable(false) {}
 
 
 	UPROPERTY(VisibleAnywhere) ULGPNode* StartNode;
@@ -91,8 +91,8 @@ public:
 	{
 		ProxyPath.Add(Data);
 
-		IsWalkable = Data.IsWalkable ? true : IsWalkable;
-		IsReturnable = Data.IsReturnable ? true : IsReturnable;
+		if (Data.IsWalkable) IsWalkable = true;
+		if (Data.IsReturnable) IsReturnable = true;
 
 		return;
 	}
@@ -118,32 +118,33 @@ public:
 
 	FLGPNodeGroupData() {}
 
-	FLGPNodeGroupData(const TSet<ULGPNode*>& Members) : IdentifyNode(Members.Array()[0]), GroupMember(Members) {}
+	FLGPNodeGroupData(const TArray<ULGPNode*>& Members) : GroupMember(Members) {}
 
 	//FLGPNodeGroupData(const TArray<ULGPNode*>& Members, const TArray<FLGPNodePathData>& Paths) : IdentifyNode(Members[0]), GroupMember(Members), GroupPathRaw(Paths) {}
 
-	UPROPERTY(VisibleAnywhere) ULGPNode* IdentifyNode;
+	//UPROPERTY(VisibleAnywhere) ULGPNode* IdentifyNode;
 
-	UPROPERTY(VisibleAnywhere) TSet<ULGPNode*> GroupMember;
+	UPROPERTY(VisibleAnywhere) TArray<ULGPNode*> GroupMember;
 
 	UPROPERTY(VisibleAnywhere) TSet<FLGPGroupPathData> GroupPath;
 
 
 
+	FORCEINLINE ULGPNode* GetIdentifyNode() const { return GroupMember[0]; }
 
-	FORCEINLINE void ValidIdentifyNode() { IdentifyNode = GroupMember.Array()[0]; return; }
+	//FORCEINLINE void ValidIdentifyNode() { IdentifyNode = GroupMember.Array()[0]; return; }
 
-	FORCEINLINE void ClearData() { IdentifyNode = nullptr; GroupMember.Empty(); GroupPath.Empty(); return; }
+	FORCEINLINE void ClearData() { GroupMember.Empty(); GroupPath.Empty(); return; }
 
 	// FORCEINLINE float GetGroupWeight(ULGPGraphReader* Reader) const;
 
 
 
-	FORCEINLINE bool operator==(FLGPNodeGroupData& Other) const { return IdentifyNode == Other.IdentifyNode; }
+	FORCEINLINE bool operator==(const FLGPNodeGroupData& Other) const { return GetIdentifyNode() == Other.GetIdentifyNode(); }
 
 	friend FORCEINLINE uint32 GetTypeHash(const FLGPNodeGroupData& Other)
 	{
-		return GetTypeHash(Other.IdentifyNode);
+		return GetTypeHash(Other.GetIdentifyNode());
 	}
 };
 
@@ -240,19 +241,19 @@ public:
 
 	FORCEINLINE float GetPassWeight() const { return PassWeight; }
 
-	FORCEINLINE bool GetNodeStep(ULGPNode* Node, uint16& Value) const {
-
-		const uint16* ValuePointer = NodeSteps.Find(Node);
-
-		if (ValuePointer)
-		{
-			Value = *ValuePointer;
-
-			return true;
-		}
-
-		return false;
-	}
+	//FORCEINLINE bool GetNodeStep(ULGPNode* Node, uint16& Value) const {
+	//
+	//	const uint16* ValuePointer = NodeSteps.Find(Node);
+	//
+	//	if (ValuePointer)
+	//	{
+	//		Value = *ValuePointer;
+	//
+	//		return true;
+	//	}
+	//
+	//	return false;
+	//}
 
 protected:
 
@@ -260,7 +261,7 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly) float PassWeight;
 
-	UPROPERTY(VisibleDefaultsOnly) TMap<ULGPNode*, uint16> NodeSteps;
+	//UPROPERTY(VisibleDefaultsOnly) TMap<ULGPNode*, uint16> NodeSteps;
 
 	UPROPERTY(VisibleDefaultsOnly) int32 GroupID = INDEX_NONE;
 
@@ -307,9 +308,6 @@ private:
 	/** Collision data */
 	UPROPERTY(Instanced)
 		class UBodySetup* NodeCollision;
-
-	UPROPERTY()
-		FBoxSphereBounds CollisionBound;
 
 	/**		////////		Collision Function				////////		*/
 public:

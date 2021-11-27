@@ -169,7 +169,7 @@ void ULGPGraphNavigator::DoThreadWork()
 
 					if (OpenIndex != INDEX_NONE)
 					{
-						float NewWeight = CurrentGroupData.StartWeight + (FVector::Dist(CurrentGroupData.GroupPointer->IdentifyNode->GetComponentLocation(), OpenGroups[OpenIndex].GroupPointer->IdentifyNode->GetComponentLocation()) * WeightData.DistanceToEndMultiply);
+						float NewWeight = CurrentGroupData.StartWeight + (FVector::Dist(CurrentGroupData.GroupPointer->GetIdentifyNode()->GetComponentLocation(), OpenGroups[OpenIndex].GroupPointer->GetIdentifyNode()->GetComponentLocation()) * WeightData.DistanceToEndMultiply);
 
 						if (NewWeight < OpenGroups[OpenIndex].StartWeight)
 						{

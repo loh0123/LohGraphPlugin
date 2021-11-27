@@ -36,7 +36,7 @@ void ULGPGraphWriter::RegisterGraphNode(ULGPNode* Node)
 
 	Node->NodeGraphWriter = this;
 
-	MarkGraphWriterDirty();
+	MarkGraphComponentDirty();
 
 	return;
 }
@@ -47,7 +47,7 @@ void ULGPGraphWriter::UnregisterGraphNode(ULGPNode* Node)
 
 	Node->NodeGraphWriter = nullptr;
 
-	MarkGraphWriterDirty();
+	MarkGraphComponentDirty();
 
 	return;
 }
@@ -64,7 +64,7 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 
 				if (GroupPointer)
 				{
-					GroupPointer->GroupPath.Remove(GroupItem.IdentifyNode);
+					GroupPointer->GroupPath.Remove(GroupItem.GetIdentifyNode());
 				}
 			}
 		}
@@ -237,7 +237,7 @@ void ULGPGraphWriter::DoThreadWork()
 
 					if (NodeData.LowLinkID == NodeData.LowLinkValue) // Store Data If Complete
 					{
-						LocalGroupList[NodeData.SCCID].ValidIdentifyNode();
+						//LocalGroupList[NodeData.SCCID].ValidIdentifyNode();
 
 						// Add To Data List
 						NodeGroupList.Add(LocalGroupList[NodeData.SCCID]);
@@ -287,19 +287,19 @@ void ULGPGraphWriter::OnThreadWorkDone()
 
 					if (Path.IsWalkable && Path.EndNode->IsNodeValid() && !GroupItem.GroupMember.Contains(Path.EndNode) && OtherGroup)
 					{
-						FLGPGroupPathData* PathPointer = GroupItem.GroupPath.Find(OtherGroup->IdentifyNode); // Already Has Path To This Group
+						FLGPGroupPathData* PathPointer = GroupItem.GroupPath.Find(OtherGroup->GetIdentifyNode()); // Already Has Path To This Group
 
 						if (PathPointer)
 						{
-							FLGPGroupPathData* OtherPathPointer = OtherGroup->GroupPath.Find(GroupItem.IdentifyNode); // Get Other Path In There Group
+							FLGPGroupPathData* OtherPathPointer = OtherGroup->GroupPath.Find(GroupItem.GetIdentifyNode()); // Get Other Path In There Group
 
 							OtherPathPointer->AddProxyPath(OtherPath);
 							PathPointer->AddProxyPath(Path);
 						}
 						else
 						{
-							FLGPGroupPathData NewGroup = FLGPGroupPathData(GroupItem.IdentifyNode, OtherGroup->IdentifyNode);
-							FLGPGroupPathData OtherNewGroup = FLGPGroupPathData(OtherGroup->IdentifyNode, GroupItem.IdentifyNode);
+							FLGPGroupPathData NewGroup = FLGPGroupPathData(GroupItem.GetIdentifyNode(), OtherGroup->GetIdentifyNode());
+							FLGPGroupPathData OtherNewGroup = FLGPGroupPathData(OtherGroup->GetIdentifyNode(), GroupItem.GetIdentifyNode());
 
 							NewGroup.AddProxyPath(Path);
 							OtherNewGroup.AddProxyPath(OtherPath);
