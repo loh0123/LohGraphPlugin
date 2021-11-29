@@ -153,35 +153,35 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList = { "WeightList", nullptr, (EPropertyFlags)0x0010000000000041, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, WeightList), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList_MetaData)) };
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList = { "WeightList", nullptr, (EPropertyFlags)0x0010000000000045, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, WeightList), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply_MetaData[] = {
 		{ "Category", "LGSTypePrefab | Variable" },
 		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply = { "NodeBufferMultiply", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, NodeBufferMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply_MetaData)) };
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply = { "NodeBufferMultiply", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, NodeBufferMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_NodeBufferMultiply_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply_MetaData[] = {
 		{ "Category", "LGSTypePrefab | Variable" },
 		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply = { "DistanceToEndMultiply", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, DistanceToEndMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply_MetaData)) };
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply = { "DistanceToEndMultiply", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, DistanceToEndMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToEndMultiply_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply_MetaData[] = {
 		{ "Category", "LGSTypePrefab | Variable" },
 		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply = { "DistanceToStartMultiply", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, DistanceToStartMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply_MetaData)) };
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply = { "DistanceToStartMultiply", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, DistanceToStartMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_DistanceToStartMultiply_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_StepMultiply_MetaData[] = {
 		{ "Category", "LGSTypePrefab | Variable" },
 		{ "ModuleRelativePath", "Public/LGPGraphComponentBase.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_StepMultiply = { "StepMultiply", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, StepMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_StepMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_StepMultiply_MetaData)) };
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_StepMultiply = { "StepMultiply", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPWeightPrefab, StepMultiply), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_StepMultiply_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_StepMultiply_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPWeightPrefab_Statics::NewProp_WeightList,
@@ -218,7 +218,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPWeightPrefab
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FLGPWeightPrefab_Hash() { return 138598122U; }
+	uint32 Get_Z_Construct_UScriptStruct_FLGPWeightPrefab_Hash() { return 638739932U; }
 	void ULGPGraphComponentBase::StaticRegisterNativesULGPGraphComponentBase()
 	{
 	}

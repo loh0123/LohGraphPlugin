@@ -148,6 +148,11 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BuildVersion_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FUInt32PropertyParams NewProp_BuildVersion;
+		static const UE4CodeGen_Private::FIntPropertyParams NewProp_ReturnPathData_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ReturnPathData_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_ReturnPathData;
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_PathProcessQueue_Inner;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PathProcessQueue_MetaData[];
@@ -198,14 +203,22 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 	};
 #endif
 	const UE4CodeGen_Private::FUInt32PropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion = { "BuildVersion", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::UInt32, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphWriter, BuildVersion), METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion_MetaData)) };
+	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_ReturnPathData_Inner = { "ReturnPathData", nullptr, (EPropertyFlags)0x0000000000020000, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_ReturnPathData_MetaData[] = {
+		{ "Category", "LGPGraph | Varaible" },
+		{ "Comment", "// Use To Check If Data Is Outdated\n" },
+		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
+		{ "ToolTip", "Use To Check If Data Is Outdated" },
+	};
+#endif
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_ReturnPathData = { "ReturnPathData", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphWriter, ReturnPathData), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_ReturnPathData_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_ReturnPathData_MetaData)) };
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_PathProcessQueue_Inner = { "PathProcessQueue", nullptr, (EPropertyFlags)0x00000000000a0008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPNode_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_PathProcessQueue_MetaData[] = {
 		{ "Category", "LGPGraph | Varaible" },
-		{ "Comment", "// Use To Check If Data Is Outdated\n" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
-		{ "ToolTip", "Use To Check If Data Is Outdated" },
 	};
 #endif
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_PathProcessQueue = { "PathProcessQueue", nullptr, (EPropertyFlags)0x0020088000020009, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphWriter, PathProcessQueue), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_PathProcessQueue_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_PathProcessQueue_MetaData)) };
@@ -231,6 +244,8 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_ReturnPathData_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_ReturnPathData,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_PathProcessQueue_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_PathProcessQueue,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_CurrentPathProcessNode,
@@ -264,7 +279,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphWriter, 4086046129);
+	IMPLEMENT_CLASS(ULGPGraphWriter, 811793337);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphWriter>()
 	{
 		return ULGPGraphWriter::StaticClass();

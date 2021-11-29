@@ -124,11 +124,11 @@ void ULGPGameCoreSystem::UnregisterGraphComponent(ULGPGraphComponentBase* Compon
 	return;
 }
 
-int32 ULGPGameCoreSystem::SetWeightPrefabList(TArray<FLGPWeightPrefab>& NewList)
+int32 ULGPGameCoreSystem::SetWeightPrefabList(const TArray<FLGPWeightPrefab>& NewList)
 {
-	if (NewList.Num() > 255) NewList.SetNum(255);
-
 	WeightPrefabList = NewList;
+
+	if (WeightPrefabList.Num() > 255) WeightPrefabList.SetNum(255);
 
 	return WeightPrefabList.Num();
 }

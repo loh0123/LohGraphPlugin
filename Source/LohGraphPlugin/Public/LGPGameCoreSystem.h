@@ -78,7 +78,7 @@ public:
 	// Weight Prefab List /////////////////////////////////////////////////////////////
 
 	UFUNCTION(BlueprintCallable, Category = "LGPGameCoreSystem")
-		FORCEINLINE int32 SetWeightPrefabList(TArray<FLGPWeightPrefab>& NewList);
+		FORCEINLINE int32 SetWeightPrefabList(const TArray<FLGPWeightPrefab>& NewList);
 
 	UFUNCTION(BlueprintCallable, Category = "LGPGameCoreSystem")
 		FORCEINLINE int32 ClearWeightPrefabList();

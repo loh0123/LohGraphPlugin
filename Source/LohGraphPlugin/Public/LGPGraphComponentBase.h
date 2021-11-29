@@ -26,19 +26,19 @@ public:
 		WeightList.SetNum(256);
 	}
 
-	UPROPERTY(EditAnywhere, EditFixedSize, Category = "LGSTypePrefab | Variable")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, Category = "LGSTypePrefab | Variable")
 		TArray<float> WeightList;
 
-	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGSTypePrefab | Variable")
 		float NodeBufferMultiply = 1.0f;
 
-	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGSTypePrefab | Variable")
 		float DistanceToEndMultiply = 2.0f;
 
-	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGSTypePrefab | Variable")
 		float DistanceToStartMultiply = 1.0f;
 
-	UPROPERTY(EditAnywhere, Category = "LGSTypePrefab | Variable")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGSTypePrefab | Variable")
 		float StepMultiply = 1.0f;
 };
 
@@ -89,16 +89,16 @@ protected:
 
 
 	// Prepare Thread To Start (True if can start Thread)
-	virtual FORCEINLINE bool OnThreadWorkStart() { return true; }
+	virtual  FORCEINLINE bool OnThreadWorkStart() { return true; }
 
 	// Warning This Run On Other Thread
-	virtual FORCEINLINE void DoThreadWork() { return; }
+	virtual  FORCEINLINE void DoThreadWork() { return; }
 
 	// Call After Thread Work Is Done
-	virtual FORCEINLINE void OnThreadWorkDone() { return; }
+	virtual  FORCEINLINE void OnThreadWorkDone() { return; }
 
 	// Call After All Thread Of Same Type End Work
-	virtual FORCEINLINE void OnThreadEndEvent() { return; }
+	//virtual FORCEINLINE void OnThreadEndEvent() { return; }
 
 	//////////////////////////////////////////////////////////////////
 

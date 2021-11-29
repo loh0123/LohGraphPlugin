@@ -99,7 +99,17 @@ class LOHGRAPHPLUGIN_API ULGPGraphNavigator : public ULGPGraphReader
 {
 	GENERATED_BODY()
 
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPathReceiveSignature, const TArray<FLGPGroupPathData>&, Path);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBeginFollowingPathSignature);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndFollowingPathSignature);
+
 public:
+
+	// Sets default values for this component's properties
+	ULGPGraphNavigator();
+
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
 		FORCEINLINE bool GoToNode(ULGPNode* Node);
@@ -107,19 +117,77 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
 		FORCEINLINE bool GoToLocation(const FVector Location);
 
+public:
+
+// Read Function /////////////////////////////////////////////////////////////
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE ULGPNode* GetFollowingNode() { return FollowingNode; }
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE ULGPNode* GetLocalNode() { return LocalNode; }
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE ULGPNode* GetStartNode() { return StartNode; }
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE ULGPNode* GetEndNode() { return EndNode; }
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE int32 GetFollowIndex() { return FollowIndex; }
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE bool GetIsFollowingPath() { return IsFollowingPath; }
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE bool GetIsManualMoving() { return IsFollowingPath; }
+
+///////////////////////////////////////////////////////////////////////////////
+
+	UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
+		FORCEINLINE bool NextFollowingNode();
+
+private:
+
+	FORCEINLINE void BeginPathFollowing();
+
+	FORCEINLINE ULGPNode* GetNextFollowingNode(ULGPNode* OverlapingNode);
+
+public:
+
+	UPROPERTY(BlueprintAssignable, Category = "LGPGraphNavigator | Event")
+		FOnPathReceiveSignature OnPathReceive;
+
+
+	UPROPERTY(BlueprintAssignable, Category = "LGPGraphNavigator | Event")
+		FOnBeginFollowingPathSignature OnBeginFollowingPath;
+
+
+	UPROPERTY(BlueprintAssignable, Category = "LGPGraphNavigator | Event")
+		FOnEndFollowingPathSignature OnEndFollowingPath;
+
 protected:
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraph | Varaible")
+	UPROPERTY(BlueprintGetter = GetFollowingNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
+		ULGPNode* FollowingNode = nullptr;
+
+	UPROPERTY(BlueprintGetter = GetLocalNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
+		ULGPNode* LocalNode = nullptr;
+
+	UPROPERTY(BlueprintGetter = GetStartNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		ULGPNode* StartNode = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraph | Varaible")
+	UPROPERTY(BlueprintGetter = GetEndNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		ULGPNode* EndNode = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraph | Varaible")
+	UPROPERTY(BlueprintGetter = GetFollowIndex, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		int32 FollowIndex = -1;
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "LGPGraph | Varaible")
+	UPROPERTY(BlueprintGetter = GetIsFollowingPath, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		bool IsFollowingPath = false;
+
+	UPROPERTY(BlueprintGetter = GetIsManualMoving, EditAnywhere, Category = "LGPGraphNavigator | Varaible")
+		bool IsManualMoving = false;
 
 	// Thread Handle //////////////////////////////////////////////////////////////////
 
@@ -133,15 +201,18 @@ protected:
 
 
 
-	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TArray<FLGPGroupPathData> PathData;
+	UPROPERTY(VisibleAnywhere, Category = "LGPGraphNavigator | Varaible") TArray<FLGPGroupPathData> PathData;
 
 	///////////////////////////////////////////////////////////////////////////////////
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphReader | Setting")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphNavigator | Setting")
 		float NavigatorBuffer = 0.0f;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphReader | Setting")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphNavigator | Setting")
 		float ReachDistance = 200.0f;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphNavigator | Setting")
+		float MovingSpeed = 300.0f;
 };

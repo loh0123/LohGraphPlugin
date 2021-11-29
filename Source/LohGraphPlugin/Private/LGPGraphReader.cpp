@@ -2,6 +2,7 @@
 
 
 #include "LGPGraphReader.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Kismet\KismetSystemLibrary.h"
 
 float ULGPGraphReader::GetNodeWeight(ULGPNode* Node) const
@@ -93,6 +94,55 @@ ULGPNode* ULGPGraphReader::GetOverlappingNodeByLocation(const FVector Point, con
 	return OutComp;
 }
 
+
+// Sets default values for this component's properties
+ULGPGraphNavigator::ULGPGraphNavigator()
+{
+	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
+	// off to improve performance if you don't need them.
+	PrimaryComponentTick.bCanEverTick = true;
+
+
+	// ...
+}
+
+void ULGPGraphNavigator::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if (IsFollowingPath && !IsManualMoving && LocalNode)
+	{
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Ticking"));
+
+		if (!LocalNode->IsPathGenerating())
+		{
+			AActor* Owner = GetOwner();
+
+			if (FollowingNode)
+			{
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Following"));
+
+				Owner->SetActorLocation(FMath::VInterpConstantTo(Owner->GetActorLocation(), FollowingNode->GetComponentLocation(), DeltaTime, MovingSpeed));
+			
+				if (FVector::Dist(Owner->GetActorLocation(), FollowingNode->GetComponentLocation()) < ReachDistance)
+				{
+					GetNextFollowingNode(GetOverlappingNode());
+				}
+			}
+			else
+			{
+				GetNextFollowingNode(GetOverlappingNode());
+			}
+		}
+		else
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Generating"));
+		}
+	}
+
+	return;
+}
+
 bool ULGPGraphNavigator::GoToNode(ULGPNode* Node)
 {
 	ULGPNode* StartN = GetOverlappingNode();
@@ -120,6 +170,142 @@ bool ULGPGraphNavigator::GoToNode(ULGPNode* Node)
 bool ULGPGraphNavigator::GoToLocation(const FVector Location)
 {
 	return GoToNode(GetOverlappingNodeByLocation(Location));
+}
+
+bool ULGPGraphNavigator::NextFollowingNode()
+{
+	if (IsManualMoving && GetNextFollowingNode(GetOverlappingNode()))
+	{
+		return true;
+	}
+
+	return false;
+}
+
+void ULGPGraphNavigator::BeginPathFollowing()
+{
+	IsFollowingPath = true;
+
+	FollowIndex = PathData.Num();
+
+	GetNextFollowingNode(GetOverlappingNode());
+
+	OnBeginFollowingPath.Broadcast();
+
+	return;
+}
+
+ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
+{
+	if (!OverlapingNode) return nullptr; // Not Valid Skip Process
+
+	FLGPWeightPrefab WeightData;
+
+	if (!GetWeightData(WeightData))
+	{
+		FollowingNode = nullptr;
+
+		LocalNode = nullptr;
+
+		IsFollowingPath = false;
+
+		return nullptr;
+	}
+
+	AActor* Owner = GetOwner();
+
+	if ((FollowingNode && OverlapingNode == FollowingNode && FollowingNode == LocalNode) || !LocalNode)
+	{
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Next Group"));
+
+		FollowingNode = nullptr;
+
+		if (FollowIndex > 0)
+		{
+			FollowIndex--;
+
+			ULGPNode* NextGroupNode = PathData.IsValidIndex(FollowIndex - 1) ? PathData[FollowIndex - 1].EndNode : EndNode;
+
+			ULGPNode* NextNode = nullptr;
+
+			float NextNodeScore = -1.0f;
+
+			for (const FLGPNodePathData& PathItem : PathData[FollowIndex].GetProxyPath())
+			{
+				float NodeScore = (FVector::Dist(PathItem.StartNode->GetComponentLocation(), NextGroupNode->GetComponentLocation()) * WeightData.DistanceToEndMultiply) + PathItem.StartNode->GetPassWeight();
+
+				if (NodeScore < NextNodeScore || NextNodeScore < 0.0f)
+				{
+					NextNode = PathItem.StartNode;
+
+					NextNodeScore = NodeScore;
+				}
+			}
+
+			LocalNode = NextNode;
+
+			LocalNode->RequestPath();
+		}
+		else
+		{
+			FollowIndex = -1;
+
+			if (LocalNode == EndNode)
+			{
+				LocalNode = nullptr;
+
+				IsFollowingPath = false;
+
+				OnEndFollowingPath.Broadcast();
+
+				return nullptr;
+			}
+			else
+			{
+				LocalNode = EndNode;
+
+				LocalNode->RequestPath();
+			}
+		}
+	}
+
+	// Path Is Generating Can't Find Data Now !!!
+	if (LocalNode->IsPathGenerating())
+	{
+		FollowingNode = nullptr;
+
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Is Generating"));
+	}
+	else
+	{
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, OverlapingNode->GetReadableName());
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Finding Next Node"));
+
+		ULGPNode* NextNode = nullptr;
+
+		float NextNodeScore = -1.0f;
+
+		for (const FLGPNodePathData& PathItem : OverlapingNode->GetPathList())
+		{
+			const int32 FlowHeat = LocalNode->GetFlowFieldStep(PathItem.EndNode);
+
+			if (FlowHeat != INDEX_NONE)
+			{
+				float NodeScore = (FVector::Dist(PathItem.StartNode->GetComponentLocation(), PathItem.EndNode->GetComponentLocation()) * WeightData.DistanceToEndMultiply) + (FlowHeat * WeightData.StepMultiply) + PathItem.StartNode->GetPassWeight();
+
+				if (NodeScore < NextNodeScore || NextNodeScore < 0.0f)
+				{
+					NextNode = PathItem.EndNode;
+
+					NextNodeScore = NodeScore;
+				}
+			}
+		}
+
+		FollowingNode = NextNode;
+	}
+
+	return FollowingNode;
 }
 
 bool ULGPGraphNavigator::OnThreadWorkStart()
@@ -191,13 +377,31 @@ void ULGPGraphNavigator::DoThreadWork()
 
 void ULGPGraphNavigator::OnThreadWorkDone()
 {
-	for (FLGPGroupPathData& PathItem : PathData)
+	if (!StopTaskerWork)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, PathItem.StartNode->GetReadableName());
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, PathItem.EndNode->GetReadableName());
+		//for (FLGPGroupPathData& PathItem : PathData)
+		//{
+		//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, PathItem.StartNode->GetReadableName());
+		//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, PathItem.EndNode->GetReadableName());
+		//
+		//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%d"), PathItem.GetProxyPath().Num()));
+		//
+		//	for (const FLGPNodePathData& NodePath : PathItem.GetProxyPath())
+		//	{
+		//		GEngine->AddOnScreenDebugMessage(-1, 50.f, FColor::Red, NodePath.StartNode->GetReadableName());
+		//		GEngine->AddOnScreenDebugMessage(-1, 50.f, FColor::Green, NodePath.EndNode->GetReadableName());
+		//	}
+		//}
 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%d"), PathItem.GetProxyPath().Num()));
+		OnPathReceive.Broadcast(PathData);
+
+		FLGPWeightPrefab WeightData;
+
+		if (GetWeightData(WeightData) && EndNode)
+		{
+			BeginPathFollowing();
+		}
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Reader Threae Exit Safe"));
 	}
-
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Reader Threae Exit Safe"));
 }

@@ -45,9 +45,14 @@ void ULGPGraphComponentBase::MarkGraphComponentDirty(const bool Recompile)
 {
 	if (!bIsDirty && !IsPendingKill() && CoreSystem)
 	{ 
-		bIsDirty = true; 
+		if (Recompile) 
+		{
+			StopGraphComponentTasker(false);
 
-		if (Recompile) CurrentBuildVersion++; 
+			CurrentBuildVersion++;
+		}
+
+		bIsDirty = true;
 	} 
 	
 	return;
@@ -104,10 +109,8 @@ void ULGPGraphComponentBase::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (bIsDirty)
+	if (bIsDirty && ComponentTasker->IsDone())
 	{
-		checkf(ComponentTasker->IsIdle(), TEXT("Tasker Work Not Done Can't Start Another Job"));
-
 		StopTaskerWork = false;
 
 		bIsDirty = false;

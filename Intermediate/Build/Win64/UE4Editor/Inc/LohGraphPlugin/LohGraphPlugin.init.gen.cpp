@@ -11,18 +11,26 @@
 #endif
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeLohGraphPlugin_init() {}
+	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnPathReceiveSignature__DelegateSignature();
+	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnBeginFollowingPathSignature__DelegateSignature();
+	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnEndFollowingPathSignature__DelegateSignature();
 	UPackage* Z_Construct_UPackage__Script_LohGraphPlugin()
 	{
 		static UPackage* ReturnPackage = nullptr;
 		if (!ReturnPackage)
 		{
+			static UObject* (*const SingletonFuncArray[])() = {
+				(UObject* (*)())Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnPathReceiveSignature__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnBeginFollowingPathSignature__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnEndFollowingPathSignature__DelegateSignature,
+			};
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/LohGraphPlugin",
-				nullptr,
-				0,
+				SingletonFuncArray,
+				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x94A96C15,
-				0x651BC692,
+				0xF5EB6673,
+				0x46C9CAE0,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

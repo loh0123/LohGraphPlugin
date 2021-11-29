@@ -6,6 +6,64 @@
 #include "LGPGraphReader.h"
 
 
+void FLGPNodeGroupData::ClearGroupPath()
+{
+	for (FLGPGroupPathData& PathItem : GroupPath)
+	{
+		FLGPNodeGroupData* GroupPointer = PathItem.EndNode->GetGroupDataPointer();
+
+		if (GroupPointer)
+		{
+			GroupPointer->GroupPath.Remove(GetIdentifyNode());
+		}
+	}
+
+	GroupPath.Empty();
+
+	return;
+}
+
+void FLGPNodeGroupData::GenerateGroupPath()
+{
+	for (int32 GroupMemberIndex = 0; GroupMemberIndex < GroupMember.Num(); GroupMemberIndex++) // Loop Current Process Node From Group
+	{
+		FLGPGroupMemberData& MemberItem = GroupMember[GroupMemberIndex];
+
+		for (const FLGPNodePathData& Path : MemberItem.Member->GetPathList()) // Loop All Path In Node
+		{
+			const FLGPNodePathData& OtherPath = *Path.EndNode->GetPathList().Find(MemberItem.Member); // Get Other Node Path Data
+			FLGPNodeGroupData* OtherGroup = Path.EndNode->GetGroupDataPointer(); // Get Other Node Group Data
+
+			if (Path.IsWalkable && Path.EndNode->IsNodeValid() && !GroupMember.Contains(Path.EndNode) && OtherGroup)
+			{
+				FLGPGroupPathData* PathPointer = GroupPath.Find(OtherGroup->GetIdentifyNode()); // Already Has Path To This Group
+
+				if (PathPointer)
+				{
+					FLGPGroupPathData* OtherPathPointer = OtherGroup->GroupPath.Find(GetIdentifyNode()); // Get Other Node Group Path
+
+					OtherPathPointer->AddProxyPath(OtherPath);
+					PathPointer->AddProxyPath(Path);
+				}
+				else
+				{
+					FLGPGroupPathData NewGroup = FLGPGroupPathData(GetIdentifyNode(), OtherGroup->GetIdentifyNode());
+					FLGPGroupPathData OtherNewGroup = FLGPGroupPathData(OtherGroup->GetIdentifyNode(), GetIdentifyNode());
+
+					NewGroup.AddProxyPath(Path);
+					OtherNewGroup.AddProxyPath(OtherPath);
+
+					GroupPath.Add(NewGroup);
+					OtherGroup->GroupPath.Add(OtherNewGroup);
+				}
+			}
+		}
+	}
+
+	return;
+}
+
+
 void ULGPNodeBase::SetupNode(TSet<FLGPNodePathData>& Paths, const bool WeightType, const bool IsTrigger)
 {
 	checkf(!HasBegunPlay(), TEXT("Setup Node Only Can Run Before Begin Play"));
@@ -139,6 +197,33 @@ FLGPNodeGroupData* ULGPNodeCache::GetGroupDataPointer()
 FLGPNodeGroupData& ULGPNodeCache::GetGroupData()
 {
 	return NodeGraphWriter->GetGroupData(Cast<ULGPNode>(this));
+}
+
+FLGPGroupMemberData& ULGPNodeCache::GetGroupMemberData()
+{
+	return NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this));
+}
+
+int32 ULGPNodeCache::GetFlowFieldStep(ULGPNode* Node)
+{
+	if (Node && Node->GetOwingWriter() == GetOwingWriter() && Node->GroupID == GroupID && NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this)).FlowFieldStep.Num() > 0)
+	{
+		return NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this)).FlowFieldStep[Node->GroupMemberIndex];
+	}
+
+	return INDEX_NONE;
+}
+
+void ULGPNodeCache::RequestPath()
+{
+	NodeGraphWriter->ProcessPathToNode(Cast<ULGPNode>(this));
+
+	return;
+}
+
+bool ULGPNodeCache::IsPathGenerating()
+{
+	return NodeGraphWriter->IsPathGenerating(Cast<ULGPNode>(this));
 }
 
 

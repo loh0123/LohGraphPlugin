@@ -12,6 +12,9 @@ C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4E
 C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Source\LohGraphPlugin\Public\LGPGraphReader.h
 C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Inc\LohGraphPlugin\LGPGraphReader.generated.h
 C:/Unreal/Project/PluginLab/Plugins/LohGraphPlugin/Source/LohGraphPlugin/Private/LGPGraphReader.cpp
+C:\Unreal\UE_4.27\Engine\Source\Runtime\Engine\Classes\Kismet/KismetMathLibrary.h
+C:\Unreal\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\KismetMathLibrary.generated.h
+C:\Unreal\UE_4.27\Engine\Source\Runtime\Engine\Classes\Kismet\KismetMathLibrary.inl
 C:\Unreal\UE_4.27\Engine\Source\Runtime\Engine\Classes\Kismet\KismetSystemLibrary.h
 C:\Unreal\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h
 C:\Unreal\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\KismetSystemLibrary.generated.h

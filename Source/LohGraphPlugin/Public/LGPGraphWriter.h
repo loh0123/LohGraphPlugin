@@ -62,6 +62,11 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////
 
+
+	FORCEINLINE bool ProcessPathToNode(ULGPNode* Node);
+
+	FORCEINLINE bool IsPathGenerating(ULGPNode* Node) const { return CurrentPathProcessNode == Node || PathProcessQueue.Contains(Node); }
+
 protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TSet<ULGPNode*> RegisteredNode;
@@ -79,8 +84,12 @@ protected:
 
 	FORCEINLINE FLGPNodeGroupData& GetGroupData(ULGPNode* Node); // Cause Error If Thread Is Running
 
+	FORCEINLINE FLGPGroupMemberData& GetGroupMemberData(ULGPNode* Node); // Cause Error If Thread Is Running
+
 
 	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") uint32 BuildVersion = 0; // Use To Check If Data Is Outdated
+
+	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TArray<int32> ReturnPathData;
 
 	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TArray<ULGPNode*> PathProcessQueue;
 

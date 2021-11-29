@@ -110,6 +110,25 @@ public:
 };
 
 USTRUCT(BlueprintType)
+struct FLGPGroupMemberData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+
+	FLGPGroupMemberData() {}
+
+	FLGPGroupMemberData(ULGPNode* M) : Member(M) {}
+
+	UPROPERTY(VisibleAnywhere) ULGPNode* Member;
+
+	UPROPERTY(VisibleAnywhere) TArray<int32> FlowFieldStep;
+
+
+	FORCEINLINE bool operator==(const FLGPGroupMemberData& Other) const { return Member == Other.Member; }
+};
+
+USTRUCT(BlueprintType)
 struct FLGPNodeGroupData
 {
 	GENERATED_USTRUCT_BODY()
@@ -124,19 +143,23 @@ public:
 
 	//UPROPERTY(VisibleAnywhere) ULGPNode* IdentifyNode;
 
-	UPROPERTY(VisibleAnywhere) TArray<ULGPNode*> GroupMember;
+	UPROPERTY(VisibleAnywhere) TArray<FLGPGroupMemberData> GroupMember;
 
 	UPROPERTY(VisibleAnywhere) TSet<FLGPGroupPathData> GroupPath;
 
 
 
-	FORCEINLINE ULGPNode* GetIdentifyNode() const { return GroupMember[0]; }
+	FORCEINLINE ULGPNode* GetIdentifyNode() const { return GroupMember[0].Member; }
 
 	//FORCEINLINE void ValidIdentifyNode() { IdentifyNode = GroupMember.Array()[0]; return; }
 
-	FORCEINLINE void ClearData() { GroupMember.Empty(); GroupPath.Empty(); return; }
+	FORCEINLINE void ClearData() { GroupMember.Empty(); ClearGroupPath(); return; }
 
 	// FORCEINLINE float GetGroupWeight(ULGPGraphReader* Reader) const;
+
+	FORCEINLINE void ClearGroupPath();
+
+	FORCEINLINE void GenerateGroupPath();
 
 
 
@@ -237,6 +260,16 @@ public:
 
 	FORCEINLINE FLGPNodeGroupData& GetGroupData(); // Warning Cant Change During Operation Or Will Cause Error
 
+	FORCEINLINE FLGPGroupMemberData& GetGroupMemberData(); // Warning Cant Change During Operation Or Will Cause Error
+
+	FORCEINLINE int32 GetFlowFieldStep(ULGPNode* Node); // Warning Cant Change During Operation Or Will Cause Error
+
+
+	FORCEINLINE void RequestPath();
+
+	FORCEINLINE bool IsPathGenerating();
+
+
 	FORCEINLINE ULGPGraphWriter* GetOwingWriter() const { return NodeGraphWriter; }
 
 	FORCEINLINE float GetPassWeight() const { return PassWeight; }
@@ -261,7 +294,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly) float PassWeight;
 
-	//UPROPERTY(VisibleDefaultsOnly) TMap<ULGPNode*, uint16> NodeSteps;
+	//UPROPERTY(VisibleAnywhere) TMap<ULGPNode*, uint16> NodeSteps;
+
+	UPROPERTY(VisibleDefaultsOnly) int32 GroupMemberIndex = INDEX_NONE;
 
 	UPROPERTY(VisibleDefaultsOnly) int32 GroupID = INDEX_NONE;
 

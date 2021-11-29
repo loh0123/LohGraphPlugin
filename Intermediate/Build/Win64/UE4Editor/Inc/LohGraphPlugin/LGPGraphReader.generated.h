@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FLGPGroupPathData;
 struct FVector;
 class ULGPNode;
 struct FLGPWeightPrefab;
@@ -22,6 +23,33 @@ struct FLGPWeightPrefab;
 
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPAStarHelper>();
+
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_104_DELEGATE \
+static inline void FOnEndFollowingPathSignature_DelegateWrapper(const FMulticastScriptDelegate& OnEndFollowingPathSignature) \
+{ \
+	OnEndFollowingPathSignature.ProcessMulticastDelegate<UObject>(NULL); \
+}
+
+
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_DELEGATE \
+static inline void FOnBeginFollowingPathSignature_DelegateWrapper(const FMulticastScriptDelegate& OnBeginFollowingPathSignature) \
+{ \
+	OnBeginFollowingPathSignature.ProcessMulticastDelegate<UObject>(NULL); \
+}
+
+
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_102_DELEGATE \
+struct LGPGraphNavigator_eventOnPathReceiveSignature_Parms \
+{ \
+	TArray<FLGPGroupPathData> Path; \
+}; \
+static inline void FOnPathReceiveSignature_DelegateWrapper(const FMulticastScriptDelegate& OnPathReceiveSignature, TArray<FLGPGroupPathData> const& Path) \
+{ \
+	LGPGraphNavigator_eventOnPathReceiveSignature_Parms Parms; \
+	Parms.Path=Path; \
+	OnPathReceiveSignature.ProcessMulticastDelegate<UObject>(&Parms); \
+}
+
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_SPARSE_DATA
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_RPC_WRAPPERS \
@@ -115,12 +143,28 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPGraphReader>();
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_SPARSE_DATA
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execNextFollowingNode); \
+	DECLARE_FUNCTION(execGetIsManualMoving); \
+	DECLARE_FUNCTION(execGetIsFollowingPath); \
+	DECLARE_FUNCTION(execGetFollowIndex); \
+	DECLARE_FUNCTION(execGetEndNode); \
+	DECLARE_FUNCTION(execGetStartNode); \
+	DECLARE_FUNCTION(execGetLocalNode); \
+	DECLARE_FUNCTION(execGetFollowingNode); \
 	DECLARE_FUNCTION(execGoToLocation); \
 	DECLARE_FUNCTION(execGoToNode);
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execNextFollowingNode); \
+	DECLARE_FUNCTION(execGetIsManualMoving); \
+	DECLARE_FUNCTION(execGetIsFollowingPath); \
+	DECLARE_FUNCTION(execGetFollowIndex); \
+	DECLARE_FUNCTION(execGetEndNode); \
+	DECLARE_FUNCTION(execGetStartNode); \
+	DECLARE_FUNCTION(execGetLocalNode); \
+	DECLARE_FUNCTION(execGetFollowingNode); \
 	DECLARE_FUNCTION(execGoToLocation); \
 	DECLARE_FUNCTION(execGoToNode);
 
@@ -145,7 +189,7 @@ public: \
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API ULGPGraphNavigator(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
+	NO_API ULGPGraphNavigator(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPGraphNavigator) \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, ULGPGraphNavigator); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(ULGPGraphNavigator); \
@@ -157,8 +201,6 @@ public:
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_ENHANCED_CONSTRUCTORS \
-	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API ULGPGraphNavigator() { }; \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ULGPGraphNavigator(ULGPGraphNavigator&&); \
@@ -170,10 +212,13 @@ public: \
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__FollowingNode() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowingNode); } \
+	FORCEINLINE static uint32 __PPO__LocalNode() { return STRUCT_OFFSET(ULGPGraphNavigator, LocalNode); } \
 	FORCEINLINE static uint32 __PPO__StartNode() { return STRUCT_OFFSET(ULGPGraphNavigator, StartNode); } \
 	FORCEINLINE static uint32 __PPO__EndNode() { return STRUCT_OFFSET(ULGPGraphNavigator, EndNode); } \
 	FORCEINLINE static uint32 __PPO__FollowIndex() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowIndex); } \
 	FORCEINLINE static uint32 __PPO__IsFollowingPath() { return STRUCT_OFFSET(ULGPGraphNavigator, IsFollowingPath); } \
+	FORCEINLINE static uint32 __PPO__IsManualMoving() { return STRUCT_OFFSET(ULGPGraphNavigator, IsManualMoving); } \
 	FORCEINLINE static uint32 __PPO__PathData() { return STRUCT_OFFSET(ULGPGraphNavigator, PathData); }
 
 

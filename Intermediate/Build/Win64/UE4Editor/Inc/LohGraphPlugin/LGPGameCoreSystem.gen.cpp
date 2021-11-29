@@ -150,6 +150,9 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 			int32 ReturnValue;
 		};
 		static const UE4CodeGen_Private::FStructPropertyParams NewProp_NewList_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NewList_MetaData[];
+#endif
 		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_NewList;
 		static const UE4CodeGen_Private::FIntPropertyParams NewProp_ReturnValue;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -159,7 +162,12 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		static const UE4CodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::NewProp_NewList_Inner = { "NewList", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FLGPWeightPrefab, METADATA_PARAMS(nullptr, 0) };
-	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::NewProp_NewList = { "NewList", nullptr, (EPropertyFlags)0x0010000000000180, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPGameCoreSystem_eventSetWeightPrefabList_Parms, NewList), EArrayPropertyFlags::None, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::NewProp_NewList_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::NewProp_NewList = { "NewList", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPGameCoreSystem_eventSetWeightPrefabList_Parms, NewList), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::NewProp_NewList_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::NewProp_NewList_MetaData)) };
 	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPGameCoreSystem_eventSetWeightPrefabList_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList_Statics::NewProp_NewList_Inner,
@@ -236,7 +244,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_ULGPGameCoreSystem_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_ULGPGameCoreSystem_ClearWeightPrefabList, "ClearWeightPrefabList" }, // 2189287294
 		{ &Z_Construct_UFunction_ULGPGameCoreSystem_GetWeightPrefab, "GetWeightPrefab" }, // 1869307680
-		{ &Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList, "SetWeightPrefabList" }, // 1486932823
+		{ &Z_Construct_UFunction_ULGPGameCoreSystem_SetWeightPrefabList, "SetWeightPrefabList" }, // 1265427948
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::Class_MetaDataParams[] = {
@@ -336,7 +344,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGameCoreSystem, 1840266281);
+	IMPLEMENT_CLASS(ULGPGameCoreSystem, 2474239148);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGameCoreSystem>()
 	{
 		return ULGPGameCoreSystem::StaticClass();

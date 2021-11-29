@@ -52,21 +52,29 @@ void ULGPGraphWriter::UnregisterGraphNode(ULGPNode* Node)
 	return;
 }
 
+bool ULGPGraphWriter::ProcessPathToNode(ULGPNode* Node)
+{
+	if (Node && GetGroupMemberData(Node).FlowFieldStep.Num() == 0)
+	{
+		PathProcessQueue.Add(Node);
+
+		MarkGraphComponentDirty(false);
+
+		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT("PathQuest Process"));
+
+		return true;
+	}
+
+	return false;
+}
+
 bool ULGPGraphWriter::OnThreadWorkStart()
 {
 	auto ClearData = [&]()
 	{
 		for (FLGPNodeGroupData& GroupItem : NodeGroupList)
 		{
-			for (FLGPGroupPathData& PathItem : GroupItem.GroupPath)
-			{
-				FLGPNodeGroupData* GroupPointer = PathItem.EndNode->GetGroupDataPointer();
-
-				if (GroupPointer)
-				{
-					GroupPointer->GroupPath.Remove(GroupItem.GetIdentifyNode());
-				}
-			}
+			GroupItem.ClearGroupPath();
 		}
 
 		PathProcessQueue.Empty();
@@ -75,6 +83,8 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 
 		return;
 	};
+
+	//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT("Thread Work On"));
 
 	if (RegisteredNode.Num() > 0)
 	{
@@ -86,9 +96,25 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 		}
 		else if (PathProcessQueue.Num() > 0)
 		{
-			CurrentPathProcessNode = PathProcessQueue.Pop();
+			while (PathProcessQueue.Num() > 0)
+			{
+				CurrentPathProcessNode = PathProcessQueue.Pop(false);
 
-			return true;
+				if (CurrentPathProcessNode->GetGroupMemberData().FlowFieldStep.Num() == 0)
+				{
+					break;
+				}
+				else
+				{
+					CurrentPathProcessNode = nullptr;
+				}
+			} 
+
+			PathProcessQueue.Shrink();
+
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PathQuest"));
+
+			return CurrentPathProcessNode != nullptr;
 		}
 	}
 	else
@@ -101,11 +127,45 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 
 void ULGPGraphWriter::DoThreadWork()
 {
-	if (CurrentPathProcessNode)
+	if (CurrentPathProcessNode) // Process Node Flow Field Paths
 	{
-		// Process Node Paths
+		ReturnPathData.Empty();
+
+		TSet<ULGPNode*> OpenNodes = { CurrentPathProcessNode };
+		TSet<ULGPNode*> CloseNodes;
+
+		ReturnPathData.SetNum(GetGroupData(CurrentPathProcessNode).GroupMember.Num());
+		CloseNodes.Reserve(GetGroupData(CurrentPathProcessNode).GroupMember.Num());
+
+		int32 Iteration = 0;
+
+		while (OpenNodes.Num() != 0 && !StopTaskerWork)
+		{
+			TSet<ULGPNode*> NextNodes;
+
+			for (ULGPNode* CurrentNode : OpenNodes)
+			{
+				ReturnPathData[CurrentNode->GroupMemberIndex] = Iteration;
+
+				CloseNodes.Add(CurrentNode);
+
+				for (const FLGPNodePathData& PathItem : CurrentNode->GetPathList())
+				{
+					if (!CloseNodes.Contains(PathItem.EndNode) &&
+						PathItem.EndNode->GetOwingWriter() == this &&
+						PathItem.EndNode->GroupID == CurrentPathProcessNode->GroupID)
+					{
+						NextNodes.Add(PathItem.EndNode);
+					}
+				}
+			}
+
+			OpenNodes = NextNodes;
+
+			Iteration++;
+		}
 	}
-	else if (NodeGroupList.Num() == 0)
+	else if (NodeGroupList.Num() == 0) // Generate Group Data
 	{
 		// Process Group Data
 		TArray<ULGPNode*> UnMarkNode = RegisteredNode.Array();
@@ -138,17 +198,20 @@ void ULGPGraphWriter::DoThreadWork()
 				{
 					if (A.SCCID != INDEX_NONE)
 					{
-						if (LocalGroupList[A.SCCID].GroupMember.Num() > LocalGroupList[B.SCCID].GroupMember.Num())
+						if (B.SCCID != A.SCCID)
 						{
-							LocalGroupList[A.SCCID].GroupMember.Append(LocalGroupList[B.SCCID].GroupMember);
-							LocalGroupList[B.SCCID].GroupMember.Empty();
+							if (LocalGroupList[A.SCCID].GroupMember.Num() > LocalGroupList[B.SCCID].GroupMember.Num())
+							{
+								LocalGroupList[A.SCCID].GroupMember.Append(LocalGroupList[B.SCCID].GroupMember);
+								LocalGroupList[B.SCCID].GroupMember.Empty();
 
-							return;
-						}
-						else
-						{
-							LocalGroupList[B.SCCID].GroupMember.Append(LocalGroupList[A.SCCID].GroupMember);
-							LocalGroupList[A.SCCID].GroupMember.Empty();
+								return;
+							}
+							else
+							{
+								LocalGroupList[B.SCCID].GroupMember.Append(LocalGroupList[A.SCCID].GroupMember);
+								LocalGroupList[A.SCCID].GroupMember.Empty();
+							}
 						}
 					}
 
@@ -257,14 +320,6 @@ void ULGPGraphWriter::DoThreadWork()
 				}
 			}
 		}
-
-		for (int32 Index = 0; Index < NodeGroupList.Num(); Index++)
-		{
-			for (ULGPNode* Node : NodeGroupList[Index].GroupMember)
-			{
-				Node->GroupID = Index;
-			}
-		}
 	}
 
 	return;
@@ -274,41 +329,28 @@ void ULGPGraphWriter::OnThreadWorkDone()
 {
 	if (!StopTaskerWork)
 	{
-		BuildVersion = CurrentBuildVersion;
-
-		for (FLGPNodeGroupData& GroupItem : NodeGroupList) // Loop Current Group
+		if (CurrentPathProcessNode)
 		{
-			for (ULGPNode* Node : GroupItem.GroupMember) // Loop Current Process Node From Group
+			GetGroupMemberData(CurrentPathProcessNode).FlowFieldStep = ReturnPathData;
+
+			CurrentPathProcessNode = nullptr;
+		}
+		else
+		{
+			BuildVersion = CurrentBuildVersion;
+
+			for (int32 GroupIndex = 0; GroupIndex < NodeGroupList.Num(); GroupIndex++) // Loop Current Group
 			{
-				for (const FLGPNodePathData& Path : Node->GetPathList()) // Loop All Path In Node
+				for (int32 GroupMemberIndex = 0; GroupMemberIndex < NodeGroupList[GroupIndex].GroupMember.Num(); GroupMemberIndex++) // Loop Current Process Node From Group
 				{
-					const FLGPNodePathData& OtherPath = *Path.EndNode->GetPathList().Find(Node); // Get Other Path Data
-					FLGPNodeGroupData* OtherGroup = Path.EndNode->GetGroupDataPointer(); // Get Other Group Data
+					FLGPGroupMemberData& MemberItem = NodeGroupList[GroupIndex].GroupMember[GroupMemberIndex];
 
-					if (Path.IsWalkable && Path.EndNode->IsNodeValid() && !GroupItem.GroupMember.Contains(Path.EndNode) && OtherGroup)
-					{
-						FLGPGroupPathData* PathPointer = GroupItem.GroupPath.Find(OtherGroup->GetIdentifyNode()); // Already Has Path To This Group
+					MemberItem.Member->GroupID = GroupIndex; // Set Group ID For All Member
 
-						if (PathPointer)
-						{
-							FLGPGroupPathData* OtherPathPointer = OtherGroup->GroupPath.Find(GroupItem.GetIdentifyNode()); // Get Other Path In There Group
-
-							OtherPathPointer->AddProxyPath(OtherPath);
-							PathPointer->AddProxyPath(Path);
-						}
-						else
-						{
-							FLGPGroupPathData NewGroup = FLGPGroupPathData(GroupItem.GetIdentifyNode(), OtherGroup->GetIdentifyNode());
-							FLGPGroupPathData OtherNewGroup = FLGPGroupPathData(OtherGroup->GetIdentifyNode(), GroupItem.GetIdentifyNode());
-
-							NewGroup.AddProxyPath(Path);
-							OtherNewGroup.AddProxyPath(OtherPath);
-
-							GroupItem.GroupPath.Add(NewGroup);
-							OtherGroup->GroupPath.Add(OtherNewGroup);
-						}
-					}
+					MemberItem.Member->GroupMemberIndex = GroupMemberIndex; // Set Group Member Index For All Member
 				}
+
+				NodeGroupList[GroupIndex].GenerateGroupPath();
 			}
 		}
 	}
@@ -318,7 +360,7 @@ void ULGPGraphWriter::OnThreadWorkDone()
 
 FLGPNodeGroupData* ULGPGraphWriter::GetGroupDataPointer(ULGPNode* Node)
 {
-	if (!IsGraphComponentWorking() && BuildVersion == CurrentBuildVersion && NodeGroupList.IsValidIndex(Node->GroupID))
+	if (BuildVersion == CurrentBuildVersion && NodeGroupList.IsValidIndex(Node->GroupID))
 	{
 		return &NodeGroupList[Node->GroupID];
 	}
@@ -330,9 +372,20 @@ FLGPNodeGroupData& ULGPGraphWriter::GetGroupData(ULGPNode* Node)
 {
 	checkf(Node, TEXT("Node Can't Be Null"));
 
+	checkf(BuildVersion == CurrentBuildVersion, TEXT("Thread Is Running Can't Get Data"));
+
 	checkf(NodeGroupList.IsValidIndex(Node->GroupID), TEXT("Can't Found Group"));
 
-	checkf(!IsGraphComponentWorking(), TEXT("Thread Is Running Can't Get Data"));
-
 	return NodeGroupList[Node->GroupID];
+}
+
+FLGPGroupMemberData& ULGPGraphWriter::GetGroupMemberData(ULGPNode* Node)
+{
+	checkf(Node, TEXT("Node Can't Be Null"));
+
+	checkf(BuildVersion == CurrentBuildVersion, TEXT("Thread Is Running Can't Get Data"));
+
+	checkf(NodeGroupList.IsValidIndex(Node->GroupID), TEXT("Can't Found Group"));
+
+	return NodeGroupList[Node->GroupID].GroupMember[Node->GroupMemberIndex];
 }
