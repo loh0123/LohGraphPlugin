@@ -54,7 +54,7 @@ void ULGPGraphWriter::UnregisterGraphNode(ULGPNode* Node)
 
 bool ULGPGraphWriter::ProcessPathToNode(ULGPNode* Node)
 {
-	if (Node && GetGroupMemberData(Node).FlowFieldStep.Num() == 0)
+	if (Node && Node->IsNodeValid() && GetGroupMemberData(Node).FlowFieldStep.Num() == 0)
 	{
 		PathProcessQueue.Add(Node);
 
@@ -152,6 +152,7 @@ void ULGPGraphWriter::DoThreadWork()
 				for (const FLGPNodePathData& PathItem : CurrentNode->GetPathList())
 				{
 					if (!CloseNodes.Contains(PathItem.EndNode) &&
+						PathItem.EndNode->IsNodeValid() && 
 						PathItem.EndNode->GetOwingWriter() == this &&
 						PathItem.EndNode->GroupID == CurrentPathProcessNode->GroupID)
 					{
@@ -232,7 +233,7 @@ void ULGPGraphWriter::DoThreadWork()
 			// Loop the last item on array and check is visited
 			while (UnMarkNode.Num() > 0)
 			{
-				if (MarkNode.Contains(UnMarkNode.Last()) || !UnMarkNode.Last()->IsActive())
+				if (MarkNode.Contains(UnMarkNode.Last()) || !UnMarkNode.Last()->IsNodeValid())
 				{
 					// remove visited item on the array or not active item
 					UnMarkNode.Pop(false);

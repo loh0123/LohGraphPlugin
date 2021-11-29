@@ -189,6 +189,21 @@ bool ULGPNodeCache::ClearPath()
 	return Super::ClearPath();
 }
 
+float ULGPNodeCache::GetPassWeight()
+{
+	if (IsPassWeightDirty)
+	{
+		PassWeight = 0.0f;
+
+		for (ULGPGraphNavigator* Reader : PassWeightReader)
+		{
+			PassWeight += Reader->NavigatorWeight;
+		}
+	}
+
+	return PassWeight;
+}
+
 FLGPNodeGroupData* ULGPNodeCache::GetGroupDataPointer()
 {
 	return NodeGraphWriter->GetGroupDataPointer(Cast<ULGPNode>(this));
@@ -238,6 +253,23 @@ ULGPNode::ULGPNode()
 	SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
 
 	SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
+
+	return;
+}
+
+
+void ULGPNode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	TSet<UPrimitiveComponent*> Comps;
+
+	GetOverlappingComponents(Comps);
+
+	for (UPrimitiveComponent* Item : Comps)
+	{
+		AddPassWeight(Cast<ULGPGraphNavigator>(Item));
+	}
 
 	return;
 }

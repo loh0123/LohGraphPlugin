@@ -95,11 +95,19 @@ void ULGPGameCoreSystem::Initialize(FSubsystemCollectionBase& Collection)
 
 	GraphThreadPool = FQueuedThreadPool::Allocate();
 	GraphThreadPool->Create(12, 32768, EThreadPriority::TPri_BelowNormal, TEXT("GraphCoreThreadPool"));
+
+	ProcessReaderTask.Empty();
+	ProcessWriterTask.Empty();
+
+	return;
 }
 
 void ULGPGameCoreSystem::Deinitialize()
 {
 	UE_LOG(LogGraphCore, Warning, TEXT("SubSystem Graph Offline"));
+
+	ProcessReaderTask.Empty();
+	ProcessWriterTask.Empty();
 
 	GraphThreadPool->Destroy();
 	delete GraphThreadPool;
@@ -118,6 +126,8 @@ void ULGPGameCoreSystem::RegisterGraphComponent(ULGPGraphComponentBase* Componen
 void ULGPGameCoreSystem::UnregisterGraphComponent(ULGPGraphComponentBase* Component)
 {
 	RegisteredComponents.Remove(Component);
+
+	RemoveTasker(Component);
 
 	Component->CoreSystem = nullptr;
 

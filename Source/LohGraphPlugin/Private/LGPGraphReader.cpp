@@ -273,14 +273,9 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 	if (LocalNode->IsPathGenerating())
 	{
 		FollowingNode = nullptr;
-
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Is Generating"));
 	}
 	else
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, OverlapingNode->GetReadableName());
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Finding Next Node"));
-
 		ULGPNode* NextNode = nullptr;
 
 		float NextNodeScore = -1.0f;
@@ -289,7 +284,7 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 		{
 			const int32 FlowHeat = LocalNode->GetFlowFieldStep(PathItem.EndNode);
 
-			if (FlowHeat != INDEX_NONE)
+			if (FlowHeat != INDEX_NONE && PathItem.EndNode->IsNodeValid())
 			{
 				float NodeScore = (FVector::Dist(PathItem.StartNode->GetComponentLocation(), PathItem.EndNode->GetComponentLocation()) * WeightData.DistanceToEndMultiply) + (FlowHeat * WeightData.StepMultiply) + PathItem.StartNode->GetPassWeight();
 
@@ -302,7 +297,11 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 			}
 		}
 
+		OverlapingNode->RemovePassWeight(this);
+
 		FollowingNode = NextNode;
+
+		FollowingNode->AddPassWeight(this);
 	}
 
 	return FollowingNode;

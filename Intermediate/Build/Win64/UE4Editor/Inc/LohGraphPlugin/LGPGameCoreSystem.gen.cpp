@@ -213,16 +213,6 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ProcessWriterTask_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FSetPropertyParams NewProp_ProcessWriterTask;
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_EndEventReaderTask_ElementProp;
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_EndEventReaderTask_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FSetPropertyParams NewProp_EndEventReaderTask;
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_EndEventWriterTask_ElementProp;
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_EndEventWriterTask_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FSetPropertyParams NewProp_EndEventWriterTask;
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_RegisteredComponents_ElementProp;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_RegisteredComponents_MetaData[];
@@ -272,22 +262,6 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 	};
 #endif
 	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask = { "ProcessWriterTask", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, ProcessWriterTask), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_MetaData)) };
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventReaderTask_ElementProp = { "EndEventReaderTask", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventReaderTask_MetaData[] = {
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Public/LGPGameCoreSystem.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventReaderTask = { "EndEventReaderTask", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, EndEventReaderTask), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventReaderTask_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventReaderTask_MetaData)) };
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventWriterTask_ElementProp = { "EndEventWriterTask", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventWriterTask_MetaData[] = {
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Public/LGPGameCoreSystem.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventWriterTask = { "EndEventWriterTask", nullptr, (EPropertyFlags)0x0040008000000008, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGameCoreSystem, EndEventWriterTask), METADATA_PARAMS(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventWriterTask_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventWriterTask_MetaData)) };
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents_ElementProp = { "RegisteredComponents", nullptr, (EPropertyFlags)0x0000000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphComponentBase_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents_MetaData[] = {
@@ -308,10 +282,6 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessReaderTask,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_ProcessWriterTask,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventReaderTask_ElementProp,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventReaderTask,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventWriterTask_ElementProp,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_EndEventWriterTask,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_RegisteredComponents,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGameCoreSystem_Statics::NewProp_WeightPrefabList_Inner,
@@ -344,7 +314,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGameCoreSystem() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGameCoreSystem, 2474239148);
+	IMPLEMENT_CLASS(ULGPGameCoreSystem, 3572899965);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGameCoreSystem>()
 	{
 		return ULGPGameCoreSystem::StaticClass();

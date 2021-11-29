@@ -25,6 +25,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPNode() {}
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNodeCache_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNodeCache();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphWriter_NoRegister();
+	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphNavigator_NoRegister();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNode();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FTransform();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector4();
@@ -86,9 +87,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodeGroupDat
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPNodeGroupData_Statics::NewProp_GroupMember_MetaData[] = {
 		{ "Category", "LGPNodeGroupData" },
-		{ "Comment", "//UPROPERTY(VisibleAnywhere) ULGPNode* IdentifyNode;\n" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
-		{ "ToolTip", "UPROPERTY(VisibleAnywhere) ULGPNode* IdentifyNode;" },
 	};
 #endif
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FLGPNodeGroupData_Statics::NewProp_GroupMember = { "GroupMember", nullptr, (EPropertyFlags)0x0010008000020001, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPNodeGroupData, GroupMember), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPNodeGroupData_Statics::NewProp_GroupMember_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPNodeGroupData_Statics::NewProp_GroupMember_MetaData)) };
@@ -134,7 +133,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodeGroupDat
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FLGPNodeGroupData_Hash() { return 3041571300U; }
+	uint32 Get_Z_Construct_UScriptStruct_FLGPNodeGroupData_Hash() { return 2616049662U; }
 class UScriptStruct* FLGPGroupMemberData::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;
@@ -941,10 +940,6 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NodeGraphWriter;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PassWeight_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_PassWeight;
-#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_GroupMemberIndex_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FIntPropertyParams NewProp_GroupMemberIndex;
@@ -952,6 +947,20 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_GroupID_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FIntPropertyParams NewProp_GroupID;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PassWeight_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_PassWeight;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_PassWeightReader_ElementProp;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PassWeightReader_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FSetPropertyParams NewProp_PassWeightReader;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_IsPassWeightDirty_MetaData[];
+#endif
+		static void NewProp_IsPassWeightDirty_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_IsPassWeightDirty;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -978,33 +987,54 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_NodeGraphWriter = { "NodeGraphWriter", nullptr, (EPropertyFlags)0x00200800000b001d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeCache, NodeGraphWriter), Z_Construct_UClass_ULGPGraphWriter_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_NodeGraphWriter_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_NodeGraphWriter_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight_MetaData[] = {
-		{ "Category", "LGPNodeCache" },
-		{ "ModuleRelativePath", "Public/LGPNode.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight = { "PassWeight", nullptr, (EPropertyFlags)0x0020080000030015, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeCache, PassWeight), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight_MetaData)) };
-#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupMemberIndex_MetaData[] = {
 		{ "Category", "LGPNodeCache" },
-		{ "Comment", "//UPROPERTY(VisibleAnywhere) TMap<ULGPNode*, uint16> NodeSteps;\n" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
-		{ "ToolTip", "UPROPERTY(VisibleAnywhere) TMap<ULGPNode*, uint16> NodeSteps;" },
 	};
 #endif
-	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupMemberIndex = { "GroupMemberIndex", nullptr, (EPropertyFlags)0x0020080000030001, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeCache, GroupMemberIndex), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupMemberIndex_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupMemberIndex_MetaData)) };
+	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupMemberIndex = { "GroupMemberIndex", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeCache, GroupMemberIndex), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupMemberIndex_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupMemberIndex_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupID_MetaData[] = {
 		{ "Category", "LGPNodeCache" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupID = { "GroupID", nullptr, (EPropertyFlags)0x0020080000030001, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeCache, GroupID), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupID_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupID_MetaData)) };
+	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupID = { "GroupID", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeCache, GroupID), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupID_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupID_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight_MetaData[] = {
+		{ "Category", "LGPNodeCache" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight = { "PassWeight", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeCache, PassWeight), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeightReader_ElementProp = { "PassWeightReader", nullptr, (EPropertyFlags)0x00000000000a0009, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPGraphNavigator_NoRegister, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeightReader_MetaData[] = {
+		{ "Category", "LGPNodeCache" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeightReader = { "PassWeightReader", nullptr, (EPropertyFlags)0x0020088000030009, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeCache, PassWeightReader), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeightReader_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeightReader_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_IsPassWeightDirty_MetaData[] = {
+		{ "Category", "LGPNodeCache" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	void Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_IsPassWeightDirty_SetBit(void* Obj)
+	{
+		((ULGPNodeCache*)Obj)->IsPassWeightDirty = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_IsPassWeightDirty = { "IsPassWeightDirty", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(ULGPNodeCache), &Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_IsPassWeightDirty_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_IsPassWeightDirty_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_IsPassWeightDirty_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPNodeCache_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_NodeGraphWriter,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupMemberIndex,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_GroupID,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeight,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeightReader_ElementProp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_PassWeightReader,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeCache_Statics::NewProp_IsPassWeightDirty,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ULGPNodeCache_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ULGPNodeCache>::IsAbstract,
@@ -1033,7 +1063,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNodeCache, 1321911790);
+	IMPLEMENT_CLASS(ULGPNodeCache, 661922823);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNodeCache>()
 	{
 		return ULGPNodeCache::StaticClass();
@@ -1332,7 +1362,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNode, 2043814610);
+	IMPLEMENT_CLASS(ULGPNode, 226036562);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNode>()
 	{
 		return ULGPNode::StaticClass();

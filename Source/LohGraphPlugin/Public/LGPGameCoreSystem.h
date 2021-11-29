@@ -42,9 +42,6 @@ private:
 	// Process Counter /////////////////////////
 	UPROPERTY() TSet<ULGPGraphComponentBase*> ProcessReaderTask;
 	UPROPERTY() TSet<ULGPGraphComponentBase*> ProcessWriterTask;
-
-	UPROPERTY() TSet<ULGPGraphComponentBase*> EndEventReaderTask;
-	UPROPERTY() TSet<ULGPGraphComponentBase*> EndEventWriterTask;
 	////////////////////////////////////////////
 
 public:

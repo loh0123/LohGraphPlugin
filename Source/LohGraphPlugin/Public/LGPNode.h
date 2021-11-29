@@ -11,6 +11,8 @@ class ULGPGraphWriter;
 
 class FGraphNodeProxy;
 
+class ULGPGraphNavigator;
+
 
 USTRUCT(BlueprintType)
 struct FLGPNodePathData
@@ -139,10 +141,6 @@ public:
 
 	FLGPNodeGroupData(const TArray<ULGPNode*>& Members) : GroupMember(Members) {}
 
-	//FLGPNodeGroupData(const TArray<ULGPNode*>& Members, const TArray<FLGPNodePathData>& Paths) : IdentifyNode(Members[0]), GroupMember(Members), GroupPathRaw(Paths) {}
-
-	//UPROPERTY(VisibleAnywhere) ULGPNode* IdentifyNode;
-
 	UPROPERTY(VisibleAnywhere) TArray<FLGPGroupMemberData> GroupMember;
 
 	UPROPERTY(VisibleAnywhere) TSet<FLGPGroupPathData> GroupPath;
@@ -151,11 +149,7 @@ public:
 
 	FORCEINLINE ULGPNode* GetIdentifyNode() const { return GroupMember[0].Member; }
 
-	//FORCEINLINE void ValidIdentifyNode() { IdentifyNode = GroupMember.Array()[0]; return; }
-
 	FORCEINLINE void ClearData() { GroupMember.Empty(); ClearGroupPath(); return; }
-
-	// FORCEINLINE float GetGroupWeight(ULGPGraphReader* Reader) const;
 
 	FORCEINLINE void ClearGroupPath();
 
@@ -254,7 +248,13 @@ public:
 
 
 
-	//FORCEINLINE void AddPassWeight(ULGPGraphReader* Reader);
+	FORCEINLINE void AddPassWeight(ULGPGraphNavigator* Reader) { if (!Reader) return; PassWeightReader.Add(Reader); IsPassWeightDirty = true; return; }
+
+	FORCEINLINE void RemovePassWeight(ULGPGraphNavigator* Reader) { if (!Reader) return; PassWeightReader.Remove(Reader); IsPassWeightDirty = true; return; }
+
+	FORCEINLINE float GetPassWeight();
+
+
 
 	FORCEINLINE FLGPNodeGroupData* GetGroupDataPointer(); // Warning Cant Change During Operation Or Will Cause Error
 
@@ -272,33 +272,19 @@ public:
 
 	FORCEINLINE ULGPGraphWriter* GetOwingWriter() const { return NodeGraphWriter; }
 
-	FORCEINLINE float GetPassWeight() const { return PassWeight; }
-
-	//FORCEINLINE bool GetNodeStep(ULGPNode* Node, uint16& Value) const {
-	//
-	//	const uint16* ValuePointer = NodeSteps.Find(Node);
-	//
-	//	if (ValuePointer)
-	//	{
-	//		Value = *ValuePointer;
-	//
-	//		return true;
-	//	}
-	//
-	//	return false;
-	//}
-
 protected:
 
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly) ULGPGraphWriter* NodeGraphWriter = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly) float PassWeight;
+	UPROPERTY(VisibleAnywhere) int32 GroupMemberIndex = INDEX_NONE;
 
-	//UPROPERTY(VisibleAnywhere) TMap<ULGPNode*, uint16> NodeSteps;
+	UPROPERTY(VisibleAnywhere) int32 GroupID = INDEX_NONE;
 
-	UPROPERTY(VisibleDefaultsOnly) int32 GroupMemberIndex = INDEX_NONE;
+	UPROPERTY(VisibleAnywhere) float PassWeight;
 
-	UPROPERTY(VisibleDefaultsOnly) int32 GroupID = INDEX_NONE;
+	UPROPERTY(VisibleDefaultsOnly) TSet<ULGPGraphNavigator*> PassWeightReader;
+
+	UPROPERTY(VisibleAnywhere) bool IsPassWeightDirty = false;
 
 };
 
@@ -318,6 +304,11 @@ class LOHGRAPHPLUGIN_API ULGPNode : public ULGPNodeCache
 public:
 
 	ULGPNode();
+
+protected:
+
+	// Called when the game starts and register overlapping reader
+	virtual void BeginPlay() override;
 
 // Debug Handle 
 ///////////////////////////////////////////////////////////////////////

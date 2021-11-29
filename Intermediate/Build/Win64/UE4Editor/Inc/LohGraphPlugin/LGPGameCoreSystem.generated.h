@@ -74,8 +74,6 @@ public: \
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGameCoreSystem_h_30_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__ProcessReaderTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, ProcessReaderTask); } \
 	FORCEINLINE static uint32 __PPO__ProcessWriterTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, ProcessWriterTask); } \
-	FORCEINLINE static uint32 __PPO__EndEventReaderTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, EndEventReaderTask); } \
-	FORCEINLINE static uint32 __PPO__EndEventWriterTask() { return STRUCT_OFFSET(ULGPGameCoreSystem, EndEventWriterTask); } \
 	FORCEINLINE static uint32 __PPO__RegisteredComponents() { return STRUCT_OFFSET(ULGPGameCoreSystem, RegisteredComponents); } \
 	FORCEINLINE static uint32 __PPO__WeightPrefabList() { return STRUCT_OFFSET(ULGPGameCoreSystem, WeightPrefabList); }
 
