@@ -1219,6 +1219,10 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 #endif
 		static void NewProp_IsManualMoving_SetBit(void* Obj);
 		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_IsManualMoving;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CurrentFrameDelay_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FBytePropertyParams NewProp_CurrentFrameDelay;
 		static const UE4CodeGen_Private::FStructPropertyParams NewProp_PathData_Inner;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PathData_MetaData[];
@@ -1236,6 +1240,10 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MovingSpeed_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_MovingSpeed;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_FrameDelay_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FBytePropertyParams NewProp_FrameDelay;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -1360,6 +1368,12 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		((ULGPGraphNavigator*)Obj)->IsManualMoving = 1;
 	}
 	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving = { "IsManualMoving", nullptr, (EPropertyFlags)0x0020080000000015, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(ULGPGraphNavigator), &Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_CurrentFrameDelay_MetaData[] = {
+		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_CurrentFrameDelay = { "CurrentFrameDelay", nullptr, (EPropertyFlags)0x0020080000000000, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphNavigator, CurrentFrameDelay), nullptr, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_CurrentFrameDelay_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_CurrentFrameDelay_MetaData)) };
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData_Inner = { "PathData", nullptr, (EPropertyFlags)0x0000008000020000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FLGPGroupPathData, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData_MetaData[] = {
@@ -1389,6 +1403,13 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	};
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_MovingSpeed = { "MovingSpeed", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphNavigator, MovingSpeed), METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_MovingSpeed_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_MovingSpeed_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FrameDelay_MetaData[] = {
+		{ "Category", "LGPGraphNavigator | Setting" },
+		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FrameDelay = { "FrameDelay", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphNavigator, FrameDelay), nullptr, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FrameDelay_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FrameDelay_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPGraphNavigator_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_OnPathReceive,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_OnBeginFollowingPath,
@@ -1400,11 +1421,13 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FollowIndex,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsFollowingPath,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_CurrentFrameDelay,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_NavigatorWeight,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_ReachDistance,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_MovingSpeed,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FrameDelay,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ULGPGraphNavigator_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ULGPGraphNavigator>::IsAbstract,
@@ -1433,7 +1456,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphNavigator, 292901338);
+	IMPLEMENT_CLASS(ULGPGraphNavigator, 3788966050);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphNavigator>()
 	{
 		return ULGPGraphNavigator::StaticClass();

@@ -198,6 +198,8 @@ protected:
 	UPROPERTY(BlueprintGetter = GetIsManualMoving, EditAnywhere, Category = "LGPGraphNavigator | Varaible")
 		bool IsManualMoving = false;
 
+	UPROPERTY() uint8 CurrentFrameDelay = 0;
+
 	// Thread Handle //////////////////////////////////////////////////////////////////
 
 protected:
@@ -224,4 +226,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphNavigator | Setting")
 		float MovingSpeed = 300.0f;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphNavigator | Setting")
+		uint8 FrameDelay = uint8(10);
 };

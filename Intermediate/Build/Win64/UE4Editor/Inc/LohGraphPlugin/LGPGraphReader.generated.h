@@ -223,6 +223,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__FollowIndex() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowIndex); } \
 	FORCEINLINE static uint32 __PPO__IsFollowingPath() { return STRUCT_OFFSET(ULGPGraphNavigator, IsFollowingPath); } \
 	FORCEINLINE static uint32 __PPO__IsManualMoving() { return STRUCT_OFFSET(ULGPGraphNavigator, IsManualMoving); } \
+	FORCEINLINE static uint32 __PPO__CurrentFrameDelay() { return STRUCT_OFFSET(ULGPGraphNavigator, CurrentFrameDelay); } \
 	FORCEINLINE static uint32 __PPO__PathData() { return STRUCT_OFFSET(ULGPGraphNavigator, PathData); }
 
 

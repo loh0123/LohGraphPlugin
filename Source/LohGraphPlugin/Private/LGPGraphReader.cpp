@@ -2,6 +2,7 @@
 
 
 #include "LGPGraphReader.h"
+#include "LGPGraphWriter.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet\KismetSystemLibrary.h"
 
@@ -110,7 +111,11 @@ void ULGPGraphNavigator::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (IsFollowingPath && !IsManualMoving && LocalNode)
+	if (CurrentFrameDelay > 0)
+	{
+		CurrentFrameDelay--;
+	}
+	else if (IsFollowingPath && !IsManualMoving && LocalNode)
 	{
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Ticking"));
 
@@ -126,17 +131,19 @@ void ULGPGraphNavigator::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 			
 				if (FVector::Dist(Owner->GetActorLocation(), FollowingNode->GetComponentLocation()) < ReachDistance)
 				{
-					GetNextFollowingNode(GetOverlappingNode());
+					if (GetNextFollowingNode(GetOverlappingNode()) == nullptr)
+					{
+						CurrentFrameDelay = FrameDelay;
+					}
 				}
 			}
 			else
 			{
-				GetNextFollowingNode(GetOverlappingNode());
+				if (GetNextFollowingNode(GetOverlappingNode()) == nullptr)
+				{
+					CurrentFrameDelay = FrameDelay;
+				}
 			}
-		}
-		else
-		{
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Generating"));
 		}
 	}
 
@@ -312,7 +319,13 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 	{
 		FLGPNodePathData NextNode;
 
-		float NextNodeScore = -1.0f;
+		const int32 OverlapStep = LocalNode->GetFlowFieldStep(OverlapingNode);
+
+		float OverlapWeight = 0.0f;
+
+		if (OverlapStep != INDEX_NONE) OverlapWeight = (OverlapStep * WeightData.StepMultiply) + OverlapingNode->GetPassWeight();
+
+		float NextNodeScore = OverlapStep != INDEX_NONE ? OverlapWeight : MAX_FLT;
 
 		for (const FLGPNodePathData& PathItem : OverlapingNode->GetPathList())
 		{
@@ -320,9 +333,9 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 
 			if (FlowHeat != INDEX_NONE && PathItem.EndNode->IsNodeValid())
 			{
-				float NodeScore = (FVector::Dist(PathItem.StartNode->GetComponentLocation(), PathItem.EndNode->GetComponentLocation()) * WeightData.DistanceToEndMultiply) + (FlowHeat * WeightData.StepMultiply) + PathItem.StartNode->GetPassWeight();
+				float NodeScore = (FlowHeat * WeightData.StepMultiply) + OverlapingNode->GetPassWeight();
 
-				if (NodeScore < NextNodeScore || NextNodeScore < 0.0f)
+				if (NodeScore < NextNodeScore)
 				{
 					NextNode = PathItem;
 
@@ -331,20 +344,27 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 			}
 		}
 
-		OverlapingNode->RemovePassWeight(this);
-
-		FollowingNode = NextNode.EndNode;
-
-		FollowingNode->AddPassWeight(this);
-
-		if (NextNode.bIsTrigger)
+		if (NextNode.EndNode)
 		{
-			NextNode.EndNode->GetOwingWriter()->OnAlertPathUsed.Broadcast(NextNode, this);
+			OverlapingNode->RemovePassWeight(this);
+
+			FollowingNode = NextNode.EndNode;
+
+			FollowingNode->AddPassWeight(this);
+
+			if (NextNode.bIsTrigger)
+			{
+				NextNode.EndNode->GetOwingWriter()->OnAlertPathUsed.Broadcast(NextNode, this);
+			}
+
+			if (NextNode.EndNode->bIsTrigger)
+			{
+				NextNode.EndNode->GetOwingWriter()->OnAlertNodeUsed.Broadcast(NextNode, this);
+			}
 		}
-
-		if (NextNode.EndNode->bIsTrigger)
+		else
 		{
-			NextNode.EndNode->GetOwingWriter()->OnAlertNodeUsed.Broadcast(NextNode, this);
+			FollowingNode = nullptr;
 		}
 	}
 
