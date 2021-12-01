@@ -24,21 +24,21 @@ struct FLGPWeightPrefab;
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPAStarHelper>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_104_DELEGATE \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_105_DELEGATE \
 static inline void FOnEndFollowingPathSignature_DelegateWrapper(const FMulticastScriptDelegate& OnEndFollowingPathSignature) \
 { \
 	OnEndFollowingPathSignature.ProcessMulticastDelegate<UObject>(NULL); \
 }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_DELEGATE \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_104_DELEGATE \
 static inline void FOnBeginFollowingPathSignature_DelegateWrapper(const FMulticastScriptDelegate& OnBeginFollowingPathSignature) \
 { \
 	OnBeginFollowingPathSignature.ProcessMulticastDelegate<UObject>(NULL); \
 }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_102_DELEGATE \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_DELEGATE \
 struct LGPGraphNavigator_eventOnPathReceiveSignature_Parms \
 { \
 	TArray<FLGPGroupPathData> Path; \
@@ -143,6 +143,8 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPGraphReader>();
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_SPARSE_DATA
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execContinualFollowingNode); \
+	DECLARE_FUNCTION(execStopFollowingNode); \
 	DECLARE_FUNCTION(execNextFollowingNode); \
 	DECLARE_FUNCTION(execGetIsManualMoving); \
 	DECLARE_FUNCTION(execGetIsFollowingPath); \
@@ -157,6 +159,8 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPGraphReader>();
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execContinualFollowingNode); \
+	DECLARE_FUNCTION(execStopFollowingNode); \
 	DECLARE_FUNCTION(execNextFollowingNode); \
 	DECLARE_FUNCTION(execGetIsManualMoving); \
 	DECLARE_FUNCTION(execGetIsFollowingPath); \

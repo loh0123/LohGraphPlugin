@@ -42,6 +42,9 @@ class LOHGRAPHPLUGIN_API ULGPGraphWriter : public ULGPGraphComponentBase
 {
 	GENERATED_BODY()
 
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAlertPathUsedSignature, const FLGPNodePathData&, Path, ULGPGraphNavigator*, Navigator);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAlertNodeUsedSignature, const FLGPNodePathData&, Path, ULGPGraphNavigator*, Navigator);
+
 	friend class ULGPNodeCache;
 
 protected:
@@ -53,6 +56,12 @@ protected:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 public:
+
+	UPROPERTY(BlueprintAssignable, Category = "LGPGraphWriter | Event")
+		FOnAlertPathUsedSignature OnAlertPathUsed;
+
+	UPROPERTY(BlueprintAssignable, Category = "LGPGraphWriter | Event")
+		FOnAlertNodeUsedSignature OnAlertNodeUsed;
 
 	// Node Registration /////////////////////////////////////////////////////////
 

@@ -552,6 +552,21 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_ULGPGraphReader(Z_Construct_UClass_ULGPGraphReader, &ULGPGraphReader::StaticClass, TEXT("/Script/LohGraphPlugin"), TEXT("ULGPGraphReader"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ULGPGraphReader);
+	DEFINE_FUNCTION(ULGPGraphNavigator::execContinualFollowingNode)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->ContinualFollowingNode();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(ULGPGraphNavigator::execStopFollowingNode)
+	{
+		P_GET_UBOOL(Z_Param_ClearData);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->StopFollowingNode(Z_Param_ClearData);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(ULGPGraphNavigator::execNextFollowingNode)
 	{
 		P_FINISH;
@@ -628,6 +643,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	{
 		UClass* Class = ULGPGraphNavigator::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "ContinualFollowingNode", &ULGPGraphNavigator::execContinualFollowingNode },
 			{ "GetEndNode", &ULGPGraphNavigator::execGetEndNode },
 			{ "GetFollowIndex", &ULGPGraphNavigator::execGetFollowIndex },
 			{ "GetFollowingNode", &ULGPGraphNavigator::execGetFollowingNode },
@@ -638,8 +654,47 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 			{ "GoToLocation", &ULGPGraphNavigator::execGoToLocation },
 			{ "GoToNode", &ULGPGraphNavigator::execGoToNode },
 			{ "NextFollowingNode", &ULGPGraphNavigator::execNextFollowingNode },
+			{ "StopFollowingNode", &ULGPGraphNavigator::execStopFollowingNode },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics
+	{
+		struct LGPGraphNavigator_eventContinualFollowingNode_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((LGPGraphNavigator_eventContinualFollowingNode_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(LGPGraphNavigator_eventContinualFollowingNode_Parms), &Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LGPGraphNavigator" },
+		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPGraphNavigator, nullptr, "ContinualFollowingNode", nullptr, nullptr, sizeof(LGPGraphNavigator_eventContinualFollowingNode_Parms), Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_ULGPGraphNavigator_GetEndNode_Statics
 	{
@@ -1055,6 +1110,62 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics
+	{
+		struct LGPGraphNavigator_eventStopFollowingNode_Parms
+		{
+			bool ClearData;
+			bool ReturnValue;
+		};
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ClearData_MetaData[];
+#endif
+		static void NewProp_ClearData_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_ClearData;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ClearData_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	void Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ClearData_SetBit(void* Obj)
+	{
+		((LGPGraphNavigator_eventStopFollowingNode_Parms*)Obj)->ClearData = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ClearData = { "ClearData", nullptr, (EPropertyFlags)0x0010000000000082, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(LGPGraphNavigator_eventStopFollowingNode_Parms), &Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ClearData_SetBit, METADATA_PARAMS(Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ClearData_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ClearData_MetaData)) };
+	void Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((LGPGraphNavigator_eventStopFollowingNode_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(LGPGraphNavigator_eventStopFollowingNode_Parms), &Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ClearData,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LGPGraphNavigator" },
+		{ "CPP_Default_ClearData", "false" },
+		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPGraphNavigator, nullptr, "StopFollowingNode", nullptr, nullptr, sizeof(LGPGraphNavigator_eventStopFollowingNode_Parms), Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_ULGPGraphNavigator_NoRegister()
 	{
 		return ULGPGraphNavigator::StaticClass();
@@ -1134,6 +1245,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		(UObject* (*)())Z_Construct_UPackage__Script_LohGraphPlugin,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_ULGPGraphNavigator_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode, "ContinualFollowingNode" }, // 986880914
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetEndNode, "GetEndNode" }, // 22764298
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetFollowIndex, "GetFollowIndex" }, // 1287832528
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingNode, "GetFollowingNode" }, // 947247242
@@ -1147,6 +1259,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		{ &Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnBeginFollowingPathSignature__DelegateSignature, "OnBeginFollowingPathSignature__DelegateSignature" }, // 760507647
 		{ &Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnEndFollowingPathSignature__DelegateSignature, "OnEndFollowingPathSignature__DelegateSignature" }, // 1322497208
 		{ &Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnPathReceiveSignature__DelegateSignature, "OnPathReceiveSignature__DelegateSignature" }, // 1450988989
+		{ &Z_Construct_UFunction_ULGPGraphNavigator_StopFollowingNode, "StopFollowingNode" }, // 2527643241
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::Class_MetaDataParams[] = {
@@ -1320,7 +1433,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphNavigator, 3809104112);
+	IMPLEMENT_CLASS(ULGPGraphNavigator, 292901338);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphNavigator>()
 	{
 		return ULGPGraphNavigator::StaticClass();

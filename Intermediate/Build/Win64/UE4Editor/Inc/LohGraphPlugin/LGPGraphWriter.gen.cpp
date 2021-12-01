@@ -13,14 +13,122 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeLGPGraphWriter() {}
 // Cross Module References
+	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature();
+	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphWriter();
+	LOHGRAPHPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FLGPNodePathData();
+	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphNavigator_NoRegister();
+	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature();
 	LOHGRAPHPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FLGSNodeGroupProcess();
 	UPackage* Z_Construct_UPackage__Script_LohGraphPlugin();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphWriter_NoRegister();
-	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphWriter();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPGraphComponentBase();
 	LOHGRAPHPLUGIN_API UClass* Z_Construct_UClass_ULGPNode_NoRegister();
 	LOHGRAPHPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FLGPNodeGroupData();
 // End Cross Module References
+	struct Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics
+	{
+		struct LGPGraphWriter_eventOnAlertNodeUsedSignature_Parms
+		{
+			FLGPNodePathData Path;
+			ULGPGraphNavigator* Navigator;
+		};
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Path_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_Path;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Navigator_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_Navigator;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Path_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Path = { "Path", nullptr, (EPropertyFlags)0x0010008008000182, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPGraphWriter_eventOnAlertNodeUsedSignature_Parms, Path), Z_Construct_UScriptStruct_FLGPNodePathData, METADATA_PARAMS(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Path_MetaData, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Path_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Navigator_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Navigator = { "Navigator", nullptr, (EPropertyFlags)0x0010000000080080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPGraphWriter_eventOnAlertNodeUsedSignature_Parms, Navigator), Z_Construct_UClass_ULGPGraphNavigator_NoRegister, METADATA_PARAMS(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Navigator_MetaData, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Navigator_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Path,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::NewProp_Navigator,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPGraphWriter, nullptr, "OnAlertNodeUsedSignature__DelegateSignature", nullptr, nullptr, sizeof(LGPGraphWriter_eventOnAlertNodeUsedSignature_Parms), Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00530000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics
+	{
+		struct LGPGraphWriter_eventOnAlertPathUsedSignature_Parms
+		{
+			FLGPNodePathData Path;
+			ULGPGraphNavigator* Navigator;
+		};
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Path_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_Path;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Navigator_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_Navigator;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Path_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Path = { "Path", nullptr, (EPropertyFlags)0x0010008008000182, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPGraphWriter_eventOnAlertPathUsedSignature_Parms, Path), Z_Construct_UScriptStruct_FLGPNodePathData, METADATA_PARAMS(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Path_MetaData, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Path_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Navigator_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Navigator = { "Navigator", nullptr, (EPropertyFlags)0x0010000000080080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPGraphWriter_eventOnAlertPathUsedSignature_Parms, Navigator), Z_Construct_UClass_ULGPGraphNavigator_NoRegister, METADATA_PARAMS(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Navigator_MetaData, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Navigator_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Path,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::NewProp_Navigator,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPGraphWriter, nullptr, "OnAlertPathUsedSignature__DelegateSignature", nullptr, nullptr, sizeof(LGPGraphWriter_eventOnAlertPathUsedSignature_Parms), Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00530000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 class UScriptStruct* FLGSNodeGroupProcess::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;
@@ -136,9 +244,20 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 	struct Z_Construct_UClass_ULGPGraphWriter_Statics
 	{
 		static UObject* (*const DependentSingletons[])();
+#if WITH_EDITOR
+		static const FClassFunctionLinkInfo FuncInfo[];
+#endif //WITH_EDITOR
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_OnAlertPathUsed_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnAlertPathUsed;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_OnAlertNodeUsed_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnAlertNodeUsed;
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_RegisteredNode_ElementProp;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_RegisteredNode_MetaData[];
@@ -175,6 +294,12 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		(UObject* (*)())Z_Construct_UClass_ULGPGraphComponentBase,
 		(UObject* (*)())Z_Construct_UPackage__Script_LohGraphPlugin,
 	};
+#if WITH_EDITOR
+	const FClassFunctionLinkInfo Z_Construct_UClass_ULGPGraphWriter_Statics::FuncInfo[] = {
+		{ &Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature, "OnAlertNodeUsedSignature__DelegateSignature" }, // 3260732032
+		{ &Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature, "OnAlertPathUsedSignature__DelegateSignature" }, // 3356365756
+	};
+#endif //WITH_EDITOR
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
@@ -185,6 +310,20 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		{ "ToolTip", "Graph Writer\n\n- Register / Unregister Graph Node\n- Store / Create Group List\n- Calculate Path Map For Nodes" },
 	};
 #endif
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertPathUsed_MetaData[] = {
+		{ "Category", "LGPGraphWriter | Event" },
+		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertPathUsed = { "OnAlertPathUsed", nullptr, (EPropertyFlags)0x0010000010080000, UE4CodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphWriter, OnAlertPathUsed), Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertPathUsed_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertPathUsed_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertNodeUsed_MetaData[] = {
+		{ "Category", "LGPGraphWriter | Event" },
+		{ "ModuleRelativePath", "Public/LGPGraphWriter.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertNodeUsed = { "OnAlertNodeUsed", nullptr, (EPropertyFlags)0x0010000010080000, UE4CodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphWriter, OnAlertNodeUsed), Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertNodeUsed_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertNodeUsed_MetaData)) };
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_ElementProp = { "RegisteredNode", nullptr, (EPropertyFlags)0x00000000000a0009, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ULGPNode_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_MetaData[] = {
@@ -241,6 +380,8 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 #endif
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_NodeGroupList = { "NodeGroupList", nullptr, (EPropertyFlags)0x0020088000020001, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPGraphWriter, NodeGroupList), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_NodeGroupList_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_NodeGroupList_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPGraphWriter_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertPathUsed,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_OnAlertNodeUsed,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_RegisteredNode,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphWriter_Statics::NewProp_BuildVersion,
@@ -260,11 +401,11 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		"Engine",
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
-		nullptr,
+		IF_WITH_EDITOR(FuncInfo, nullptr),
 		Z_Construct_UClass_ULGPGraphWriter_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
-		0,
+		IF_WITH_EDITOR(UE_ARRAY_COUNT(FuncInfo), 0),
 		UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphWriter_Statics::PropPointers),
 		0,
 		0x00B000A4u,
@@ -279,7 +420,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphWriter, 811793337);
+	IMPLEMENT_CLASS(ULGPGraphWriter, 47939922);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphWriter>()
 	{
 		return ULGPGraphWriter::StaticClass();

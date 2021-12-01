@@ -14,6 +14,8 @@ void EmptyLinkFunctionForGeneratedCodeLohGraphPlugin_init() {}
 	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnPathReceiveSignature__DelegateSignature();
 	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnBeginFollowingPathSignature__DelegateSignature();
 	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnEndFollowingPathSignature__DelegateSignature();
+	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature();
+	LOHGRAPHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature();
 	UPackage* Z_Construct_UPackage__Script_LohGraphPlugin()
 	{
 		static UPackage* ReturnPackage = nullptr;
@@ -23,14 +25,16 @@ void EmptyLinkFunctionForGeneratedCodeLohGraphPlugin_init() {}
 				(UObject* (*)())Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnPathReceiveSignature__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnBeginFollowingPathSignature__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_ULGPGraphNavigator_OnEndFollowingPathSignature__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertPathUsedSignature__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_ULGPGraphWriter_OnAlertNodeUsedSignature__DelegateSignature,
 			};
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/LohGraphPlugin",
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x2026944B,
-				0x46C9CAE0,
+				0xFADC0D61,
+				0x9DD68B1C,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

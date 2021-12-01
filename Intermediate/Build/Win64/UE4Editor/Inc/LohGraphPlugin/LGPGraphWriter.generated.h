@@ -8,6 +8,8 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FLGPNodePathData;
+class ULGPGraphNavigator;
 #ifdef LOHGRAPHPLUGIN_LGPGraphWriter_generated_h
 #error "LGPGraphWriter.generated.h already included, missing '#pragma once' in LGPGraphWriter.h"
 #endif
@@ -19,6 +21,36 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGSNodeGroupProcess>();
+
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_DELEGATE \
+struct LGPGraphWriter_eventOnAlertNodeUsedSignature_Parms \
+{ \
+	FLGPNodePathData Path; \
+	ULGPGraphNavigator* Navigator; \
+}; \
+static inline void FOnAlertNodeUsedSignature_DelegateWrapper(const FMulticastScriptDelegate& OnAlertNodeUsedSignature, FLGPNodePathData const& Path, ULGPGraphNavigator* Navigator) \
+{ \
+	LGPGraphWriter_eventOnAlertNodeUsedSignature_Parms Parms; \
+	Parms.Path=Path; \
+	Parms.Navigator=Navigator; \
+	OnAlertNodeUsedSignature.ProcessMulticastDelegate<UObject>(&Parms); \
+}
+
+
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_45_DELEGATE \
+struct LGPGraphWriter_eventOnAlertPathUsedSignature_Parms \
+{ \
+	FLGPNodePathData Path; \
+	ULGPGraphNavigator* Navigator; \
+}; \
+static inline void FOnAlertPathUsedSignature_DelegateWrapper(const FMulticastScriptDelegate& OnAlertPathUsedSignature, FLGPNodePathData const& Path, ULGPGraphNavigator* Navigator) \
+{ \
+	LGPGraphWriter_eventOnAlertPathUsedSignature_Parms Parms; \
+	Parms.Path=Path; \
+	Parms.Navigator=Navigator; \
+	OnAlertPathUsedSignature.ProcessMulticastDelegate<UObject>(&Parms); \
+}
+
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_43_SPARSE_DATA
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_43_RPC_WRAPPERS

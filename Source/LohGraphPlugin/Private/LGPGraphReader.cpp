@@ -182,6 +182,40 @@ bool ULGPGraphNavigator::NextFollowingNode()
 	return false;
 }
 
+bool ULGPGraphNavigator::StopFollowingNode(const bool ClearData)
+{
+	if (IsFollowingPath)
+	{
+		IsFollowingPath = false;
+
+		if (ClearData)
+		{
+			FollowingNode = nullptr;
+			LocalNode = nullptr;
+			StartNode = nullptr;
+			EndNode = nullptr;
+
+			PathData.Empty();
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+bool ULGPGraphNavigator::ContinualFollowingNode()
+{
+	if (!IsGraphComponentWorking() && LocalNode)
+	{
+		IsFollowingPath = true;
+
+		return true;
+	}
+
+	return false;
+}
+
 void ULGPGraphNavigator::BeginPathFollowing()
 {
 	IsFollowingPath = true;
@@ -276,7 +310,7 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 	}
 	else
 	{
-		ULGPNode* NextNode = nullptr;
+		FLGPNodePathData NextNode;
 
 		float NextNodeScore = -1.0f;
 
@@ -290,7 +324,7 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 
 				if (NodeScore < NextNodeScore || NextNodeScore < 0.0f)
 				{
-					NextNode = PathItem.EndNode;
+					NextNode = PathItem;
 
 					NextNodeScore = NodeScore;
 				}
@@ -299,9 +333,19 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 
 		OverlapingNode->RemovePassWeight(this);
 
-		FollowingNode = NextNode;
+		FollowingNode = NextNode.EndNode;
 
 		FollowingNode->AddPassWeight(this);
+
+		if (NextNode.bIsTrigger)
+		{
+			NextNode.EndNode->GetOwingWriter()->OnAlertPathUsed.Broadcast(NextNode, this);
+		}
+
+		if (NextNode.EndNode->bIsTrigger)
+		{
+			NextNode.EndNode->GetOwingWriter()->OnAlertNodeUsed.Broadcast(NextNode, this);
+		}
 	}
 
 	return FollowingNode;

@@ -99,6 +99,7 @@ class LOHGRAPHPLUGIN_API ULGPGraphNavigator : public ULGPGraphReader
 {
 	GENERATED_BODY()
 
+
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPathReceiveSignature, const TArray<FLGPGroupPathData>&, Path);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBeginFollowingPathSignature);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndFollowingPathSignature);
@@ -149,11 +150,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
 		FORCEINLINE bool NextFollowingNode();
 
-	//UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
-	//	FORCEINLINE void StopFollowingNode(const bool ClearData);
-	//
-	//UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
-	//	FORCEINLINE void ContinualFollowingNode();
+	UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
+		FORCEINLINE bool StopFollowingNode(const bool ClearData = false);
+	
+	UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
+		FORCEINLINE bool ContinualFollowingNode();
 
 private:
 
