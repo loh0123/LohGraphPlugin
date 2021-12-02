@@ -465,6 +465,6 @@ void ULGPGraphNavigator::OnThreadWorkDone()
 			BeginPathFollowing();
 		}
 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Reader Threae Exit Safe"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Reader Threae Exit Safe"));
 	}
 }

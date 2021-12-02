@@ -246,6 +246,8 @@ public:
 
 	virtual FORCEINLINE bool ClearPath() override;
 
+	virtual void SetActive(bool bNewActive, bool bReset = false) override;
+
 
 
 	FORCEINLINE void AddPassWeight(ULGPGraphNavigator* Reader) { if (!Reader) return; PassWeightReader.Add(Reader); IsPassWeightDirty = true; return; }
@@ -350,6 +352,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "LGSNodeBase | Collision")
 		void ClearCollisionVertex();
 
+protected:
+
+	UPROPERTY(VisibleAnywhere) bool bIsDebug;
+
 private:
 
 	FORCEINLINE void CreateCollisionData();
@@ -375,7 +381,7 @@ public:
 		: FPrimitiveSceneProxy(InComponent)
 		, CollisionInfo(InComponent->NodeCollision)
 		, WorldPosition(InComponent->GetComponentTransform())
-		, IsVisible(true)
+		, IsVisible(InComponent->bIsDebug)
 	{
 		bWillEverBeLit = false;
 	}

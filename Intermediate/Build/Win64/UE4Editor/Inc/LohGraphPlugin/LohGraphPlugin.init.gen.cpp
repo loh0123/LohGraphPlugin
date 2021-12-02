@@ -33,7 +33,7 @@ void EmptyLinkFunctionForGeneratedCodeLohGraphPlugin_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x4C2AE38D,
+				0x4C91229D,
 				0x9DD68B1C,
 				METADATA_PARAMS(nullptr, 0)
 			};
