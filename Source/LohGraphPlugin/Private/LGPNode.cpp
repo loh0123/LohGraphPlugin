@@ -189,6 +189,15 @@ bool ULGPNodeCache::ClearPath()
 	return Super::ClearPath();
 }
 
+void ULGPNodeCache::SetActive(bool bNewActive, bool bReset)
+{
+	if (NodeGraphWriter) NodeGraphWriter->MarkGraphComponentDirty(); 
+
+	Super::SetActive(bNewActive, bReset); 
+
+	return;
+}
+
 float ULGPNodeCache::GetPassWeight()
 {
 	if (IsPassWeightDirty)
