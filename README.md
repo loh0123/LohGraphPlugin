@@ -3,6 +3,9 @@ A Plugin For Graph System Also Support High Performance Navigation
 
 * Warning : if you want to package with this plugin, you project must has c++ in it
 
+# Problem
+- Path Add / Remove will not tell navigator
+
 # GameCoreSystem
 This launch automatic with the game so any blueprint or code can access it without it return null
 - Handle thread pool and thread deployment
