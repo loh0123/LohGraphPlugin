@@ -33,8 +33,8 @@ void EmptyLinkFunctionForGeneratedCodeLohGraphPlugin_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x50562392,
-				0x9DD68B1C,
+				0xE8D98F55,
+				0xD94D6242,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

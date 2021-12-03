@@ -122,21 +122,17 @@ void ULGPGraphNavigator::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	{
 		CurrentFrameDelay--;
 	}
-	else if (IsFollowingPath && !IsManualMoving && LocalNode)
+	else if (IsFollowingPath && LocalNode)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Ticking"));
-
 		if (!LocalNode->IsPathGenerating())
 		{
 			AActor* Owner = GetOwner();
 
 			if (FollowingNode)
 			{
-				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Following"));
-
-				Owner->SetActorLocation(FMath::VInterpConstantTo(Owner->GetActorLocation(), FollowingNode->GetComponentLocation(), DeltaTime, MovingSpeed));
+				if (!IsManualMoving) Owner->SetActorLocation(FMath::VInterpConstantTo(Owner->GetActorLocation(), GetFollowingLocation(), DeltaTime, MovingSpeed));
 			
-				if (FVector::Dist(Owner->GetActorLocation(), FollowingNode->GetComponentLocation()) < ReachDistance)
+				if (FVector::Dist(Owner->GetActorLocation(), GetFollowingLocation()) < ReachDistance)
 				{
 					if (GetNextFollowingNode(GetOverlappingNode()) == nullptr)
 					{
@@ -184,6 +180,15 @@ bool ULGPGraphNavigator::GoToNode(ULGPNode* Node)
 bool ULGPGraphNavigator::GoToLocation(const FVector Location)
 {
 	return GoToNode(GetOverlappingNodeByLocation(Location));
+}
+
+bool ULGPGraphNavigator::GoToActor(AActor* Node)
+{
+	if (!Node) return false;
+
+	FollowingTarget = Node;
+
+	return GoToLocation(Node->GetActorLocation());
 }
 
 bool ULGPGraphNavigator::NextFollowingNode()

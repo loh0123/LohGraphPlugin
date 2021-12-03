@@ -12,6 +12,7 @@ struct FLGPGroupPathData;
 struct FVector;
 class ULGPNode;
 struct FLGPWeightPrefab;
+class AActor;
 #ifdef LOHGRAPHPLUGIN_LGPGraphReader_generated_h
 #error "LGPGraphReader.generated.h already included, missing '#pragma once' in LGPGraphReader.h"
 #endif
@@ -153,6 +154,9 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPGraphReader>();
 	DECLARE_FUNCTION(execGetStartNode); \
 	DECLARE_FUNCTION(execGetLocalNode); \
 	DECLARE_FUNCTION(execGetFollowingNode); \
+	DECLARE_FUNCTION(execGetFollowingTarget); \
+	DECLARE_FUNCTION(execGetFollowingLocation); \
+	DECLARE_FUNCTION(execGoToActor); \
 	DECLARE_FUNCTION(execGoToLocation); \
 	DECLARE_FUNCTION(execGoToNode);
 
@@ -169,6 +173,9 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPGraphReader>();
 	DECLARE_FUNCTION(execGetStartNode); \
 	DECLARE_FUNCTION(execGetLocalNode); \
 	DECLARE_FUNCTION(execGetFollowingNode); \
+	DECLARE_FUNCTION(execGetFollowingTarget); \
+	DECLARE_FUNCTION(execGetFollowingLocation); \
+	DECLARE_FUNCTION(execGoToActor); \
 	DECLARE_FUNCTION(execGoToLocation); \
 	DECLARE_FUNCTION(execGoToNode);
 
@@ -216,6 +223,7 @@ public: \
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__FollowingTarget() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowingTarget); } \
 	FORCEINLINE static uint32 __PPO__FollowingNode() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowingNode); } \
 	FORCEINLINE static uint32 __PPO__LocalNode() { return STRUCT_OFFSET(ULGPGraphNavigator, LocalNode); } \
 	FORCEINLINE static uint32 __PPO__StartNode() { return STRUCT_OFFSET(ULGPGraphNavigator, StartNode); } \

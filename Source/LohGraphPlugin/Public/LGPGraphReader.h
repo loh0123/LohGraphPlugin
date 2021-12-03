@@ -123,9 +123,31 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
 		FORCEINLINE bool GoToLocation(const FVector Location);
 
+	UFUNCTION(BlueprintCallable, Category = "LGPGraphNavigator")
+		FORCEINLINE bool GoToActor(AActor* Node);
+
 public:
 
 // Read Function /////////////////////////////////////////////////////////////
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE FVector GetFollowingLocation() 
+		{ 
+			if (FollowingNode)
+			{
+				if (FollowingNode == EndNode && FollowingTarget)
+				{
+					return FollowingTarget->GetActorLocation();
+				}
+
+				return FollowingNode->GetComponentLocation();
+			}
+
+			return FVector(-1.0f);
+		}
+
+	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
+		FORCEINLINE AActor* GetFollowingTarget() { return FollowingTarget; }
 
 	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
 		FORCEINLINE ULGPNode* GetFollowingNode() { return FollowingNode; }
@@ -179,6 +201,9 @@ public:
 		FOnEndFollowingPathSignature OnEndFollowingPath;
 
 protected:
+
+	UPROPERTY(BlueprintGetter = GetFollowingTarget, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
+		AActor* FollowingTarget = nullptr;
 
 	UPROPERTY(BlueprintGetter = GetFollowingNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		ULGPNode* FollowingNode = nullptr;

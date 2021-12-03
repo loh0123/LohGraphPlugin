@@ -4,6 +4,7 @@
 		"Module.LohGraphPlugin.cpp.obj": [
 			"LGPGameCoreSystem.cpp.obj",
 			"LGPGraphComponentBase.cpp.obj",
+			"LGPGraphLibrary.cpp.obj",
 			"LGPGraphReader.cpp.obj",
 			"LGPGraphWriter.cpp.obj",
 			"LGPNode.cpp.obj",
@@ -12,6 +13,7 @@
 		"Module.LohGraphPlugin.gen.cpp.obj": [
 			"LGPGameCoreSystem.gen.cpp.obj",
 			"LGPGraphComponentBase.gen.cpp.obj",
+			"LGPGraphLibrary.gen.cpp.obj",
 			"LGPGraphReader.gen.cpp.obj",
 			"LGPGraphWriter.gen.cpp.obj",
 			"LGPNode.gen.cpp.obj",
