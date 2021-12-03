@@ -297,7 +297,7 @@ FPrimitiveSceneProxy* ULGPNode::CreateSceneProxy()
 
 FBoxSphereBounds ULGPNode::CalcBounds(const FTransform& LocalToWorld) const
 {
-	return NodeCollision != nullptr ? NodeCollision->AggGeom.CalcAABB(LocalToWorld) : FBoxSphereBounds(100.0f);
+	return NodeCollision != nullptr ? NodeCollision->AggGeom.CalcAABB(LocalToWorld) : FBoxSphereBounds(100.0f).TransformBy(LocalToWorld);
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -434,6 +434,7 @@ void ULGPNode::UpdateCollisionData()
 	NodeCollision->CreatePhysicsMeshes();
 	RecreatePhysicsState(); 
 
+	Bounds = CalcBounds(GetComponentTransform());
 	UpdateBounds();
 
 	return;
