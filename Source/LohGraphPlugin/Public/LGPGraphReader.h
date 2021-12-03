@@ -228,6 +228,8 @@ protected:
 
 	UPROPERTY() uint8 CurrentFrameDelay = 0;
 
+	UPROPERTY() uint8 CurrentTargetDelay = 0;
+
 	// Thread Handle //////////////////////////////////////////////////////////////////
 
 protected:

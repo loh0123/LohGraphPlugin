@@ -124,6 +124,11 @@ void ULGPGraphNavigator::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	}
 	else if (IsFollowingPath && LocalNode)
 	{
+		if (FollowingTarget && CurrentTargetDelay-- == 0 && GetOverlappingNodeByLocation(FollowingTarget->GetActorLocation()) != EndNode)
+		{
+			GoToActor(FollowingTarget);
+		}
+
 		if (!LocalNode->IsPathGenerating())
 		{
 			AActor* Owner = GetOwner();
