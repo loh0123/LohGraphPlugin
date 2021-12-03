@@ -357,7 +357,7 @@ public:
 
 protected:
 
-	UPROPERTY(VisibleAnywhere) bool bIsDebug;
+	UPROPERTY(EditAnywhere) bool bIsDebug;
 
 private:
 

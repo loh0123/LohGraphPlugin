@@ -9,6 +9,9 @@
 #include "LGPGraphReader.h"
 
 
+DECLARE_STATS_GROUP(TEXT("LGPGraph Performance Tracer"), STATGROUP_LGPGraphCycle, STATCAT_Advanced);
+
+
 // Sets default values for this component's properties
 ULGPGraphComponentBase::ULGPGraphComponentBase()
 {

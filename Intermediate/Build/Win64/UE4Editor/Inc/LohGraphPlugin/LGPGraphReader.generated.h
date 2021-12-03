@@ -17,28 +17,28 @@ struct FLGPWeightPrefab;
 #endif
 #define LOHGRAPHPLUGIN_LGPGraphReader_generated_h
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_14_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_17_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FLGPAStarHelper_Statics; \
 	LOHGRAPHPLUGIN_API static class UScriptStruct* StaticStruct();
 
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPAStarHelper>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_105_DELEGATE \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_108_DELEGATE \
 static inline void FOnEndFollowingPathSignature_DelegateWrapper(const FMulticastScriptDelegate& OnEndFollowingPathSignature) \
 { \
 	OnEndFollowingPathSignature.ProcessMulticastDelegate<UObject>(NULL); \
 }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_104_DELEGATE \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_107_DELEGATE \
 static inline void FOnBeginFollowingPathSignature_DelegateWrapper(const FMulticastScriptDelegate& OnBeginFollowingPathSignature) \
 { \
 	OnBeginFollowingPathSignature.ProcessMulticastDelegate<UObject>(NULL); \
 }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_DELEGATE \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_106_DELEGATE \
 struct LGPGraphNavigator_eventOnPathReceiveSignature_Parms \
 { \
 	TArray<FLGPGroupPathData> Path; \
@@ -51,8 +51,8 @@ static inline void FOnPathReceiveSignature_DelegateWrapper(const FMulticastScrip
 }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_RPC_WRAPPERS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_SPARSE_DATA
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execGetOverlappingNodeByLocation); \
 	DECLARE_FUNCTION(execGetOverlappingNode); \
@@ -60,7 +60,7 @@ static inline void FOnPathReceiveSignature_DelegateWrapper(const FMulticastScrip
 	DECLARE_FUNCTION(execGetWeightData);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_RPC_WRAPPERS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execGetOverlappingNodeByLocation); \
 	DECLARE_FUNCTION(execGetOverlappingNode); \
@@ -68,7 +68,7 @@ static inline void FOnPathReceiveSignature_DelegateWrapper(const FMulticastScrip
 	DECLARE_FUNCTION(execGetWeightData);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_INCLASS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPGraphReader(); \
 	friend struct Z_Construct_UClass_ULGPGraphReader_Statics; \
@@ -77,7 +77,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPGraphReader)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_INCLASS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_INCLASS \
 private: \
 	static void StaticRegisterNativesULGPGraphReader(); \
 	friend struct Z_Construct_UClass_ULGPGraphReader_Statics; \
@@ -86,7 +86,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPGraphReader)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_STANDARD_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPGraphReader(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPGraphReader) \
@@ -99,7 +99,7 @@ private: \
 public:
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_ENHANCED_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPGraphReader() { }; \
 private: \
@@ -112,36 +112,36 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ULGPGraphReader)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_PRIVATE_PROPERTY_OFFSET
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_70_PROLOG
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_GENERATED_BODY_LEGACY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_PRIVATE_PROPERTY_OFFSET
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_PROLOG
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_RPC_WRAPPERS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_INCLASS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_STANDARD_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_RPC_WRAPPERS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_INCLASS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_RPC_WRAPPERS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_INCLASS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_73_ENHANCED_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_RPC_WRAPPERS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_INCLASS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_76_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPGraphReader>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_RPC_WRAPPERS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_SPARSE_DATA
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execContinualFollowingNode); \
 	DECLARE_FUNCTION(execStopFollowingNode); \
@@ -157,7 +157,7 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPGraphReader>();
 	DECLARE_FUNCTION(execGoToNode);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_RPC_WRAPPERS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execContinualFollowingNode); \
 	DECLARE_FUNCTION(execStopFollowingNode); \
@@ -173,7 +173,7 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPGraphReader>();
 	DECLARE_FUNCTION(execGoToNode);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_INCLASS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPGraphNavigator(); \
 	friend struct Z_Construct_UClass_ULGPGraphNavigator_Statics; \
@@ -182,7 +182,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPGraphNavigator)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_INCLASS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_INCLASS \
 private: \
 	static void StaticRegisterNativesULGPGraphNavigator(); \
 	friend struct Z_Construct_UClass_ULGPGraphNavigator_Statics; \
@@ -191,7 +191,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPGraphNavigator)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_STANDARD_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPGraphNavigator(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPGraphNavigator) \
@@ -204,7 +204,7 @@ private: \
 public:
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_ENHANCED_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ULGPGraphNavigator(ULGPGraphNavigator&&); \
@@ -215,7 +215,7 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ULGPGraphNavigator)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_PRIVATE_PROPERTY_OFFSET \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__FollowingNode() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowingNode); } \
 	FORCEINLINE static uint32 __PPO__LocalNode() { return STRUCT_OFFSET(ULGPGraphNavigator, LocalNode); } \
 	FORCEINLINE static uint32 __PPO__StartNode() { return STRUCT_OFFSET(ULGPGraphNavigator, StartNode); } \
@@ -227,27 +227,27 @@ public: \
 	FORCEINLINE static uint32 __PPO__PathData() { return STRUCT_OFFSET(ULGPGraphNavigator, PathData); }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_97_PROLOG
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_GENERATED_BODY_LEGACY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_PROLOG
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_RPC_WRAPPERS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_INCLASS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_STANDARD_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_RPC_WRAPPERS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_INCLASS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_RPC_WRAPPERS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_INCLASS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_100_ENHANCED_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_RPC_WRAPPERS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_INCLASS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

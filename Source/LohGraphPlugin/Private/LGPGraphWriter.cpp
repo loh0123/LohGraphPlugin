@@ -5,6 +5,8 @@
 
 #include "LGPGraphWriter.h"
 
+DECLARE_CYCLE_STAT(TEXT("WriterCycle"), STAT_WriterCycle, STATGROUP_LGPGraphCycle);
+
 void ULGPGraphWriter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -63,8 +65,6 @@ bool ULGPGraphWriter::ProcessPathToNode(ULGPNode* Node)
 
 		MarkGraphComponentDirty(false);
 
-		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT("PathQuest Process"));
-
 		return true;
 	}
 
@@ -86,8 +86,6 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 
 		return;
 	};
-
-	//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT("Thread Work On"));
 
 	if (RegisteredNode.Num() > 0)
 	{
@@ -115,8 +113,6 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 
 			PathProcessQueue.Shrink();
 
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("PathQuest"));
-
 			return CurrentPathProcessNode != nullptr;
 		}
 	}
@@ -130,6 +126,8 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 
 void ULGPGraphWriter::DoThreadWork()
 {
+	SCOPE_CYCLE_COUNTER(STAT_WriterCycle);
+
 	if (CurrentPathProcessNode) // Process Node Flow Field Paths
 	{
 		ReturnPathData.Empty();
@@ -194,34 +192,32 @@ void ULGPGraphWriter::DoThreadWork()
 
 		auto SetLowLink = [&] (FLGSNodeGroupProcess& A, FLGSNodeGroupProcess& B)
 		{
-			if (A.LowLinkValue >= B.LowLinkValue)
+			if (A.LowLinkValue < B.LowLinkValue) return;
+
+			A.LowLinkValue = B.LowLinkValue;
+
+			if (B.SCCID == INDEX_NONE) return;
+
+			if (A.SCCID != INDEX_NONE)
 			{
-				A.LowLinkValue = B.LowLinkValue;
-
-				if (B.SCCID != INDEX_NONE)
+				if (B.SCCID != A.SCCID)
 				{
-					if (A.SCCID != INDEX_NONE)
+					if (LocalGroupList[A.SCCID].GroupMember.Num() > LocalGroupList[B.SCCID].GroupMember.Num())
 					{
-						if (B.SCCID != A.SCCID)
-						{
-							if (LocalGroupList[A.SCCID].GroupMember.Num() > LocalGroupList[B.SCCID].GroupMember.Num())
-							{
-								LocalGroupList[A.SCCID].GroupMember.Append(LocalGroupList[B.SCCID].GroupMember);
-								LocalGroupList[B.SCCID].GroupMember.Empty();
+						LocalGroupList[A.SCCID].GroupMember.Append(LocalGroupList[B.SCCID].GroupMember);
+						LocalGroupList[B.SCCID].GroupMember.Empty();
 
-								return;
-							}
-							else
-							{
-								LocalGroupList[B.SCCID].GroupMember.Append(LocalGroupList[A.SCCID].GroupMember);
-								LocalGroupList[A.SCCID].GroupMember.Empty();
-							}
-						}
+						return;
 					}
-
-					A.SCCID = B.SCCID;
+					else
+					{
+						LocalGroupList[B.SCCID].GroupMember.Append(LocalGroupList[A.SCCID].GroupMember);
+						LocalGroupList[A.SCCID].GroupMember.Empty();
+					}
 				}
 			}
+
+			A.SCCID = B.SCCID;
 
 			return;
 		};

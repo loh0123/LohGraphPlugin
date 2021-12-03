@@ -1347,7 +1347,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	{
 		((ULGPNode*)Obj)->bIsDebug = 1;
 	}
-	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug = { "bIsDebug", nullptr, (EPropertyFlags)0x0020080000020001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(ULGPNode), &Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug_MetaData)) };
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug = { "bIsDebug", nullptr, (EPropertyFlags)0x0020080000000001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(ULGPNode), &Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPNode_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNode_Statics::NewProp_NodeCollision,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNode_Statics::NewProp_bIsDebug,
@@ -1379,7 +1379,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNode, 671963763);
+	IMPLEMENT_CLASS(ULGPNode, 2987915793);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNode>()
 	{
 		return ULGPNode::StaticClass();

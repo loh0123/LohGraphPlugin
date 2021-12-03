@@ -9,6 +9,10 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet\KismetSystemLibrary.h"
 
+
+DECLARE_CYCLE_STAT(TEXT("Reader Graoup Navigation Cycle"), STAT_ReaderNavCycle, STATGROUP_LGPGraphCycle);
+DECLARE_CYCLE_STAT(TEXT("Reader Next Node Cycle"), STAT_ReaderNexCycle, STATGROUP_LGPGraphCycle);
+
 float ULGPGraphReader::GetNodeWeight(ULGPNode* Node) const
 {
 	FLGPWeightPrefab Data;
@@ -256,12 +260,12 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 		return nullptr;
 	}
 
+	SCOPE_CYCLE_COUNTER(STAT_ReaderNexCycle);
+
 	AActor* Owner = GetOwner();
 
 	if ((FollowingNode && OverlapingNode == FollowingNode && FollowingNode == LocalNode) || !LocalNode)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Next Group"));
-
 		FollowingNode = nullptr;
 
 		if (FollowIndex > 0)
@@ -317,58 +321,58 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 	if (LocalNode->IsPathGenerating())
 	{
 		FollowingNode = nullptr;
+
+		return nullptr;
+	}
+
+
+
+	const int32 OverlapStep = LocalNode->GetFlowFieldStep(OverlapingNode);
+
+	float NextNodeScore = OverlapStep != INDEX_NONE ? (OverlapStep * WeightData.StepMultiply) + OverlapingNode->GetPassWeight() : MAX_FLT;
+
+	FLGPNodePathData NextNode;
+
+
+
+	for (const FLGPNodePathData& PathItem : OverlapingNode->GetPathList())
+	{
+		const int32 FlowHeat = LocalNode->GetFlowFieldStep(PathItem.EndNode);
+
+		if (FlowHeat != INDEX_NONE && PathItem.EndNode->IsNodeValid())
+		{
+			float NodeScore = (FlowHeat * WeightData.StepMultiply) + OverlapingNode->GetPassWeight();
+
+			if (NodeScore < NextNodeScore)
+			{
+				NextNode = PathItem;
+
+				NextNodeScore = NodeScore;
+			}
+		}
+	}
+
+	if (NextNode.EndNode)
+	{
+		OverlapingNode->RemovePassWeight(this);
+
+		FollowingNode = NextNode.EndNode;
+
+		FollowingNode->AddPassWeight(this);
+
+		if (NextNode.bIsTrigger)
+		{
+			NextNode.EndNode->GetOwingWriter()->OnAlertPathUsed.Broadcast(NextNode, this);
+		}
+
+		if (NextNode.EndNode->bIsTrigger)
+		{
+			NextNode.EndNode->GetOwingWriter()->OnAlertNodeUsed.Broadcast(NextNode, this);
+		}
 	}
 	else
 	{
-		FLGPNodePathData NextNode;
-
-		const int32 OverlapStep = LocalNode->GetFlowFieldStep(OverlapingNode);
-
-		float OverlapWeight = 0.0f;
-
-		if (OverlapStep != INDEX_NONE) OverlapWeight = (OverlapStep * WeightData.StepMultiply) + OverlapingNode->GetPassWeight();
-
-		float NextNodeScore = OverlapStep != INDEX_NONE ? OverlapWeight : MAX_FLT;
-
-		for (const FLGPNodePathData& PathItem : OverlapingNode->GetPathList())
-		{
-			const int32 FlowHeat = LocalNode->GetFlowFieldStep(PathItem.EndNode);
-
-			if (FlowHeat != INDEX_NONE && PathItem.EndNode->IsNodeValid())
-			{
-				float NodeScore = (FlowHeat * WeightData.StepMultiply) + OverlapingNode->GetPassWeight();
-
-				if (NodeScore < NextNodeScore)
-				{
-					NextNode = PathItem;
-
-					NextNodeScore = NodeScore;
-				}
-			}
-		}
-
-		if (NextNode.EndNode)
-		{
-			OverlapingNode->RemovePassWeight(this);
-
-			FollowingNode = NextNode.EndNode;
-
-			FollowingNode->AddPassWeight(this);
-
-			if (NextNode.bIsTrigger)
-			{
-				NextNode.EndNode->GetOwingWriter()->OnAlertPathUsed.Broadcast(NextNode, this);
-			}
-
-			if (NextNode.EndNode->bIsTrigger)
-			{
-				NextNode.EndNode->GetOwingWriter()->OnAlertNodeUsed.Broadcast(NextNode, this);
-			}
-		}
-		else
-		{
-			FollowingNode = nullptr;
-		}
+		FollowingNode = nullptr;
 	}
 
 	return FollowingNode;
@@ -385,6 +389,8 @@ void ULGPGraphNavigator::DoThreadWork()
 	{
 		return;
 	}
+
+	SCOPE_CYCLE_COUNTER(STAT_ReaderNavCycle);
 
 	FLGPWeightPrefab WeightData = FLGPWeightPrefab();
 	GetWeightData(WeightData);
@@ -410,6 +416,8 @@ void ULGPGraphNavigator::DoThreadWork()
 
 				CurrentGroupData = CloseGroups[CurrentGroupData.ParentKey];
 			} 
+
+			break;
 		}
 		else
 		{
@@ -445,20 +453,6 @@ void ULGPGraphNavigator::OnThreadWorkDone()
 {
 	if (!StopTaskerWork)
 	{
-		//for (FLGPGroupPathData& PathItem : PathData)
-		//{
-		//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, PathItem.StartNode->GetReadableName());
-		//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, PathItem.EndNode->GetReadableName());
-		//
-		//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("%d"), PathItem.GetProxyPath().Num()));
-		//
-		//	for (const FLGPNodePathData& NodePath : PathItem.GetProxyPath())
-		//	{
-		//		GEngine->AddOnScreenDebugMessage(-1, 50.f, FColor::Red, NodePath.StartNode->GetReadableName());
-		//		GEngine->AddOnScreenDebugMessage(-1, 50.f, FColor::Green, NodePath.EndNode->GetReadableName());
-		//	}
-		//}
-
 		OnPathReceive.Broadcast(PathData);
 
 		FLGPWeightPrefab WeightData;
@@ -467,7 +461,5 @@ void ULGPGraphNavigator::OnThreadWorkDone()
 		{
 			BeginPathFollowing();
 		}
-
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Reader Threae Exit Safe"));
 	}
 }

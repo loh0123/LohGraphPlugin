@@ -18,21 +18,21 @@ struct FVector;
 #endif
 #define LOHGRAPHPLUGIN_LGPNode_generated_h
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_136_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_139_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FLGPNodeGroupData_Statics; \
 	LOHGRAPHPLUGIN_API static class UScriptStruct* StaticStruct();
 
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPNodeGroupData>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_117_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_120_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FLGPGroupMemberData_Statics; \
 	LOHGRAPHPLUGIN_API static class UScriptStruct* StaticStruct();
 
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPGroupMemberData>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_63_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_66_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FLGPGroupPathData_Statics; \
 	LOHGRAPHPLUGIN_API static class UScriptStruct* StaticStruct(); \
 	FORCEINLINE static uint32 __PPO__ProxyPath() { return STRUCT_OFFSET(FLGPGroupPathData, ProxyPath); }
@@ -40,15 +40,15 @@ template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPGroupMember
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPGroupPathData>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_20_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_23_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FLGPNodePathData_Statics; \
 	LOHGRAPHPLUGIN_API static class UScriptStruct* StaticStruct();
 
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPNodePathData>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_RPC_WRAPPERS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_SPARSE_DATA
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execClearPath); \
 	DECLARE_FUNCTION(execRemovePath); \
@@ -56,7 +56,7 @@ template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPNodePathDat
 	DECLARE_FUNCTION(execGetPathArray);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_RPC_WRAPPERS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execClearPath); \
 	DECLARE_FUNCTION(execRemovePath); \
@@ -64,7 +64,7 @@ template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGPNodePathDat
 	DECLARE_FUNCTION(execGetPathArray);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_INCLASS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPNodeBase(); \
 	friend struct Z_Construct_UClass_ULGPNodeBase_Statics; \
@@ -73,7 +73,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPNodeBase)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_INCLASS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_INCLASS \
 private: \
 	static void StaticRegisterNativesULGPNodeBase(); \
 	friend struct Z_Construct_UClass_ULGPNodeBase_Statics; \
@@ -82,7 +82,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPNodeBase)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_STANDARD_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPNodeBase(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPNodeBase) \
@@ -95,7 +95,7 @@ private: \
 public:
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_ENHANCED_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPNodeBase(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -108,41 +108,41 @@ public: \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPNodeBase)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_PRIVATE_PROPERTY_OFFSET \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__PathList() { return STRUCT_OFFSET(ULGPNodeBase, PathList); }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_175_PROLOG
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_GENERATED_BODY_LEGACY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_PROLOG
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_RPC_WRAPPERS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_INCLASS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_STANDARD_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_RPC_WRAPPERS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_INCLASS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_RPC_WRAPPERS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_INCLASS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_178_ENHANCED_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_RPC_WRAPPERS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_INCLASS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_181_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPNodeBase>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_RPC_WRAPPERS
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_RPC_WRAPPERS_NO_PURE_DECLS
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_INCLASS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_SPARSE_DATA
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_RPC_WRAPPERS
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_RPC_WRAPPERS_NO_PURE_DECLS
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPNodeCache(); \
 	friend struct Z_Construct_UClass_ULGPNodeCache_Statics; \
@@ -151,7 +151,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPNodeCache)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_INCLASS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_INCLASS \
 private: \
 	static void StaticRegisterNativesULGPNodeCache(); \
 	friend struct Z_Construct_UClass_ULGPNodeCache_Statics; \
@@ -160,7 +160,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPNodeCache)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_STANDARD_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPNodeCache(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPNodeCache) \
@@ -173,7 +173,7 @@ private: \
 public:
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_ENHANCED_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPNodeCache(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -186,7 +186,7 @@ public: \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPNodeCache)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_PRIVATE_PROPERTY_OFFSET \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__NodeGraphWriter() { return STRUCT_OFFSET(ULGPNodeCache, NodeGraphWriter); } \
 	FORCEINLINE static uint32 __PPO__GroupMemberIndex() { return STRUCT_OFFSET(ULGPNodeCache, GroupMemberIndex); } \
 	FORCEINLINE static uint32 __PPO__GroupID() { return STRUCT_OFFSET(ULGPNodeCache, GroupID); } \
@@ -195,35 +195,35 @@ public: \
 	FORCEINLINE static uint32 __PPO__IsPassWeightDirty() { return STRUCT_OFFSET(ULGPNodeCache, IsPassWeightDirty); }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_224_PROLOG
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_GENERATED_BODY_LEGACY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_PROLOG
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_RPC_WRAPPERS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_INCLASS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_STANDARD_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_RPC_WRAPPERS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_INCLASS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_RPC_WRAPPERS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_INCLASS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_227_ENHANCED_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_RPC_WRAPPERS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_INCLASS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_230_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPNodeCache>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_RPC_WRAPPERS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_SPARSE_DATA
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execClearCollisionVertex); \
 	DECLARE_FUNCTION(execSetCollisionSphere); \
@@ -231,7 +231,7 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPNodeCache>();
 	DECLARE_FUNCTION(execSetCollisionVertex);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_RPC_WRAPPERS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execClearCollisionVertex); \
 	DECLARE_FUNCTION(execSetCollisionSphere); \
@@ -239,7 +239,7 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPNodeCache>();
 	DECLARE_FUNCTION(execSetCollisionVertex);
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_INCLASS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPNode(); \
 	friend struct Z_Construct_UClass_ULGPNode_Statics; \
@@ -248,7 +248,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPNode)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_INCLASS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_INCLASS \
 private: \
 	static void StaticRegisterNativesULGPNode(); \
 	friend struct Z_Construct_UClass_ULGPNode_Statics; \
@@ -257,7 +257,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPNode)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_STANDARD_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPNode(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPNode) \
@@ -270,7 +270,7 @@ private: \
 public:
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_ENHANCED_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ULGPNode(ULGPNode&&); \
@@ -281,32 +281,32 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ULGPNode)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_PRIVATE_PROPERTY_OFFSET \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__NodeCollision() { return STRUCT_OFFSET(ULGPNode, NodeCollision); } \
 	FORCEINLINE static uint32 __PPO__bIsDebug() { return STRUCT_OFFSET(ULGPNode, bIsDebug); }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_300_PROLOG
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_GENERATED_BODY_LEGACY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_PROLOG
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_RPC_WRAPPERS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_INCLASS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_STANDARD_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_RPC_WRAPPERS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_INCLASS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_RPC_WRAPPERS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_INCLASS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_303_ENHANCED_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_RPC_WRAPPERS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_INCLASS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
