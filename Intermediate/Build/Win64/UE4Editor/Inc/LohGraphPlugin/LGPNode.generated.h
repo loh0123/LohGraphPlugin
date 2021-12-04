@@ -225,6 +225,7 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPNodeCache>();
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_SPARSE_DATA
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execSetIsDebug); \
 	DECLARE_FUNCTION(execClearCollisionVertex); \
 	DECLARE_FUNCTION(execSetCollisionSphere); \
 	DECLARE_FUNCTION(execSetCollisionBox); \
@@ -233,6 +234,7 @@ template<> LOHGRAPHPLUGIN_API UClass* StaticClass<class ULGPNodeCache>();
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPNode_h_306_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execSetIsDebug); \
 	DECLARE_FUNCTION(execClearCollisionVertex); \
 	DECLARE_FUNCTION(execSetCollisionSphere); \
 	DECLARE_FUNCTION(execSetCollisionBox); \

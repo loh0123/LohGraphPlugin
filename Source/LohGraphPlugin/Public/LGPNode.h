@@ -355,6 +355,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "LGSNodeBase | Collision")
 		void ClearCollisionVertex();
 
+	UFUNCTION(BlueprintCallable, Category = "LGSNodeBase | Collision")
+		void SetIsDebug(const bool bNewValue) { bIsDebug = bNewValue; MarkRenderStateDirty(); return; }
+
 protected:
 
 	UPROPERTY(EditAnywhere) bool bIsDebug;

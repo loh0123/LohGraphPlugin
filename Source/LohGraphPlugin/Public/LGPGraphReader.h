@@ -131,11 +131,11 @@ public:
 // Read Function /////////////////////////////////////////////////////////////
 
 	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
-		FORCEINLINE FVector GetFollowingLocation() 
+		FORCEINLINE FVector GetFollowingLocation() const
 		{ 
 			if (FollowingNode)
 			{
-				if (FollowingNode == EndNode && FollowingTarget)
+				if (FollowingTarget && FollowingNode == EndNode)
 				{
 					return FollowingTarget->GetActorLocation();
 				}
@@ -168,7 +168,7 @@ public:
 		FORCEINLINE bool GetIsFollowingPath() { return IsFollowingPath; }
 
 	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
-		FORCEINLINE bool GetIsManualMoving() { return IsFollowingPath; }
+		FORCEINLINE bool GetIsManualMoving() { return IsManualMoving; }
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -182,6 +182,10 @@ public:
 		FORCEINLINE bool ContinualFollowingNode();
 
 private:
+
+	FORCEINLINE void PrintNavDiagnostics() const;
+
+	FORCEINLINE void ClearPathData();
 
 	FORCEINLINE void OnPathNeedUpdate(const bool bIsForce);
 
@@ -227,6 +231,9 @@ protected:
 
 	UPROPERTY(BlueprintGetter = GetIsManualMoving, EditAnywhere, Category = "LGPGraphNavigator | Varaible")
 		bool IsManualMoving = false;
+
+	UPROPERTY(EditAnywhere, Category = "LGPGraphNavigator | Varaible")
+		bool IsPrintDebug = false;
 
 	UPROPERTY() uint8 CurrentFrameDelay = 0;
 

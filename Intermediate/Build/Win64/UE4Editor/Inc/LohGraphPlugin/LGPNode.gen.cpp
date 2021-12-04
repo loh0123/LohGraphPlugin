@@ -1070,6 +1070,14 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_ULGPNodeCache(Z_Construct_UClass_ULGPNodeCache, &ULGPNodeCache::StaticClass, TEXT("/Script/LohGraphPlugin"), TEXT("ULGPNodeCache"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ULGPNodeCache);
+	DEFINE_FUNCTION(ULGPNode::execSetIsDebug)
+	{
+		P_GET_UBOOL(Z_Param_bNewValue);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetIsDebug(Z_Param_bNewValue);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(ULGPNode::execClearCollisionVertex)
 	{
 		P_FINISH;
@@ -1110,6 +1118,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 			{ "SetCollisionBox", &ULGPNode::execSetCollisionBox },
 			{ "SetCollisionSphere", &ULGPNode::execSetCollisionSphere },
 			{ "SetCollisionVertex", &ULGPNode::execSetCollisionVertex },
+			{ "SetIsDebug", &ULGPNode::execSetIsDebug },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -1283,6 +1292,52 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics
+	{
+		struct LGPNode_eventSetIsDebug_Parms
+		{
+			bool bNewValue;
+		};
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bNewValue_MetaData[];
+#endif
+		static void NewProp_bNewValue_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bNewValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::NewProp_bNewValue_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	void Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::NewProp_bNewValue_SetBit(void* Obj)
+	{
+		((LGPNode_eventSetIsDebug_Parms*)Obj)->bNewValue = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::NewProp_bNewValue = { "bNewValue", nullptr, (EPropertyFlags)0x0010000000000082, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(LGPNode_eventSetIsDebug_Parms), &Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::NewProp_bNewValue_SetBit, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::NewProp_bNewValue_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::NewProp_bNewValue_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::NewProp_bNewValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LGSNodeBase | Collision" },
+		{ "ModuleRelativePath", "Public/LGPNode.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPNode, nullptr, "SetIsDebug", nullptr, nullptr, sizeof(LGPNode_eventSetIsDebug_Parms), Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ULGPNode_SetIsDebug()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ULGPNode_SetIsDebug_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_ULGPNode_NoRegister()
 	{
 		return ULGPNode::StaticClass();
@@ -1316,6 +1371,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		{ &Z_Construct_UFunction_ULGPNode_SetCollisionBox, "SetCollisionBox" }, // 780093976
 		{ &Z_Construct_UFunction_ULGPNode_SetCollisionSphere, "SetCollisionSphere" }, // 1433478689
 		{ &Z_Construct_UFunction_ULGPNode_SetCollisionVertex, "SetCollisionVertex" }, // 371994093
+		{ &Z_Construct_UFunction_ULGPNode_SetIsDebug, "SetIsDebug" }, // 2714663539
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPNode_Statics::Class_MetaDataParams[] = {
@@ -1379,7 +1435,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNode, 2987915793);
+	IMPLEMENT_CLASS(ULGPNode, 3731620349);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNode>()
 	{
 		return ULGPNode::StaticClass();

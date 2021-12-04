@@ -15,5 +15,5 @@ class LOHGRAPHPLUGIN_API ULGPGraphLibrary : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 	
 	UFUNCTION(BlueprintCallable, Category = "LGPGraphLibrary")
-		static void AddGraphNodeGrid(AActor* SelfActor, const FTransform& StartTransform, const FVector GridGap, const FIntVector Size,const bool bBlockCheck, TArray<ULGPNode*>& ReturnList);
+		static void AddGraphNodeGrid(AActor* SelfActor, const FTransform& StartTransform, const FVector GridGap, const FIntVector Size, const bool bDebug,const bool bBlockCheck, TArray<ULGPNode*>& ReturnList);
 };

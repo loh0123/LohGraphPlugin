@@ -821,7 +821,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		{ "ToolTip", "Read Function /" },
 	};
 #endif
-	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPGraphNavigator, nullptr, "GetFollowingLocation", nullptr, nullptr, sizeof(LGPGraphNavigator_eventGetFollowingLocation_Parms), Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::Function_MetaDataParams)) };
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULGPGraphNavigator, nullptr, "GetFollowingLocation", nullptr, nullptr, sizeof(LGPGraphNavigator_eventGetFollowingLocation_Parms), Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -1358,6 +1358,11 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		static void NewProp_IsManualMoving_SetBit(void* Obj);
 		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_IsManualMoving;
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_IsPrintDebug_MetaData[];
+#endif
+		static void NewProp_IsPrintDebug_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_IsPrintDebug;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CurrentFrameDelay_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FBytePropertyParams NewProp_CurrentFrameDelay;
@@ -1398,7 +1403,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_ContinualFollowingNode, "ContinualFollowingNode" }, // 986880914
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetEndNode, "GetEndNode" }, // 22764298
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetFollowIndex, "GetFollowIndex" }, // 1287832528
-		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation, "GetFollowingLocation" }, // 1358860670
+		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingLocation, "GetFollowingLocation" }, // 1218428191
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingNode, "GetFollowingNode" }, // 1220530560
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetFollowingTarget, "GetFollowingTarget" }, // 1081405935
 		{ &Z_Construct_UFunction_ULGPGraphNavigator_GetIsFollowingPath, "GetIsFollowingPath" }, // 3658875148
@@ -1522,6 +1527,17 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 	}
 	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving = { "IsManualMoving", nullptr, (EPropertyFlags)0x0020080000000015, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(ULGPGraphNavigator), &Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving_MetaData)) };
 #if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsPrintDebug_MetaData[] = {
+		{ "Category", "LGPGraphNavigator | Varaible" },
+		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
+	};
+#endif
+	void Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsPrintDebug_SetBit(void* Obj)
+	{
+		((ULGPGraphNavigator*)Obj)->IsPrintDebug = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsPrintDebug = { "IsPrintDebug", nullptr, (EPropertyFlags)0x0020080000000001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(ULGPGraphNavigator), &Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsPrintDebug_SetBit, METADATA_PARAMS(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsPrintDebug_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsPrintDebug_MetaData)) };
+#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_CurrentFrameDelay_MetaData[] = {
 		{ "ModuleRelativePath", "Public/LGPGraphReader.h" },
 	};
@@ -1581,6 +1597,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_FollowIndex,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsFollowingPath,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsManualMoving,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_IsPrintDebug,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_CurrentFrameDelay,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_CurrentTargetDelay,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPGraphNavigator_Statics::NewProp_PathData_Inner,
@@ -1617,7 +1634,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphNavigator, 3748188452);
+	IMPLEMENT_CLASS(ULGPGraphNavigator, 3079434829);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphNavigator>()
 	{
 		return ULGPGraphNavigator::StaticClass();

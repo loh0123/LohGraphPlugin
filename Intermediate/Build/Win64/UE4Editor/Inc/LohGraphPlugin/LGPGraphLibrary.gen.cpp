@@ -29,11 +29,12 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphLibrary() {}
 		P_GET_STRUCT_REF(FTransform,Z_Param_Out_StartTransform);
 		P_GET_STRUCT(FVector,Z_Param_GridGap);
 		P_GET_STRUCT(FIntVector,Z_Param_Size);
+		P_GET_UBOOL(Z_Param_bDebug);
 		P_GET_UBOOL(Z_Param_bBlockCheck);
 		P_GET_TARRAY_REF(ULGPNode*,Z_Param_Out_ReturnList);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		ULGPGraphLibrary::AddGraphNodeGrid(Z_Param_SelfActor,Z_Param_Out_StartTransform,Z_Param_GridGap,Z_Param_Size,Z_Param_bBlockCheck,Z_Param_Out_ReturnList);
+		ULGPGraphLibrary::AddGraphNodeGrid(Z_Param_SelfActor,Z_Param_Out_StartTransform,Z_Param_GridGap,Z_Param_Size,Z_Param_bDebug,Z_Param_bBlockCheck,Z_Param_Out_ReturnList);
 		P_NATIVE_END;
 	}
 	void ULGPGraphLibrary::StaticRegisterNativesULGPGraphLibrary()
@@ -52,6 +53,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphLibrary() {}
 			FTransform StartTransform;
 			FVector GridGap;
 			FIntVector Size;
+			bool bDebug;
 			bool bBlockCheck;
 			TArray<ULGPNode*> ReturnList;
 		};
@@ -68,6 +70,11 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphLibrary() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Size_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FStructPropertyParams NewProp_Size;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bDebug_MetaData[];
+#endif
+		static void NewProp_bDebug_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bDebug;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bBlockCheck_MetaData[];
 #endif
@@ -104,6 +111,16 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphLibrary() {}
 #endif
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_Size = { "Size", nullptr, (EPropertyFlags)0x0010000000000082, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(LGPGraphLibrary_eventAddGraphNodeGrid_Parms, Size), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_Size_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_Size_MetaData)) };
 #if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bDebug_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	void Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bDebug_SetBit(void* Obj)
+	{
+		((LGPGraphLibrary_eventAddGraphNodeGrid_Parms*)Obj)->bDebug = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bDebug = { "bDebug", nullptr, (EPropertyFlags)0x0010000000000082, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(LGPGraphLibrary_eventAddGraphNodeGrid_Parms), &Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bDebug_SetBit, METADATA_PARAMS(Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bDebug_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bDebug_MetaData)) };
+#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bBlockCheck_MetaData[] = {
 		{ "NativeConst", "" },
 	};
@@ -125,6 +142,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphLibrary() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_StartTransform,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_GridGap,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_Size,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bDebug,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_bBlockCheck,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_ReturnList_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid_Statics::NewProp_ReturnList,
@@ -164,7 +182,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphLibrary() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_LohGraphPlugin,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_ULGPGraphLibrary_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid, "AddGraphNodeGrid" }, // 1636318029
+		{ &Z_Construct_UFunction_ULGPGraphLibrary_AddGraphNodeGrid, "AddGraphNodeGrid" }, // 3249167843
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ULGPGraphLibrary_Statics::Class_MetaDataParams[] = {
@@ -200,7 +218,7 @@ void EmptyLinkFunctionForGeneratedCodeLGPGraphLibrary() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphLibrary, 1697288807);
+	IMPLEMENT_CLASS(ULGPGraphLibrary, 2454736607);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphLibrary>()
 	{
 		return ULGPGraphLibrary::StaticClass();
