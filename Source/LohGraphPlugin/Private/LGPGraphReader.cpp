@@ -198,7 +198,7 @@ bool ULGPGraphNavigator::GoToActor(AActor* Node)
 
 bool ULGPGraphNavigator::NextFollowingNode()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("NextFollowingNode"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("NextFollowingNode"));
 
 	if (IsManualMoving && GetNextFollowingNode(GetOverlappingNode()))
 	{
@@ -210,7 +210,7 @@ bool ULGPGraphNavigator::NextFollowingNode()
 
 bool ULGPGraphNavigator::StopFollowingNode(const bool ClearData)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("StopFollowingNode"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("StopFollowingNode"));
 
 	if (IsFollowingPath)
 	{
@@ -234,7 +234,7 @@ bool ULGPGraphNavigator::StopFollowingNode(const bool ClearData)
 
 bool ULGPGraphNavigator::ContinualFollowingNode()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("ContinualFollowingNode"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("ContinualFollowingNode"));
 
 	if (!IsGraphComponentWorking() && LocalNode)
 	{
@@ -250,9 +250,7 @@ void ULGPGraphNavigator::OnPathNeedUpdate(const bool bIsForce)
 {
 	if (!bIsForce) return;
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("PathUpdate"));
-
-	ULGPNode* OverlapNode = GetOverlappingNode();
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("PathUpdate"));
 
 
 	PathData[0].StartNode->GetOwingWriter()->OnComponentUpdate.RemoveAll(this);
@@ -265,7 +263,7 @@ void ULGPGraphNavigator::OnPathNeedUpdate(const bool bIsForce)
 	PathData.Empty();
 
 
-	if (OverlapNode && OverlapNode->IsNodeValid() && EndNode && EndNode->IsNodeValid())
+	if (EndNode && EndNode->IsNodeValid())
 	{
 		GoToNode(EndNode);
 	}
@@ -309,7 +307,7 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 
 	AActor* Owner = GetOwner();
 
-	if ((FollowingNode && OverlapingNode == FollowingNode && FollowingNode == LocalNode) || !LocalNode)
+	if ((OverlapingNode && OverlapingNode == LocalNode) || !LocalNode)
 	{
 		FollowingNode = nullptr;
 

@@ -213,7 +213,7 @@ public:
 
 protected:
 
-	UPROPERTY(VisibleAnywhere) TSet<FLGPNodePathData> PathList;
+	UPROPERTY(VisibleDefaultsOnly) TSet<FLGPNodePathData> PathList;
 
 };
 
