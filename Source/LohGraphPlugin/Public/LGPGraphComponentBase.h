@@ -9,6 +9,9 @@
 #include "Components/ActorComponent.h"
 #include "LGPGraphComponentBase.generated.h"
 
+DECLARE_EVENT_OneParam(ULGPGraphComponentBase, FComponentUpdateEvent, bool);
+
+
 class ULGPGameCoreSystem;
 class GraphComponentTasker;
 
@@ -74,6 +77,8 @@ class LOHGRAPHPLUGIN_API ULGPGraphComponentBase : public UActorComponent
 
 public:	
 
+	FComponentUpdateEvent OnComponentUpdate;
+
 	// Sets default values for this component's properties
 	ULGPGraphComponentBase();
 
@@ -133,6 +138,8 @@ protected:
 	FThreadSafeBool StopTaskerWork = false;
 
 	UPROPERTY() ULGPGameCoreSystem* CoreSystem = nullptr;
+
+	UPROPERTY(VisibleAnywhere) uint8 bIsRecompile : 1;
 
 	UPROPERTY(VisibleAnywhere) uint8 bIsDirty : 1;
 

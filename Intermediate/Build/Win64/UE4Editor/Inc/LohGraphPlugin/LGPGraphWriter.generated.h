@@ -15,14 +15,14 @@ class ULGPGraphNavigator;
 #endif
 #define LOHGRAPHPLUGIN_LGPGraphWriter_generated_h
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_18_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_19_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FLGSNodeGroupProcess_Statics; \
 	LOHGRAPHPLUGIN_API static class UScriptStruct* StaticStruct();
 
 
 template<> LOHGRAPHPLUGIN_API UScriptStruct* StaticStruct<struct FLGSNodeGroupProcess>();
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_49_DELEGATE \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_50_DELEGATE \
 struct LGPGraphWriter_eventOnAlertNodeUsedSignature_Parms \
 { \
 	FLGPNodePathData Path; \
@@ -37,7 +37,7 @@ static inline void FOnAlertNodeUsedSignature_DelegateWrapper(const FMulticastScr
 }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_48_DELEGATE \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_49_DELEGATE \
 struct LGPGraphWriter_eventOnAlertPathUsedSignature_Parms \
 { \
 	FLGPNodePathData Path; \
@@ -52,10 +52,10 @@ static inline void FOnAlertPathUsedSignature_DelegateWrapper(const FMulticastScr
 }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_RPC_WRAPPERS
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_RPC_WRAPPERS_NO_PURE_DECLS
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_INCLASS_NO_PURE_DECLS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_SPARSE_DATA
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_RPC_WRAPPERS
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_RPC_WRAPPERS_NO_PURE_DECLS
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPGraphWriter(); \
 	friend struct Z_Construct_UClass_ULGPGraphWriter_Statics; \
@@ -64,7 +64,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPGraphWriter)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_INCLASS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_INCLASS \
 private: \
 	static void StaticRegisterNativesULGPGraphWriter(); \
 	friend struct Z_Construct_UClass_ULGPGraphWriter_Statics; \
@@ -73,7 +73,7 @@ public: \
 	DECLARE_SERIALIZER(ULGPGraphWriter)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_STANDARD_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPGraphWriter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ULGPGraphWriter) \
@@ -86,7 +86,7 @@ private: \
 public:
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_ENHANCED_CONSTRUCTORS \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ULGPGraphWriter() { }; \
 private: \
@@ -99,7 +99,7 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ULGPGraphWriter)
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_PRIVATE_PROPERTY_OFFSET \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__RegisteredNode() { return STRUCT_OFFSET(ULGPGraphWriter, RegisteredNode); } \
 	FORCEINLINE static uint32 __PPO__BuildVersion() { return STRUCT_OFFSET(ULGPGraphWriter, BuildVersion); } \
 	FORCEINLINE static uint32 __PPO__ReturnPathData() { return STRUCT_OFFSET(ULGPGraphWriter, ReturnPathData); } \
@@ -108,27 +108,27 @@ public: \
 	FORCEINLINE static uint32 __PPO__NodeGroupList() { return STRUCT_OFFSET(ULGPGraphWriter, NodeGroupList); }
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_43_PROLOG
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_GENERATED_BODY_LEGACY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_44_PROLOG
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_RPC_WRAPPERS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_INCLASS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_STANDARD_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_RPC_WRAPPERS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_INCLASS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_GENERATED_BODY \
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_PRIVATE_PROPERTY_OFFSET \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_SPARSE_DATA \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_RPC_WRAPPERS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_INCLASS_NO_PURE_DECLS \
-	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_46_ENHANCED_CONSTRUCTORS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_PRIVATE_PROPERTY_OFFSET \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_SPARSE_DATA \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_RPC_WRAPPERS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_INCLASS_NO_PURE_DECLS \
+	PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

@@ -420,7 +420,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGSNodeGroupPro
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphWriter, 47939922);
+	IMPLEMENT_CLASS(ULGPGraphWriter, 904420756);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphWriter>()
 	{
 		return ULGPGraphWriter::StaticClass();

@@ -33,9 +33,9 @@ public:
 	FLGPNodePathData(ULGPNode* S, ULGPNode* E, const uint8 WeightType, const bool Walkable, const bool Returnable, const bool Trigger) : StartNode(S), EndNode(E), PathWeightType(WeightType), IsWalkable(Walkable), IsReturnable(Returnable), bIsTrigger(Trigger) {}
 
 
-	UPROPERTY(VisibleAnywhere) ULGPNode* StartNode;
+	UPROPERTY(VisibleAnywhere) ULGPNode* StartNode = nullptr;
 
-	UPROPERTY(VisibleAnywhere) ULGPNode* EndNode;
+	UPROPERTY(VisibleAnywhere) ULGPNode* EndNode = nullptr;
 
 	UPROPERTY(VisibleAnywhere) uint8 PathWeightType = uint8(0);
 
@@ -213,7 +213,7 @@ public:
 
 protected:
 
-	UPROPERTY(VisibleDefaultsOnly) TSet<FLGPNodePathData> PathList;
+	UPROPERTY(VisibleAnywhere) TSet<FLGPNodePathData> PathList;
 
 };
 

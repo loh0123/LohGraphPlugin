@@ -183,6 +183,8 @@ public:
 
 private:
 
+	FORCEINLINE void OnPathNeedUpdate(const bool bIsForce);
+
 	FORCEINLINE void BeginPathFollowing();
 
 	FORCEINLINE ULGPNode* GetNextFollowingNode(ULGPNode* OverlapingNode);

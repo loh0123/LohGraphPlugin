@@ -8,14 +8,27 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AActor;
+struct FTransform;
+struct FVector;
+struct FIntVector;
+class ULGPNode;
 #ifdef LOHGRAPHPLUGIN_LGPGraphLibrary_generated_h
 #error "LGPGraphLibrary.generated.h already included, missing '#pragma once' in LGPGraphLibrary.h"
 #endif
 #define LOHGRAPHPLUGIN_LGPGraphLibrary_generated_h
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphLibrary_h_15_SPARSE_DATA
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphLibrary_h_15_RPC_WRAPPERS
-#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphLibrary_h_15_RPC_WRAPPERS_NO_PURE_DECLS
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphLibrary_h_15_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execAddGraphNodeGrid);
+
+
+#define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphLibrary_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execAddGraphNodeGrid);
+
+
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphLibrary_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesULGPGraphLibrary(); \

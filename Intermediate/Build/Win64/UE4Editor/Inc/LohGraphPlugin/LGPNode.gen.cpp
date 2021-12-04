@@ -881,7 +881,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList = { "PathList", nullptr, (EPropertyFlags)0x0020088000030001, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeBase, PathList), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_MetaData)) };
+	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList = { "PathList", nullptr, (EPropertyFlags)0x0020088000020001, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ULGPNodeBase, PathList), METADATA_PARAMS(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_PathList_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULGPNodeBase_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_bIsTrigger,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULGPNodeBase_Statics::NewProp_NodeWeightType,
@@ -915,7 +915,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNodeBase, 2194620230);
+	IMPLEMENT_CLASS(ULGPNodeBase, 1357671073);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNodeBase>()
 	{
 		return ULGPNodeBase::StaticClass();
@@ -1063,7 +1063,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNodeCache, 661922823);
+	IMPLEMENT_CLASS(ULGPNodeCache, 3682540618);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNodeCache>()
 	{
 		return ULGPNodeCache::StaticClass();
@@ -1379,7 +1379,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPNodePathData
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPNode, 2987915793);
+	IMPLEMENT_CLASS(ULGPNode, 1240455416);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPNode>()
 	{
 		return ULGPNode::StaticClass();

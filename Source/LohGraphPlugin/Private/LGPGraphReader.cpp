@@ -198,6 +198,8 @@ bool ULGPGraphNavigator::GoToActor(AActor* Node)
 
 bool ULGPGraphNavigator::NextFollowingNode()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("NextFollowingNode"));
+
 	if (IsManualMoving && GetNextFollowingNode(GetOverlappingNode()))
 	{
 		return true;
@@ -208,6 +210,8 @@ bool ULGPGraphNavigator::NextFollowingNode()
 
 bool ULGPGraphNavigator::StopFollowingNode(const bool ClearData)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("StopFollowingNode"));
+
 	if (IsFollowingPath)
 	{
 		IsFollowingPath = false;
@@ -230,6 +234,8 @@ bool ULGPGraphNavigator::StopFollowingNode(const bool ClearData)
 
 bool ULGPGraphNavigator::ContinualFollowingNode()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("ContinualFollowingNode"));
+
 	if (!IsGraphComponentWorking() && LocalNode)
 	{
 		IsFollowingPath = true;
@@ -240,11 +246,40 @@ bool ULGPGraphNavigator::ContinualFollowingNode()
 	return false;
 }
 
+void ULGPGraphNavigator::OnPathNeedUpdate(const bool bIsForce)
+{
+	if (!bIsForce) return;
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("PathUpdate"));
+
+	ULGPNode* OverlapNode = GetOverlappingNode();
+
+
+	PathData[0].StartNode->GetOwingWriter()->OnComponentUpdate.RemoveAll(this);
+
+	for (FLGPGroupPathData& PathItem : PathData)
+	{
+		PathItem.EndNode->GetOwingWriter()->OnComponentUpdate.RemoveAll(this);
+	}
+
+	PathData.Empty();
+
+
+	if (OverlapNode && OverlapNode->IsNodeValid() && EndNode && EndNode->IsNodeValid())
+	{
+		GoToNode(EndNode);
+	}
+
+	return;
+}
+
 void ULGPGraphNavigator::BeginPathFollowing()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("BeginPathFollowing"));
+
 	IsFollowingPath = true;
 
-	FollowIndex = PathData.Num();
+	FollowIndex = PathData.Num() - 1;
 
 	GetNextFollowingNode(GetOverlappingNode());
 
@@ -278,9 +313,11 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 	{
 		FollowingNode = nullptr;
 
+		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("FN: %s, LC: %s"), FollowingNode ? *FollowingNode->GetReadableName() : TEXT("Null"), LocalNode ? *LocalNode->GetReadableName() : TEXT("Null")));
+
 		if (FollowIndex > 0)
 		{
-			FollowIndex--;
+			if (LocalNode) FollowIndex--;
 
 			ULGPNode* NextGroupNode = PathData.IsValidIndex(FollowIndex - 1) ? PathData[FollowIndex - 1].EndNode : EndNode;
 
@@ -299,6 +336,8 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 					NextNodeScore = NodeScore;
 				}
 			}
+
+			//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("Local: %s, ID: %d"), *NextNode->GetReadableName(), FollowIndex));
 
 			LocalNode = NextNode;
 
@@ -325,6 +364,8 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 				LocalNode->RequestPath();
 			}
 		}
+
+		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("ReLocal: %s"), *LocalNode->GetReadableName()));
 	}
 
 	// Path Is Generating Can't Find Data Now !!!
@@ -343,7 +384,7 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 
 	FLGPNodePathData NextNode;
 
-
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("Num: %d, Weight: %f, Local: %s"), OverlapingNode->GetPathList().Num(), NextNodeScore, *LocalNode->GetReadableName()));
 
 	for (const FLGPNodePathData& PathItem : OverlapingNode->GetPathList())
 	{
@@ -355,6 +396,8 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 
 			if (NodeScore < NextNodeScore)
 			{
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Finded"));
+
 				NextNode = PathItem;
 
 				NextNodeScore = NodeScore;
@@ -463,6 +506,13 @@ void ULGPGraphNavigator::OnThreadWorkDone()
 {
 	if (!StopTaskerWork)
 	{
+		PathData[0].StartNode->GetOwingWriter()->OnComponentUpdate.AddUObject(this, &ULGPGraphNavigator::OnPathNeedUpdate);
+
+		for (FLGPGroupPathData& PathItem : PathData)
+		{
+			PathItem.EndNode->GetOwingWriter()->OnComponentUpdate.AddUObject(this, &ULGPGraphNavigator::OnPathNeedUpdate);
+		}
+
 		OnPathReceive.Broadcast(PathData);
 
 		FLGPWeightPrefab WeightData;

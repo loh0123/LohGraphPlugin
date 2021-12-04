@@ -10,6 +10,7 @@
 #include "LGPGraphComponentBase.h"
 #include "LGPGraphWriter.generated.h"
 
+
 class GraphWriterTasker;
 
 USTRUCT(BlueprintType)
@@ -48,6 +49,7 @@ class LOHGRAPHPLUGIN_API ULGPGraphWriter : public ULGPGraphComponentBase
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAlertPathUsedSignature, const FLGPNodePathData&, Path, ULGPGraphNavigator*, Navigator);
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAlertNodeUsedSignature, const FLGPNodePathData&, Path, ULGPGraphNavigator*, Navigator);
 
+
 	friend class ULGPNodeCache;
 
 protected:
@@ -78,6 +80,7 @@ public:
 	FORCEINLINE bool ProcessPathToNode(ULGPNode* Node);
 
 	FORCEINLINE bool IsPathGenerating(ULGPNode* Node) const { return CurrentPathProcessNode == Node || PathProcessQueue.Contains(Node); }
+
 
 protected:
 
