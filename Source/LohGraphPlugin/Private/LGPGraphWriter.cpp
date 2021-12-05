@@ -334,6 +334,8 @@ void ULGPGraphWriter::OnThreadWorkDone()
 			GetGroupMemberData(CurrentPathProcessNode).FlowFieldStep = ReturnPathData;
 
 			CurrentPathProcessNode = nullptr;
+
+			if (PathProcessQueue.Num() > 0) MarkGraphComponentDirty(false);
 		}
 		else
 		{

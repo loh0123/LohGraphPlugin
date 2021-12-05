@@ -263,10 +263,11 @@ void ULGPGraphNavigator::PrintNavDiagnostics() const
 	GEngine->AddOnScreenDebugMessage(4, 15.f, FColor::Red, FString::Printf(TEXT("IsManualMoving: %s"), IsManualMoving ? TEXT("True") : TEXT("False")));
 
 	GEngine->AddOnScreenDebugMessage(5, 15.f, FColor::Red, FString::Printf(TEXT("OverlapingNode: %s"), GetOverlappingNode() ? *GetOverlappingNode()->GetReadableName() : TEXT("Null")));
-	GEngine->AddOnScreenDebugMessage(6, 15.f, FColor::Red, FString::Printf(TEXT("PathNum: %d"), GetOverlappingNode() ? GetOverlappingNode()->GetPathList().Num() : -1));
+	GEngine->AddOnScreenDebugMessage(6, 15.f, FColor::Red, FString::Printf(TEXT("Dist To Target: %f"), FVector::Dist(GetOwner()->GetActorLocation(), GetFollowingLocation())));
 
-	GEngine->AddOnScreenDebugMessage(7, 15.f, FColor::Red, FString::Printf(TEXT("PathDataNum: %d"), PathData.Num()));
-	GEngine->AddOnScreenDebugMessage(8, 15.f, FColor::Red, FString::Printf(TEXT("Dist To Target: %f"), FVector::Dist(GetOwner()->GetActorLocation(), GetFollowingLocation())));
+
+	GEngine->AddOnScreenDebugMessage(8, 15.f, FColor::Red, FString::Printf(TEXT("PathDataNum: %d"), PathData.Num()));
+	GEngine->AddOnScreenDebugMessage(9, 15.f, FColor::Red, FString::Printf(TEXT("Dist To Target: %f"), FVector::Dist(GetOwner()->GetActorLocation(), GetFollowingLocation())));
 
 	return;
 }
@@ -397,6 +398,8 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 	// Path Is Generating Can't Find Data Now !!!
 	if (LocalNode->IsPathGenerating())
 	{
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Path Generating"));
+
 		FollowingNode = nullptr;
 
 		return nullptr;
@@ -410,7 +413,7 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 
 	FLGPNodePathData NextNode;
 
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, FString::Printf(TEXT("Num: %d, Weight: %f, Local: %s"), OverlapingNode->GetPathList().Num(), NextNodeScore, *LocalNode->GetReadableName()));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::White, FString::Printf(TEXT("Num: %d, Weight: %f, Local: %s"), OverlapingNode->GetPathList().Num(), NextNodeScore, *LocalNode->GetReadableName()));
 
 	for (const FLGPNodePathData& PathItem : OverlapingNode->GetPathList())
 	{
