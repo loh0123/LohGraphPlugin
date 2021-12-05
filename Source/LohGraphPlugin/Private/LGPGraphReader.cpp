@@ -231,12 +231,7 @@ bool ULGPGraphNavigator::StopFollowingNode(const bool ClearData)
 
 		if (ClearData)
 		{
-			FollowingNode = nullptr;
-			LocalNode = nullptr;
-			StartNode = nullptr;
-			EndNode = nullptr;
-
-			PathData.Empty();
+			ClearPathData();
 		}
 
 		return true;
@@ -288,6 +283,11 @@ void ULGPGraphNavigator::ClearPathData()
 	}
 
 	PathData.Empty();
+
+	LocalNode = nullptr;
+	FollowingNode = nullptr;
+
+	FollowIndex = -1;
 
 	return;
 }
