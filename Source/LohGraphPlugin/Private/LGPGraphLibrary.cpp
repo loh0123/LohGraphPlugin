@@ -39,11 +39,11 @@ void ULGPGraphLibrary::AddGraphNodeGrid(AActor* SelfActor, const FTransform& Sta
 	{
 		FIntVector Position = FIntVector(X, Y, Z);
 
-		CurrentLocation = StartTransform.Rotator().RotateVector(FVector(X * GridGap.X, Y * GridGap.Y, Z * GridGap.Z));
+		CurrentLocation = StartTransform.Rotator().RotateVector(FVector(X * GridGap.X, Y * GridGap.Y, Z * GridGap.Z) + StartTransform.GetLocation());
 
 		ULGPNode* NewComp = Cast<ULGPNode>(SelfActor->AddComponentByClass(ULGPNode::StaticClass(), false, FTransform(StartTransform.Rotator(), CurrentLocation, FVector(1)), false));
 
-		NewComp->SetCollisionBox({ FTransform(StartTransform.Rotator(), FVector(), GridGap)});
+		NewComp->SetCollisionBox({ FTransform(StartTransform.Rotator(), FVector(0), GridGap)});
 
 		NewComp->SetIsDebug(bDebug);
 

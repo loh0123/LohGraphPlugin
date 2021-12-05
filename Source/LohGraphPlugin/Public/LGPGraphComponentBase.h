@@ -82,18 +82,19 @@ public:
 	// Sets default values for this component's properties
 	ULGPGraphComponentBase();
 
-protected:
 	// Thread Handle /////////////////////////////////////////////////
+
+public:
+
+	FORCEINLINE bool IsGraphComponentWorking() const;
+
+	FORCEINLINE bool IsGraphComponentDirty() const { return bIsDirty; }
+
+protected:
 
 	FORCEINLINE void StopGraphComponentTasker(const bool StartNextFrame = true);
 	
-	FORCEINLINE bool IsGraphComponentWorking() const;
-	
-	
-	
 	FORCEINLINE void MarkGraphComponentDirty(const bool Recompile = true);
-	
-	FORCEINLINE bool IsGraphComponentDirty() const { return bIsDirty; }
 
 
 	// Prepare Thread To Start (True if can start Thread)

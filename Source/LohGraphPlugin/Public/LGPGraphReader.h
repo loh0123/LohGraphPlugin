@@ -208,20 +208,23 @@ public:
 
 protected:
 
-	UPROPERTY(BlueprintGetter = GetFollowingTarget, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
-		AActor* FollowingTarget = nullptr;
-
 	UPROPERTY(BlueprintGetter = GetFollowingNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		ULGPNode* FollowingNode = nullptr;
 
 	UPROPERTY(BlueprintGetter = GetLocalNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		ULGPNode* LocalNode = nullptr;
 
+	UPROPERTY(BlueprintGetter = GetFollowingTarget, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
+		AActor* FollowingTarget = nullptr;
+
 	UPROPERTY(BlueprintGetter = GetStartNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		ULGPNode* StartNode = nullptr;
 
 	UPROPERTY(BlueprintGetter = GetEndNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		ULGPNode* EndNode = nullptr;
+
+	UPROPERTY()
+		TSet<ULGPGraphWriter*> PassWriter;
 
 	UPROPERTY(BlueprintGetter = GetFollowIndex, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		int32 FollowIndex = -1;
@@ -236,8 +239,6 @@ protected:
 		bool IsPrintDebug = false;
 
 	UPROPERTY() uint8 CurrentFrameDelay = 0;
-
-	UPROPERTY() uint8 CurrentTargetDelay = 0;
 
 	// Thread Handle //////////////////////////////////////////////////////////////////
 

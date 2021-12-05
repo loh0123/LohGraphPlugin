@@ -23,7 +23,10 @@ ULGPGraphComponentBase::ULGPGraphComponentBase()
 	// ...
 }
 
-
+bool ULGPGraphComponentBase::IsGraphComponentWorking() const
+{
+	return !ComponentTasker->IsWorkDone() || bIsDirty;
+}
 
 void ULGPGraphComponentBase::StopGraphComponentTasker(const bool StartNextFrame)
 {
@@ -40,11 +43,6 @@ void ULGPGraphComponentBase::StopGraphComponentTasker(const bool StartNextFrame)
 	}
 	
 	return;
-}
-
-bool ULGPGraphComponentBase::IsGraphComponentWorking() const
-{
-	return !ComponentTasker->IsWorkDone() || bIsDirty;
 }
 
 void ULGPGraphComponentBase::MarkGraphComponentDirty(const bool Recompile)

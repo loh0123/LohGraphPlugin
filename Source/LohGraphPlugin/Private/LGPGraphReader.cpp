@@ -126,20 +126,13 @@ void ULGPGraphNavigator::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	}
 	else if (IsFollowingPath && LocalNode)
 	{
-		if (FollowingTarget && CurrentTargetDelay-- == 0 && GetOverlappingNodeByLocation(FollowingTarget->GetActorLocation()) != EndNode)
-		{
-			GoToActor(FollowingTarget);
-		}
-
 		if (!LocalNode->IsPathGenerating())
 		{
-			AActor* Owner = GetOwner();
-
 			if (FollowingNode)
 			{
-				if (!IsManualMoving) Owner->SetActorLocation(FMath::VInterpConstantTo(Owner->GetActorLocation(), GetFollowingLocation(), DeltaTime, MovingSpeed));
+				if (!IsManualMoving) GetOwner()->SetActorLocation(FMath::VInterpConstantTo(GetOwner()->GetActorLocation(), GetFollowingLocation(), DeltaTime, MovingSpeed));
 			
-				if (FVector::Dist(Owner->GetActorLocation(), GetFollowingLocation()) < ReachDistance)
+				if (FVector::Dist(GetOwner()->GetActorLocation(), GetFollowingLocation()) < ReachDistance)
 				{
 					if (GetNextFollowingNode(GetOverlappingNode()) == nullptr)
 					{
@@ -175,11 +168,11 @@ bool ULGPGraphNavigator::GoToNode(ULGPNode* Node)
 		{
 			ClearPathData();
 
-			IsFollowingPath = true;
-			FollowIndex = 0;
+			if (StartNode->GetOwingWriter()->IsGraphComponentWorking()) return false;
 
-			LocalNode = EndNode;
-			LocalNode->RequestPath();
+			StartNode->GetOwingWriter()->OnComponentUpdate.AddUObject(this, &ULGPGraphNavigator::OnPathNeedUpdate);
+
+			BeginPathFollowing();
 		}
 		else
 		{
@@ -276,14 +269,13 @@ void ULGPGraphNavigator::ClearPathData()
 {
 	if (PathData.Num() == 0) return;
 
-	PathData[0].StartNode->GetOwingWriter()->OnComponentUpdate.RemoveAll(this);
-
-	for (FLGPGroupPathData& PathItem : PathData)
+	for (ULGPGraphWriter* WriterItem : PassWriter)
 	{
-		PathItem.EndNode->GetOwingWriter()->OnComponentUpdate.RemoveAll(this);
+		WriterItem->OnComponentUpdate.RemoveAll(this);
 	}
 
 	PathData.Empty();
+	PassWriter.Empty();
 
 	LocalNode = nullptr;
 	FollowingNode = nullptr;
@@ -313,7 +305,7 @@ void ULGPGraphNavigator::OnPathNeedUpdate(const bool bIsForce)
 
 void ULGPGraphNavigator::BeginPathFollowing()
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("BeginPathFollowing"));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::White, FString::Printf(TEXT("FollowIndex: %d"), FollowIndex));
 
 	IsFollowingPath = true;
 
@@ -336,15 +328,29 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 
 	SCOPE_CYCLE_COUNTER(STAT_ReaderNexCycle);
 
-	if ((OverlapingNode && OverlapingNode == LocalNode) || !LocalNode)
+	// Stop Navigation If Reach End Node Already
+	if (OverlapingNode == EndNode)
 	{
 		FollowingNode = nullptr;
 
-		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("FN: %s, LC: %s"), FollowingNode ? *FollowingNode->GetReadableName() : TEXT("Null"), LocalNode ? *LocalNode->GetReadableName() : TEXT("Null")));
+		LocalNode = nullptr;
 
-		if (FollowIndex > 0)
+		IsFollowingPath = false;
+
+		OnEndFollowingPath.Broadcast();
+
+		return nullptr;
+	}
+
+	// Clear Local Node If Reached
+	if (LocalNode && OverlapingNode == LocalNode) { LocalNode = nullptr; }
+
+	// Local Node Invalid Find New Local Node If Possible
+	if (!LocalNode)
+	{
+		if (FollowIndex >= 0)
 		{
-			if (LocalNode) { FollowIndex--; LocalNode->GetOwingWriter()->OnComponentUpdate.RemoveAll(this); }
+			FollowingNode = nullptr;
 
 			ULGPNode* NextGroupNode = PathData.IsValidIndex(FollowIndex - 1) ? PathData[FollowIndex - 1].EndNode : EndNode;
 
@@ -364,97 +370,75 @@ ULGPNode* ULGPGraphNavigator::GetNextFollowingNode(ULGPNode* OverlapingNode)
 				}
 			}
 
-			//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("Local: %s, ID: %d"), *NextNode->GetReadableName(), FollowIndex));
-
 			LocalNode = NextNode;
 
 			LocalNode->RequestPath();
+
+			FollowIndex--;
 		}
 		else
 		{
-			FollowIndex = -1;
+			LocalNode = EndNode;
 
-			if (LocalNode == EndNode)
-			{
-				LocalNode = nullptr;
-
-				IsFollowingPath = false;
-
-				OnEndFollowingPath.Broadcast();
-
-				return nullptr;
-			}
-			else
-			{
-				LocalNode = EndNode;
-
-				LocalNode->RequestPath();
-			}
+			LocalNode->RequestPath();
 		}
-
-		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("ReLocal: %s"), *LocalNode->GetReadableName()));
 	}
 
 	// Path Is Generating Can't Find Data Now !!!
-	if (LocalNode->IsPathGenerating())
-	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Path Generating"));
+	if (LocalNode->IsPathGenerating()) { FollowingNode = nullptr; }
 
-		FollowingNode = nullptr;
-
-		return nullptr;
-	}
-
-
-
-	const int32 OverlapStep = LocalNode->GetFlowFieldStep(OverlapingNode);
-
-	float NextNodeScore = OverlapStep != INDEX_NONE ? (OverlapStep * WeightData.StepMultiply) + OverlapingNode->GetPassWeight() : MAX_FLT;
-
-	FLGPNodePathData NextNode;
-
-	//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::White, FString::Printf(TEXT("Num: %d, Weight: %f, Local: %s"), OverlapingNode->GetPathList().Num(), NextNodeScore, *LocalNode->GetReadableName()));
-
-	for (const FLGPNodePathData& PathItem : OverlapingNode->GetPathList())
-	{
-		const int32 FlowHeat = LocalNode->GetFlowFieldStep(PathItem.EndNode);
-
-		if (FlowHeat != INDEX_NONE && PathItem.EndNode->IsNodeValid())
-		{
-			float NodeScore = (FlowHeat * WeightData.StepMultiply) + OverlapingNode->GetPassWeight();
-
-			if (NodeScore < NextNodeScore)
-			{
-				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, TEXT("Finded"));
-
-				NextNode = PathItem;
-
-				NextNodeScore = NodeScore;
-			}
-		}
-	}
-
-	if (NextNode.EndNode)
-	{
-		OverlapingNode->RemovePassWeight(this);
-
-		FollowingNode = NextNode.EndNode;
-
-		FollowingNode->AddPassWeight(this);
-
-		if (NextNode.bIsTrigger)
-		{
-			NextNode.EndNode->GetOwingWriter()->OnAlertPathUsed.Broadcast(NextNode, this);
-		}
-
-		if (NextNode.EndNode->bIsTrigger)
-		{
-			NextNode.EndNode->GetOwingWriter()->OnAlertNodeUsed.Broadcast(NextNode, this);
-		}
-	}
+	// Find Next Node To Follow
 	else
 	{
-		FollowingNode = nullptr;
+		// Get Current OverlapingNode Step To LocalNode
+		const int32 OverlapStep = LocalNode->GetFlowFieldStep(OverlapingNode);
+
+		float NextNodeScore = OverlapStep != INDEX_NONE ? (OverlapStep * WeightData.StepMultiply) + OverlapingNode->GetPassWeight() : MAX_FLT;
+
+		FLGPNodePathData NextNode;
+
+		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::White, FString::Printf(TEXT("Num: %d, Weight: %f, Local: %s"), OverlapingNode->GetPathList().Num(), NextNodeScore, *LocalNode->GetReadableName()));
+
+		for (const FLGPNodePathData& PathItem : OverlapingNode->GetPathList())
+		{
+			const int32 FlowHeat = LocalNode->GetFlowFieldStep(PathItem.EndNode);
+
+			if (FlowHeat != INDEX_NONE && PathItem.EndNode->IsNodeValid())
+			{
+				float NodeScore = (FlowHeat * WeightData.StepMultiply) + OverlapingNode->GetPassWeight();
+
+				if (NodeScore < NextNodeScore)
+				{
+					NextNode = PathItem;
+
+					NextNodeScore = NodeScore;
+				}
+			}
+		}
+
+		if (NextNode.EndNode)
+		{
+			OverlapingNode->RemovePassWeight(this);
+
+			FollowingNode = NextNode.EndNode;
+
+			FollowingNode->AddPassWeight(this);
+
+			if (NextNode.bIsTrigger)
+			{
+				NextNode.EndNode->GetOwingWriter()->OnAlertPathUsed.Broadcast(NextNode, this);
+			}
+
+			if (NextNode.EndNode->bIsTrigger)
+			{
+				NextNode.EndNode->GetOwingWriter()->OnAlertNodeUsed.Broadcast(NextNode, this);
+			}
+		}
+		// All Path Weight Too High
+		else
+		{
+			FollowingNode = nullptr;
+		}
 	}
 
 	return FollowingNode;
@@ -498,6 +482,8 @@ void ULGPGraphNavigator::DoThreadWork()
 			{
 				PathData.Add(CloseGroups[CurrentGroupData.ParentKey].GroupPointer->GroupPath[CurrentGroupData.PathKey]);
 
+				PassWriter.Add(CloseGroups[CurrentGroupData.ParentKey].GroupPointer->GroupMember[0].Member->GetOwingWriter());
+
 				CurrentGroupData = CloseGroups[CurrentGroupData.ParentKey];
 			} 
 
@@ -537,11 +523,11 @@ void ULGPGraphNavigator::OnThreadWorkDone()
 {
 	if (!StopTaskerWork && PathData.Num() > 0)
 	{
-		PathData[0].StartNode->GetOwingWriter()->OnComponentUpdate.AddUObject(this, &ULGPGraphNavigator::OnPathNeedUpdate);
-
-		for (FLGPGroupPathData& PathItem : PathData)
+		for (ULGPGraphWriter* WriterItem : PassWriter)
 		{
-			PathItem.EndNode->GetOwingWriter()->OnComponentUpdate.AddUObject(this, &ULGPGraphNavigator::OnPathNeedUpdate);
+			if (WriterItem->IsGraphComponentWorking()) { MarkGraphComponentDirty(); ClearPathData(); return; }
+
+			WriterItem->OnComponentUpdate.AddUObject(this, &ULGPGraphNavigator::OnPathNeedUpdate);
 		}
 
 		OnPathReceive.Broadcast(PathData);

@@ -223,17 +223,17 @@ public: \
 
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphReader_h_103_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__FollowingTarget() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowingTarget); } \
 	FORCEINLINE static uint32 __PPO__FollowingNode() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowingNode); } \
 	FORCEINLINE static uint32 __PPO__LocalNode() { return STRUCT_OFFSET(ULGPGraphNavigator, LocalNode); } \
+	FORCEINLINE static uint32 __PPO__FollowingTarget() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowingTarget); } \
 	FORCEINLINE static uint32 __PPO__StartNode() { return STRUCT_OFFSET(ULGPGraphNavigator, StartNode); } \
 	FORCEINLINE static uint32 __PPO__EndNode() { return STRUCT_OFFSET(ULGPGraphNavigator, EndNode); } \
+	FORCEINLINE static uint32 __PPO__PassWriter() { return STRUCT_OFFSET(ULGPGraphNavigator, PassWriter); } \
 	FORCEINLINE static uint32 __PPO__FollowIndex() { return STRUCT_OFFSET(ULGPGraphNavigator, FollowIndex); } \
 	FORCEINLINE static uint32 __PPO__IsFollowingPath() { return STRUCT_OFFSET(ULGPGraphNavigator, IsFollowingPath); } \
 	FORCEINLINE static uint32 __PPO__IsManualMoving() { return STRUCT_OFFSET(ULGPGraphNavigator, IsManualMoving); } \
 	FORCEINLINE static uint32 __PPO__IsPrintDebug() { return STRUCT_OFFSET(ULGPGraphNavigator, IsPrintDebug); } \
 	FORCEINLINE static uint32 __PPO__CurrentFrameDelay() { return STRUCT_OFFSET(ULGPGraphNavigator, CurrentFrameDelay); } \
-	FORCEINLINE static uint32 __PPO__CurrentTargetDelay() { return STRUCT_OFFSET(ULGPGraphNavigator, CurrentTargetDelay); } \
 	FORCEINLINE static uint32 __PPO__PathData() { return STRUCT_OFFSET(ULGPGraphNavigator, PathData); }
 
 
