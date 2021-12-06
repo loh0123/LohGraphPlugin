@@ -84,13 +84,13 @@ public:
 
 protected:
 
-	UPROPERTY(VisibleAnywhere) TArray<FLGPNodePathData> ProxyPath;
+	UPROPERTY(VisibleAnywhere) TSet<FLGPNodePathData> ProxyPath;
 
 
 
 public:
 
-	FORCEINLINE const TArray<FLGPNodePathData>& GetProxyPath() { return ProxyPath; }
+	FORCEINLINE const TSet<FLGPNodePathData>& GetProxyPath() const { return ProxyPath; }
 
 	FORCEINLINE void AddProxyPath(const FLGPNodePathData& Data)
 	{
@@ -150,13 +150,13 @@ public:
 
 
 
+	FORCEINLINE void GenerateGroupPath();
+
 	FORCEINLINE ULGPNode* GetIdentifyNode() const { return GroupMember[0].Member; }
 
 	FORCEINLINE void ClearData() { GroupMember.Empty(); ClearGroupPath(); return; }
 
 	FORCEINLINE void ClearGroupPath();
-
-	FORCEINLINE void GenerateGroupPath();
 
 
 

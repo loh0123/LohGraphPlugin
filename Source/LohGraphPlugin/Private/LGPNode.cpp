@@ -28,6 +28,8 @@ void FLGPNodeGroupData::ClearGroupPath()
 
 void FLGPNodeGroupData::GenerateGroupPath()
 {
+	TSet<FLGPNodeGroupData*> CallBackList;
+
 	for (int32 GroupMemberIndex = 0; GroupMemberIndex < GroupMember.Num(); GroupMemberIndex++) // Loop Current Process Node From Group
 	{
 		FLGPGroupMemberData& MemberItem = GroupMember[GroupMemberIndex];
@@ -37,30 +39,31 @@ void FLGPNodeGroupData::GenerateGroupPath()
 			const FLGPNodePathData& OtherPath = *Path.EndNode->GetPathList().Find(MemberItem.Member); // Get Other Node Path Data
 			FLGPNodeGroupData* OtherGroup = Path.EndNode->GetGroupDataPointer(); // Get Other Node Group Data
 
-			if (Path.IsWalkable && Path.EndNode->IsNodeValid() && !GroupMember.Contains(Path.EndNode) && OtherGroup)
+			if (Path.EndNode->IsNodeValid() && !GroupMember.Contains(Path.EndNode) && OtherGroup)
 			{
 				FLGPGroupPathData* PathPointer = GroupPath.Find(OtherGroup->GetIdentifyNode()); // Already Has Path To This Group
 
 				if (PathPointer)
 				{
-					FLGPGroupPathData* OtherPathPointer = OtherGroup->GroupPath.Find(GetIdentifyNode()); // Get Other Node Group Path
-
-					OtherPathPointer->AddProxyPath(OtherPath);
 					PathPointer->AddProxyPath(Path);
 				}
 				else
 				{
 					FLGPGroupPathData NewGroup = FLGPGroupPathData(GetIdentifyNode(), OtherGroup->GetIdentifyNode());
-					FLGPGroupPathData OtherNewGroup = FLGPGroupPathData(OtherGroup->GetIdentifyNode(), GetIdentifyNode());
 
 					NewGroup.AddProxyPath(Path);
-					OtherNewGroup.AddProxyPath(OtherPath);
 
 					GroupPath.Add(NewGroup);
-					OtherGroup->GroupPath.Add(OtherNewGroup);
+
+					if (!OtherGroup->GroupPath.Contains(GetIdentifyNode())) CallBackList.Add(OtherGroup);
 				}
 			}
 		}
+	}
+
+	for (FLGPNodeGroupData* Item : CallBackList)
+	{
+		Item->GenerateGroupPath();
 	}
 
 	return;

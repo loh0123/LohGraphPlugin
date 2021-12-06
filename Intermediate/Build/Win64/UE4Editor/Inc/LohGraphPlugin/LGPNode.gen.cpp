@@ -280,11 +280,11 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPGroupPathDat
 #endif
 		static void NewProp_IsReturnable_SetBit(void* Obj);
 		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_IsReturnable;
-		static const UE4CodeGen_Private::FStructPropertyParams NewProp_ProxyPath_Inner;
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_ProxyPath_ElementProp;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ProxyPath_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_ProxyPath;
+		static const UE4CodeGen_Private::FSetPropertyParams NewProp_ProxyPath;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const UE4CodeGen_Private::FStructParams ReturnStructParams;
 	};
@@ -336,20 +336,20 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPGroupPathDat
 		((FLGPGroupPathData*)Obj)->IsReturnable = 1;
 	}
 	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_IsReturnable = { "IsReturnable", nullptr, (EPropertyFlags)0x0010000000020001, UE4CodeGen_Private::EPropertyGenFlags::Bool , RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(uint8), sizeof(FLGPGroupPathData), &Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_IsReturnable_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_IsReturnable_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_IsReturnable_MetaData)) };
-	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_Inner = { "ProxyPath", nullptr, (EPropertyFlags)0x0000008000020000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FLGPNodePathData, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_ElementProp = { "ProxyPath", nullptr, (EPropertyFlags)0x0000008000020001, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FLGPNodePathData, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_MetaData[] = {
 		{ "Category", "LGPGroupPathData" },
 		{ "ModuleRelativePath", "Public/LGPNode.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath = { "ProxyPath", nullptr, (EPropertyFlags)0x0020088000020001, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPGroupPathData, ProxyPath), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_MetaData)) };
+	const UE4CodeGen_Private::FSetPropertyParams Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath = { "ProxyPath", nullptr, (EPropertyFlags)0x0020088000020001, UE4CodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FLGPGroupPathData, ProxyPath), METADATA_PARAMS(Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_StartNode,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_EndNode,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_IsWalkable,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_IsReturnable,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath_ElementProp,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::NewProp_ProxyPath,
 	};
 	const UE4CodeGen_Private::FStructParams Z_Construct_UScriptStruct_FLGPGroupPathData_Statics::ReturnStructParams = {
@@ -380,7 +380,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPGroupPathDat
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FLGPGroupPathData_Hash() { return 3597745264U; }
+	uint32 Get_Z_Construct_UScriptStruct_FLGPGroupPathData_Hash() { return 3395274384U; }
 class UScriptStruct* FLGPNodePathData::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;
