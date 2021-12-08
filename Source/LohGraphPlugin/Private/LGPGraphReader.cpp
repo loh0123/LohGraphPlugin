@@ -415,8 +415,6 @@ void ULGPGraphNavigator::OnPathNeedUpdate(const bool bIsForce)
 {
 	if (!bIsForce) return;
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("Update Obj: %s"), *GetReadableName()));
-
 	StopFollowingNode(true);
 
 	bRetryPath = true;
