@@ -191,8 +191,6 @@ private:
 
 	FORCEINLINE void BeginPathFollowing();
 
-	FORCEINLINE ULGPNode* GetNextFollowingNode();
-
 public:
 
 	UPROPERTY(BlueprintAssignable, Category = "LGPGraphNavigator | Event")

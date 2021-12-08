@@ -248,7 +248,7 @@ FLGPGroupMemberData& ULGPNodeCache::GetGroupMemberData()
 
 int32 ULGPNodeCache::GetFlowFieldStep(ULGPNode* Node)
 {
-	if (Node && Node->GetOwingWriter() == GetOwingWriter() && Node->GroupID == GroupID && NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this)).FlowFieldStep.IsValidIndex(Node->GroupMemberIndex))
+	if (Node && Node->GetOwingWriter() == GetOwingWriter() && Node->GroupID == GroupID && !NodeGraphWriter->IsGraphUpdating() && NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this)).FlowFieldStep.IsValidIndex(Node->GroupMemberIndex))
 	{
 		return NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this)).FlowFieldStep[Node->GroupMemberIndex];
 	}

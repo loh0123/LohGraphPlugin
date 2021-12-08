@@ -59,11 +59,18 @@ void ULGPGraphWriter::UnregisterGraphNode(ULGPNode* Node)
 
 bool ULGPGraphWriter::ProcessPathToNode(ULGPNode* Node)
 {
-	if (Node && Node->IsNodeValid() && GetGroupMemberData(Node).FlowFieldStep.Num() == 0)
+	if (Node && Node->IsNodeValid())
 	{
-		PathProcessQueue.Add(Node);
+		if (IsGraphUpdating())
+		{
+			PathProcessQueue.Add(Node);
+		}
+		else if (GetGroupMemberData(Node).FlowFieldStep.Num() == 0)
+		{
+			PathProcessQueue.Add(Node);
 
-		MarkGraphComponentDirty(false);
+			MarkGraphComponentDirty(false);
+		}
 
 		return true;
 	}
@@ -78,6 +85,12 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 		for (FLGPNodeGroupData& GroupItem : NodeGroupList)
 		{
 			GroupItem.ClearGroupPath();
+		}
+
+		for (ULGPNode* Node : RegisteredNode)
+		{
+			Node->GroupID = INDEX_NONE;
+			Node->GroupMemberIndex = INDEX_NONE;
 		}
 
 		PathProcessQueue.Empty();
@@ -334,8 +347,6 @@ void ULGPGraphWriter::OnThreadWorkDone()
 			GetGroupMemberData(CurrentPathProcessNode).FlowFieldStep = ReturnPathData;
 
 			CurrentPathProcessNode = nullptr;
-
-			if (PathProcessQueue.Num() > 0) MarkGraphComponentDirty(false);
 		}
 		else
 		{
@@ -355,6 +366,8 @@ void ULGPGraphWriter::OnThreadWorkDone()
 				NodeGroupList[GroupIndex].GenerateGroupPath();
 			}
 		}
+
+		if (PathProcessQueue.Num() > 0) MarkGraphComponentDirty(false);
 	}
 	
 	return;

@@ -389,8 +389,8 @@ public:
 		: FPrimitiveSceneProxy(InComponent)
 		, CollisionInfo(InComponent->NodeCollision)
 		, WorldPosition(InComponent->GetComponentTransform())
-		, IsEnable(InComponent->IsActive())
 		, IsVisible(InComponent->bIsDebug)
+		, IsEnable(InComponent->IsActive())
 	{
 		bWillEverBeLit = false;
 	}
