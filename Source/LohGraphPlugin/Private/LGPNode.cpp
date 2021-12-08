@@ -85,6 +85,8 @@ bool ULGPNodeBase::AddPath(ULGPNode* Node, const uint8 WeightType, const bool Is
 {
 	if (Node && !Node->IsPendingKill())
 	{
+		FRWScopeLock NodeRWLock(NodeRWMutex, FRWScopeLockType::SLT_Write);
+
 		FLGPNodePathData* Data = PathList.Find(Node);
 
 		if (Data)
@@ -111,6 +113,8 @@ bool ULGPNodeBase::RemovePath(ULGPNode* Node)
 {
 	if (Node && !Node->IsPendingKill())
 	{
+		FRWScopeLock NodeRWLock(NodeRWMutex, FRWScopeLockType::SLT_Write);
+
 		FLGPNodePathData* SelfData = PathList.Find(Node);
 		FLGPNodePathData* NodeData = Node->PathList.Find(Node);
 
@@ -139,7 +143,13 @@ bool ULGPNodeBase::RemovePath(ULGPNode* Node)
 
 bool ULGPNodeBase::ClearPath()
 {
-	TArray<FLGPNodePathData> LocalPathNode = PathList.Array();
+	TArray<FLGPNodePathData> LocalPathNode;
+
+	{
+		FRWScopeLock NodeRWLock(NodeRWMutex, FRWScopeLockType::SLT_ReadOnly);
+
+		LocalPathNode = PathList.Array();
+	}
 
 	for (FLGPNodePathData& Path : LocalPathNode)
 	{

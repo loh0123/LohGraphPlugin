@@ -89,7 +89,7 @@ bool ULGPGraphWriter::OnThreadWorkStart()
 
 	if (RegisteredNode.Num() > 0)
 	{
-		if (BuildVersion != CurrentBuildVersion)
+		if (BuildVersion != NextBuildVersion)
 		{
 			ClearData();
 
@@ -339,7 +339,7 @@ void ULGPGraphWriter::OnThreadWorkDone()
 		}
 		else
 		{
-			BuildVersion = CurrentBuildVersion;
+			BuildVersion = NextBuildVersion;
 
 			for (int32 GroupIndex = 0; GroupIndex < NodeGroupList.Num(); GroupIndex++) // Loop Current Group
 			{
@@ -362,7 +362,7 @@ void ULGPGraphWriter::OnThreadWorkDone()
 
 FLGPNodeGroupData* ULGPGraphWriter::GetGroupDataPointer(ULGPNode* Node)
 {
-	if (BuildVersion == CurrentBuildVersion && NodeGroupList.IsValidIndex(Node->GroupID))
+	if (BuildVersion == NextBuildVersion && NodeGroupList.IsValidIndex(Node->GroupID))
 	{
 		return &NodeGroupList[Node->GroupID];
 	}
@@ -374,7 +374,7 @@ FLGPNodeGroupData& ULGPGraphWriter::GetGroupData(ULGPNode* Node)
 {
 	checkf(Node, TEXT("Node Can't Be Null"));
 
-	checkf(BuildVersion == CurrentBuildVersion, TEXT("Thread Is Running Can't Get Data"));
+	checkf(BuildVersion == NextBuildVersion, TEXT("Thread Is Running Can't Get Data"));
 
 	checkf(NodeGroupList.IsValidIndex(Node->GroupID), TEXT("Can't Found Group"));
 
@@ -385,7 +385,7 @@ FLGPGroupMemberData& ULGPGraphWriter::GetGroupMemberData(ULGPNode* Node)
 {
 	checkf(Node, TEXT("Node Can't Be Null"));
 
-	checkf(BuildVersion == CurrentBuildVersion, TEXT("Thread Is Running Can't Get Data"));
+	checkf(BuildVersion == NextBuildVersion, TEXT("Thread Is Running Can't Get Data"));
 
 	checkf(NodeGroupList.IsValidIndex(Node->GroupID), TEXT("Can't Found Group"));
 

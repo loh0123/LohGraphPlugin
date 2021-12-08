@@ -547,7 +547,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphReader, 2416226531);
+	IMPLEMENT_CLASS(ULGPGraphReader, 992381021);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphReader>()
 	{
 		return ULGPGraphReader::StaticClass();
@@ -1639,7 +1639,7 @@ static struct FScriptStruct_LohGraphPlugin_StaticRegisterNativesFLGPAStarHelper
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ULGPGraphNavigator, 2157401868);
+	IMPLEMENT_CLASS(ULGPGraphNavigator, 1464364833);
 	template<> LOHGRAPHPLUGIN_API UClass* StaticClass<ULGPGraphNavigator>()
 	{
 		return ULGPGraphNavigator::StaticClass();

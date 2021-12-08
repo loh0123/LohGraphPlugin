@@ -189,10 +189,10 @@ public:
 	// Setup Node On Construst
 	FORCEINLINE void SetupNode(TSet<FLGPNodePathData>& Paths, const bool WeightType, const bool IsTrigger);
 
-	FORCEINLINE const TSet<FLGPNodePathData>& GetPathList() const { return PathList; }
+	FORCEINLINE const TSet<FLGPNodePathData>& GetPathList() { FRWScopeLock NodeRWLock(NodeRWMutex, FRWScopeLockType::SLT_ReadOnly); return PathList; }
 
 	UFUNCTION(BlueprintPure,		Category = "LGPNodeBase | Graph Path")
-		FORCEINLINE TArray<FLGPNodePathData> GetPathArray() const { return PathList.Array(); }
+		FORCEINLINE TArray<FLGPNodePathData> GetPathArray() { FRWScopeLock NodeRWLock(NodeRWMutex, FRWScopeLockType::SLT_ReadOnly); return PathList.Array(); }
 
 
 	UFUNCTION(BlueprintCallable,	Category = "LGPNodeBase | Graph Path")
@@ -214,6 +214,8 @@ public:
 protected:
 
 	UPROPERTY(VisibleDefaultsOnly) TSet<FLGPNodePathData> PathList;
+
+	FRWLock NodeRWMutex;
 
 };
 

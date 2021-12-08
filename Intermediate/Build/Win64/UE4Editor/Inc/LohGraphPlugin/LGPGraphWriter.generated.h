@@ -101,7 +101,6 @@ public: \
 
 #define PluginLab_Plugins_LohGraphPlugin_Source_LohGraphPlugin_Public_LGPGraphWriter_h_47_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__RegisteredNode() { return STRUCT_OFFSET(ULGPGraphWriter, RegisteredNode); } \
-	FORCEINLINE static uint32 __PPO__BuildVersion() { return STRUCT_OFFSET(ULGPGraphWriter, BuildVersion); } \
 	FORCEINLINE static uint32 __PPO__ReturnPathData() { return STRUCT_OFFSET(ULGPGraphWriter, ReturnPathData); } \
 	FORCEINLINE static uint32 __PPO__PathProcessQueue() { return STRUCT_OFFSET(ULGPGraphWriter, PathProcessQueue); } \
 	FORCEINLINE static uint32 __PPO__CurrentPathProcessNode() { return STRUCT_OFFSET(ULGPGraphWriter, CurrentPathProcessNode); } \

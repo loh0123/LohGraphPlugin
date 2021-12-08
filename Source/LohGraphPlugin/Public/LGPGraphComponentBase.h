@@ -140,9 +140,9 @@ protected:
 
 	UPROPERTY() ULGPGameCoreSystem* CoreSystem = nullptr;
 
-	UPROPERTY(VisibleAnywhere) uint8 bIsRecompile : 1;
-
 	UPROPERTY(VisibleAnywhere) uint8 bIsDirty : 1;
 
-	UPROPERTY(VisibleAnywhere) uint32 CurrentBuildVersion = 0;
+	UPROPERTY(VisibleAnywhere) uint32 NextBuildVersion = 0;
+
+	UPROPERTY(VisibleAnywhere) uint32 BuildVersion = 0; // Use To Check If Data Is Outdated
 };

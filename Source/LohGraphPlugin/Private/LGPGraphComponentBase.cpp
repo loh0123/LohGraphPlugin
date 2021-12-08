@@ -34,7 +34,7 @@ void ULGPGraphComponentBase::StopGraphComponentTasker(const bool StartNextFrame)
 	{
 		StopTaskerWork = true;
 
-		ComponentTasker->EnsureCompletion(false);
+		ComponentTasker->EnsureCompletion();
 
 		if (StartNextFrame)
 		{
@@ -53,9 +53,7 @@ void ULGPGraphComponentBase::MarkGraphComponentDirty(const bool Recompile)
 		{
 			StopGraphComponentTasker(false);
 
-			CurrentBuildVersion++;
-
-			bIsRecompile = true;
+			NextBuildVersion++;
 		}
 
 		bIsDirty = true;
@@ -121,11 +119,9 @@ void ULGPGraphComponentBase::TickComponent(float DeltaTime, ELevelTick TickType,
 
 		bIsDirty = false;
 
-		OnComponentUpdate.Broadcast(bIsRecompile);
+		OnComponentUpdate.Broadcast(NextBuildVersion != BuildVersion);
 
 		OnComponentUpdate.Clear();
-
-		bIsRecompile = false;
 
 		if (OnThreadWorkStart()) CoreSystem->AddTasker(this);
 	}

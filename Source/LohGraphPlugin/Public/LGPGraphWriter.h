@@ -102,7 +102,6 @@ protected:
 	FORCEINLINE FLGPGroupMemberData& GetGroupMemberData(ULGPNode* Node); // Cause Error If Thread Is Running
 
 
-	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") uint32 BuildVersion = 0; // Use To Check If Data Is Outdated
 
 	UPROPERTY(VisibleAnywhere, Category = "LGPGraph | Varaible") TArray<int32> ReturnPathData;
 

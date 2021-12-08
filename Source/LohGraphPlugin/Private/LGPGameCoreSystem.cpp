@@ -35,20 +35,13 @@ void ULGPGameCoreSystem::AddTasker(ULGPGraphComponentBase* GraphComponent)
 		if (ProcessReaderTask.Num() != 0)
 		{
 			TArray<ULGPGraphComponentBase*> CacheReader = ProcessReaderTask.Array();
-
+		
 			for (ULGPGraphComponentBase* Reader : CacheReader)
 			{
-				Reader->StopTaskerWork = true; // Tell All Thread To End Early
-			}
-
-			for (ULGPGraphComponentBase* Reader : CacheReader)
-			{
-				Reader->ComponentTasker->EnsureCompletion(); // Check Thread Already End Or Wait Until End
-
-				Reader->MarkGraphComponentDirty(false); // Mark Reader To Be Rerun
+				Reader->StopGraphComponentTasker();  // Tell All Thread To End Early
 			}
 		}
-
+		
 		ProcessWriterTask.Add(GraphComponent);
 
 		GraphComponent->ComponentTasker->StartBackgroundTask(GraphThreadPool);
@@ -130,7 +123,7 @@ void ULGPGameCoreSystem::UnregisterGraphComponent(ULGPGraphComponentBase* Compon
 {
 	RegisteredComponents.Remove(Component);
 
-	RemoveTasker(Component);
+	Component->ComponentTasker->EnsureCompletion();
 
 	Component->CoreSystem = nullptr;
 
