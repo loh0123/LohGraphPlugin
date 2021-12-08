@@ -30,7 +30,7 @@ bool ULGPGraphComponentBase::IsGraphComponentWorking() const
 
 void ULGPGraphComponentBase::StopGraphComponentTasker(const bool StartNextFrame)
 {
-	if (!ComponentTasker->IsWorkDone())
+	if (!ComponentTasker->IsIdle())
 	{
 		StopTaskerWork = true;
 

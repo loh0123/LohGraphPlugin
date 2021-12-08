@@ -211,6 +211,8 @@ void ULGPNodeCache::SetActive(bool bNewActive, bool bReset)
 
 	Super::SetActive(bNewActive, bReset); 
 
+	MarkRenderStateDirty();
+
 	return;
 }
 
@@ -246,7 +248,7 @@ FLGPGroupMemberData& ULGPNodeCache::GetGroupMemberData()
 
 int32 ULGPNodeCache::GetFlowFieldStep(ULGPNode* Node)
 {
-	if (Node && Node->GetOwingWriter() == GetOwingWriter() && Node->GroupID == GroupID && NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this)).FlowFieldStep.Num() > 0)
+	if (Node && Node->GetOwingWriter() == GetOwingWriter() && Node->GroupID == GroupID && NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this)).FlowFieldStep.IsValidIndex(Node->GroupMemberIndex))
 	{
 		return NodeGraphWriter->GetGroupMemberData(Cast<ULGPNode>(this)).FlowFieldStep[Node->GroupMemberIndex];
 	}

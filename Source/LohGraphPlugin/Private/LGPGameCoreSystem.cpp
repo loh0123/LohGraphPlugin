@@ -34,7 +34,7 @@ void ULGPGameCoreSystem::AddTasker(ULGPGraphComponentBase* GraphComponent)
 	case EGraphComponentType::Writer :
 		if (ProcessReaderTask.Num() != 0)
 		{
-			TArray<ULGPGraphComponentBase*> CacheReader = ProcessReaderTask.Array();
+			TSet<ULGPGraphComponentBase*> CacheReader = ProcessReaderTask;
 		
 			for (ULGPGraphComponentBase* Reader : CacheReader)
 			{

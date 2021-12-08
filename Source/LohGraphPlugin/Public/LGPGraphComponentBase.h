@@ -88,7 +88,9 @@ public:
 
 	FORCEINLINE bool IsGraphComponentWorking() const;
 
-	FORCEINLINE bool IsGraphComponentDirty() const { return bIsDirty; }
+	FORCEINLINE bool IsGraphComponentDirty() const { return bIsDirty || IsGraphUpdating(); }
+
+	FORCEINLINE bool IsGraphUpdating() const { return NextBuildVersion != BuildVersion; }
 
 protected:
 

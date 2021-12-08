@@ -389,6 +389,7 @@ public:
 		: FPrimitiveSceneProxy(InComponent)
 		, CollisionInfo(InComponent->NodeCollision)
 		, WorldPosition(InComponent->GetComponentTransform())
+		, IsEnable(InComponent->IsActive())
 		, IsVisible(InComponent->bIsDebug)
 	{
 		bWillEverBeLit = false;
@@ -409,7 +410,7 @@ public:
 			{
 				if (VisibilityMap & (1 << ViewIndex))
 				{
-					CollisionInfo->AggGeom.GetAggGeom(WorldPosition, FColor::Yellow, WireframeMaterialInstance, false, false, false, ViewIndex, Collector);
+					CollisionInfo->AggGeom.GetAggGeom(WorldPosition, IsEnable ? FColor::Green : FColor::Red, WireframeMaterialInstance, false, false, false, ViewIndex, Collector);
 				}
 			}
 		}
@@ -436,4 +437,5 @@ private:
 	UBodySetup* CollisionInfo;
 	const FTransform& WorldPosition;
 	const bool IsVisible;
+	const bool IsEnable;
 };

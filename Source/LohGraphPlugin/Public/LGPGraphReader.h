@@ -23,7 +23,7 @@ public:
 
 	FLGPAStarHelper(FLGPNodeGroupData* GPointer, ULGPNode* EndNode, const FLGPWeightPrefab& WeightData) :
 		GroupPointer(GPointer),
-		EndWeight(FVector::Dist(GPointer->GetIdentifyNode()->GetComponentLocation(), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
+		EndWeight(FVector::Dist(GPointer ? GPointer->GetIdentifyNode()->GetComponentLocation() : FVector(0), EndNode->GetComponentLocation())* WeightData.DistanceToEndMultiply)
 	{}
 
 	FLGPAStarHelper(const FSetElementId& PrKey, const FSetElementId& PKey, FLGPNodeGroupData* GPointer, ULGPNode* EndNode, const FLGPWeightPrefab& WeightData) :
@@ -165,10 +165,10 @@ public:
 		FORCEINLINE int32 GetFollowIndex() { return FollowIndex; }
 
 	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
-		FORCEINLINE bool GetIsFollowingPath() { return IsFollowingPath; }
+		FORCEINLINE bool GetIsFollowingPath() { return bIsFollowingPath; }
 
 	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
-		FORCEINLINE bool GetIsManualMoving() { return IsManualMoving; }
+		FORCEINLINE bool GetIsManualMoving() { return bIsManualMoving; }
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -191,7 +191,7 @@ private:
 
 	FORCEINLINE void BeginPathFollowing();
 
-	FORCEINLINE ULGPNode* GetNextFollowingNode(ULGPNode* OverlapingNode);
+	FORCEINLINE ULGPNode* GetNextFollowingNode();
 
 public:
 
@@ -230,13 +230,15 @@ protected:
 		int32 FollowIndex = -1;
 
 	UPROPERTY(BlueprintGetter = GetIsFollowingPath, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
-		bool IsFollowingPath = false;
+		uint8 bIsFollowingPath : 1;
 
 	UPROPERTY(BlueprintGetter = GetIsManualMoving, EditAnywhere, Category = "LGPGraphNavigator | Varaible")
-		bool IsManualMoving = false;
+		uint8 bIsManualMoving : 1;
 
 	UPROPERTY(EditAnywhere, Category = "LGPGraphNavigator | Varaible")
-		bool IsPrintDebug = false;
+		uint8 bIsPrintDebug : 1;
+
+	UPROPERTY() uint8 bRetryPath : 1;
 
 	UPROPERTY() uint8 CurrentFrameDelay = 0;
 

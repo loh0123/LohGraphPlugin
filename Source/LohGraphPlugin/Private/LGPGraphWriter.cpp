@@ -59,7 +59,7 @@ void ULGPGraphWriter::UnregisterGraphNode(ULGPNode* Node)
 
 bool ULGPGraphWriter::ProcessPathToNode(ULGPNode* Node)
 {
-	if (Node && Node->IsNodeValid())
+	if (Node && Node->IsNodeValid() && GetGroupMemberData(Node).FlowFieldStep.Num() == 0)
 	{
 		PathProcessQueue.Add(Node);
 
