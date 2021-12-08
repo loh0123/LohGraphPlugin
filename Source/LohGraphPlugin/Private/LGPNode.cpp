@@ -116,7 +116,7 @@ bool ULGPNodeBase::RemovePath(ULGPNode* Node)
 		FRWScopeLock NodeRWLock(NodeRWMutex, FRWScopeLockType::SLT_Write);
 
 		FLGPNodePathData* SelfData = PathList.Find(Node);
-		FLGPNodePathData* NodeData = Node->PathList.Find(Node);
+		FLGPNodePathData* NodeData = Node->PathList.Find(Cast<ULGPNode>(this));
 
 		if (SelfData && NodeData)
 		{
@@ -143,12 +143,12 @@ bool ULGPNodeBase::RemovePath(ULGPNode* Node)
 
 bool ULGPNodeBase::ClearPath()
 {
-	TArray<FLGPNodePathData> LocalPathNode;
+	TSet<FLGPNodePathData> LocalPathNode;
 
 	{
 		FRWScopeLock NodeRWLock(NodeRWMutex, FRWScopeLockType::SLT_ReadOnly);
 
-		LocalPathNode = PathList.Array();
+		LocalPathNode = PathList;
 	}
 
 	for (FLGPNodePathData& Path : LocalPathNode)

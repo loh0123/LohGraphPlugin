@@ -128,11 +128,13 @@ void ULGPGraphNavigator::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	{
 		if (FollowingTarget)
 		{
-			GoToActor(FollowingTarget);
+			if (GoToActor(FollowingTarget)) { bRetryPath = false; }
+			else { CurrentFrameDelay = FrameDelay; }
 		}
 		else
 		{
-			GoToNode(EndNode);
+			if (GoToNode(EndNode)) { bRetryPath = false; }
+			else { CurrentFrameDelay = FrameDelay; }
 		}
 	}
 	else if (bIsFollowingPath && LocalNode)
@@ -168,37 +170,28 @@ bool ULGPGraphNavigator::GoToNode(ULGPNode* Node)
 {
 	ULGPNode* StartN = GetOverlappingNode();
 
-	if (StartN && StartN->IsNodeValid() && Node && Node->IsNodeValid())
+	ClearPathData();
+
+	StartNode = StartN;
+	EndNode = Node;
+
+	if (StartNode && StartNode->IsNodeValid() && EndNode && EndNode->IsNodeValid() && StartNode->GetGroupDataPointer() && EndNode->GetGroupDataPointer())
 	{
 		StopGraphComponentTasker();
 
-		StartNode = StartN;
-		EndNode = Node;
-
 		if (StartNode->GetGroupDataPointer() == EndNode->GetGroupDataPointer())
 		{
-			ClearPathData();
-
-			if (StartNode->GetOwingWriter()->IsGraphComponentWorking()) { bRetryPath = true; CurrentFrameDelay = FrameDelay; return false; }
-
 			StartNode->GetOwingWriter()->OnComponentUpdate.AddUObject(this, &ULGPGraphNavigator::OnPathNeedUpdate);
 
 			BeginPathFollowing();
 		}
 		else
 		{
-			bIsFollowingPath = false;
-			FollowIndex = -1;
-
 			MarkGraphComponentDirty();
 		}
 
-		bRetryPath = false;
-
 		return true;
 	}
-
-	bRetryPath = false;
 
 	return false;
 }
@@ -348,11 +341,13 @@ bool ULGPGraphNavigator::StopFollowingNode(const bool ClearData)
 
 	if (bIsFollowingPath)
 	{
-		bIsFollowingPath = false;
-
 		if (ClearData)
 		{
 			ClearPathData();
+		}
+		else
+		{
+			bIsFollowingPath = false;
 		}
 
 		return true;
@@ -411,6 +406,7 @@ void ULGPGraphNavigator::ClearPathData()
 	FollowingNode = nullptr;
 
 	FollowIndex = -1;
+	bIsFollowingPath = false;
 
 	return;
 }
@@ -419,16 +415,11 @@ void ULGPGraphNavigator::OnPathNeedUpdate(const bool bIsForce)
 {
 	if (!bIsForce) return;
 
-	StopFollowingNode();
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("Update Obj: %s"), *GetReadableName()));
 
-	if (EndNode && EndNode->IsNodeValid())
-	{
-		bRetryPath = true;
-	}
-	else
-	{
-		ClearPathData();
-	}
+	StopFollowingNode(true);
+
+	bRetryPath = true;
 
 	return;
 }
