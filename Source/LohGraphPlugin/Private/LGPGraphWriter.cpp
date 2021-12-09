@@ -69,7 +69,7 @@ bool ULGPGraphWriter::ProcessPathToNode(ULGPNode* Node)
 		{
 			PathProcessQueue.Add(Node);
 
-			MarkGraphComponentDirty(false);
+			if (!IsGraphComponentWorking()) MarkGraphComponentDirty(false);
 		}
 
 		return true;

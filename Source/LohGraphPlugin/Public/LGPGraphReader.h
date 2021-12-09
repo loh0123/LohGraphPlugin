@@ -133,17 +133,11 @@ public:
 	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
 		FORCEINLINE FVector GetFollowingLocation() const
 		{ 
-			if (FollowingNode)
-			{
-				if (FollowingTarget && FollowingNode == EndNode)
-				{
-					return FollowingTarget->GetActorLocation();
-				}
+			if (!FollowingNode) return FVector(-1.0f);
 
-				return FollowingNode->GetComponentLocation();
-			}
+			if (FollowingTarget && FollowingNode == EndNode) return FollowingTarget->GetActorLocation();
 
-			return FVector(-1.0f);
+			return FollowingNode->GetComponentLocation();
 		}
 
 	UFUNCTION(BlueprintPure, Category = "LGPGraphNavigator")
@@ -183,8 +177,6 @@ public:
 
 private:
 
-	FORCEINLINE void PrintNavDiagnostics() const;
-
 	FORCEINLINE void ClearPathData();
 
 	FORCEINLINE void OnPathNeedUpdate(const bool bIsForce);
@@ -221,8 +213,12 @@ protected:
 	UPROPERTY(BlueprintGetter = GetEndNode, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		ULGPNode* EndNode = nullptr;
 
+
+
 	UPROPERTY()
 		TSet<ULGPGraphWriter*> PassWriter;
+
+
 
 	UPROPERTY(BlueprintGetter = GetFollowIndex, VisibleAnywhere, Category = "LGPGraphNavigator | Varaible")
 		int32 FollowIndex = -1;
@@ -233,8 +229,7 @@ protected:
 	UPROPERTY(BlueprintGetter = GetIsManualMoving, EditAnywhere, Category = "LGPGraphNavigator | Varaible")
 		uint8 bIsManualMoving : 1;
 
-	UPROPERTY(EditAnywhere, Category = "LGPGraphNavigator | Varaible")
-		uint8 bIsPrintDebug : 1;
+
 
 	UPROPERTY() uint8 bRetryPath : 1;
 
@@ -259,7 +254,7 @@ protected:
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphNavigator | Setting")
-		float NavigatorWeight = 0.0f;
+		float NavigatorWeight = 1.0f;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "LGPGraphNavigator | Setting")
 		float ReachDistance = 200.0f;
