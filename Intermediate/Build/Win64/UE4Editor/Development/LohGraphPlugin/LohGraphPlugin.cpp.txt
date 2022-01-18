@@ -1,2 +1,0 @@
-C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Intermediate\Build\Win64\UE4Editor\Development\LohGraphPlugin\Definitions.LohGraphPlugin.h
-C:\Unreal\Project\PluginLab\Plugins\LohGraphPlugin\Source\LohGraphPlugin\Public\LohGraphPlugin.h
